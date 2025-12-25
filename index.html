@@ -9,14 +9,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css" />
     <script type="module" crossorigin src="/darkscript-js_cinemania/index.js"></script>
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/index-Blvaa4Au.css">
   </head>
   <body>
+    <header class="header">
+  <div class="container header-container">
+    <a href="./index.html" class="logo">
+      <img src="./src/images/logo.svg" alt="Cinemania" class="logo-icon">
+      <span class="logo-text">Cinemania</span>
+    </a>
+
+    <div class="header-right">
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+      </div>
+
+      <button type="button" class="menu-open-btn">
+        <span class="menu-text">MENU</span>
+      </button>
+    </div>
     
+    <nav class="mobile-menu">
+      <ul class="nav-list">
+        <li><a href="./index.html" class="nav-link active">Home</a></li>
+        <li><a href="./catalog.html" class="nav-link">Catalog</a></li>
+        <li><a href="./library.html" class="nav-link">My library</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+    
+
+    <section class="hero" id="hero-section">
+      <div class="container hero-content">
+        <h1 class="hero-title">Let’s Make Your Own Cinema</h1>
+        <p class="hero-description">Is a guide to creating a personalized movie...</p>
+        <button type="button" class="btn-primary" id="hero-btn">Get Started</button>
+      </div>
+</section>
     <main>
       
     </main>
+
 
 
 
