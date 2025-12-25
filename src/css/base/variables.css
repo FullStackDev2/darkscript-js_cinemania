@@ -1,0 +1,26 @@
+:root {
+  /* Renk Paleti (Dark Mode - Varsayılan) */
+  --color-primary: #f87115;      /* Turuncu Butonlar */
+  --color-bg: #111111;           /* Koyu Arka Plan */
+  --color-text: #ffffff;         /* Beyaz Yazı */
+  --color-secondary: #595959;    /* İkincil Yazı/Gri */
+  --color-black: #000000;
+  
+  /* Geçişler */
+  --transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Fontlar */
+  --font-main: 'Roboto', sans-serif;
+
+  /* Hero overlays */
+  --hero-overlay-dark: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 60%);
+  --hero-overlay-light: linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.6) 60%);
+  --hero-image: none;
+}
+
+/* Light Mode Değişkenleri */
+body.light-mode {
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-secondary: #282828;
+}
