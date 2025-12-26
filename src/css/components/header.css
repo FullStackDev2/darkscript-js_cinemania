@@ -126,7 +126,7 @@
   z-index: 55;
 }
 
-/* Desktop: hide mobile menu and show normal nav if needed */
+/* Desktop: Menü Saklanır */
 @media (min-width: 768px) {
   .menu-open-btn { display: none; }
   .mobile-menu { display: none; }
