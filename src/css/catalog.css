@@ -1,0 +1,378 @@
+.catalog-page {
+    max-width: 320px;
+    margin: 0 auto;
+    width: 100%;
+    font-family: 'Roboto',sans-serif;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    color: #fff;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 0 18px;
+    width: 280px;
+    height: 406px;
+    margin: 0 auto;
+}
+.movie-details,
+.section {
+    width: 100%;
+    padding: 0;
+}
+
+.hero-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding-bottom: 24px;
+}
+
+.movie-details {
+    padding: 0px 16px;
+}
+
+.movie-meta-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 24px;
+    padding-top: 40px;
+}
+
+.section-header1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 24px;
+}
+
+.section-header1 h2 {
+    font-size: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+    width: 184px;
+    white-space: nowrap;
+    padding-left: 19px;
+}
+
+.section-header h2 {
+    font-size: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+    width: 123px;
+    white-space: nowrap;
+    padding-left: 19px;
+}
+
+.section-header a {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.see-all {
+    font-size: 14px;
+    color: var(--color-primary);
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+.weekly-trends {
+    width: 100%;
+    padding: 0 20px;
+    padding-bottom: 32px;
+}
+
+.monthly {
+    position: relative;
+    z-index: 3;
+    display: block;
+}
+
+.monthly h1 {
+    font-size: 18px;
+    color: #fff;
+}
+
+.weekly-rating {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+}
+
+.weekly-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+
+
+.movie-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+}
+
+.movie-card img {
+    width: 100%;
+    height: 406px;
+    object-fit: cover;
+    display: block;
+}
+
+
+.movie-card-overlay {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.movie-card-text {
+    max-width: 70%;
+}
+
+.movie-title {
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.movie-meta {
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.movie-title,
+.movie-meta {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+}
+
+.movie-card-rating {
+    font-size: 14px;
+    color: #ffb400;
+    letter-spacing: 2px;
+    flex-shrink: 0;
+}
+
+.movie-card.large::after {
+    content: none;
+    background: none;
+}
+
+.movie-head {
+    text-transform: uppercase;
+    color: #111111;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+    padding-left: 3px;
+    padding-bottom: 20px;
+}
+
+.movie-meta {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    column-gap: 20px;
+    font-size: 13px;
+}
+
+.meta-left,
+.meta-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* ← satırlar arası boşluk */
+}
+
+.meta-left span {
+    font-weight: 500;
+    color: #111111;
+    white-space: nowrap;
+}
+
+.meta-right strong {
+    font-weight: 500;
+    color: #111111;
+}
+
+.vote-values {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vote-score {
+    background: #f2f2f2;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.meta-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1;
+    color: #111111;
+    padding-left: 4px;
+}
+
+.meta-left .tight {
+    margin-bottom: -12px;
+}
+
+#movieDate {
+    color: #F87719;
+}
+
+#movieGenre{
+    padding-top: 5px;
+}
+
+#movieVoteAvg,
+#movieVoteCount,
+#movieAbout,
+#moviePopularity,
+#movieGenre{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    color: #282828;
+    font-family: 'Roboto',sans-serif;
+}
+
+.meta-right{
+    padding-left: 50px;
+}
+
+#movieOverview {
+   padding-top: 50px;
+   text-align: justify;
+   padding-bottom: 24px;
+}
+
+.genre {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    line-height: 1.4;
+}
+
+.subButon{
+    background: linear-gradient(to bottom,
+                rgba(255, 194, 38, 1),
+                rgba(248, 65, 25, 1));
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(17, 17, 17, 1);
+    width: 121px;
+    height: 38px;
+    gap: 10px;
+    margin-top: 20px;
+    border-radius: 74px;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.search-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    padding-top: 40px;
+}
+
+/* Ortak input stilleri */
+.search-input,
+.search-input1,
+.search-select {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid #e6e6e6;
+    font-size: 14px;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Film input */
+.search-input {
+    flex: 2;
+    width: 100%;
+    height: 40px;
+    color: #595959;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* Year dropdown */
+.search-select {
+    flex: 1;
+    width: 95px;
+    height: 40px;
+}
+
+/* Search text input */
+.search-input1 {
+    flex: 2;
+    width: 224px;
+    height: 40px;
+    color: #595959;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+
+}
+
+.search-input,
+.search-input1,
+.search-select {
+    border: 1px solid #595959;
+    border-radius: 8px;
+}
+
+/* Focus efekti */
+.search-input:focus,
+.search-input1:focus,
+.search-select:focus {
+    border-color: #ff8a00;
+}
