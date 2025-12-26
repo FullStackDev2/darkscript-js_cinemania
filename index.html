@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="/darkscript-js_cinemania/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/darkscript-js_cinemania/assets/vendor-2s9xPmg-.js">
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/index-YcfbmeFq.css">
+    <link rel="modulepreload" crossorigin href="/darkscript-js_cinemania/assets/library_mainbody-DkZWOx8X.js">
+    <link rel="modulepreload" crossorigin href="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js">
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/library_mainbody-YhVPdHtU.css">
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/catalog-CCH5ysD3.css">
   </head>
   <body>
+
     <header class="header">
   <div class="container header-container">
     <a href="./index.html" class="logo">
@@ -50,7 +53,7 @@
 
     <section class="hero" id="hero-section">
       <div class="container hero-content">
-        <h1 class="hero-title">Let’s Make Your Own Cinema</h1>
+        <h1 class="hero-title">Let's Make Your Own Cinema</h1>
         <p class="hero-description">Is a guide to creating a personalized movie...</p>
         <button type="button" class="btn-primary" id="hero-btn">Get Started</button>
       </div>
@@ -69,7 +72,7 @@
 <!-- MODAL -->
 <div class="modal-backdrop" id="teamModal">
   <div class="modal">
-    <button class="close-btn" id="closeTeamModal">×</button>
+    <button class="close-btn" id="closeTeamModal">x</button>
     <h2>Project Team</h2>
 
     <ul class="team-list">
@@ -114,10 +117,126 @@
 </div>
 
     <main>
-      
+      <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog</title>
+
+</head>
+
+<body>
+
+    <main class="catalog-page">
+
+        <section class="section">
+        
+            <div class="section-header">
+                <h2>WEEKLY TRENDS</h2>
+                <a href="catalog_list.html" class="see-all">See all</a>
+            </div>
+        
+            <div class="weekly-trends" id="weeklyTrends"></div>
+        
+        </section>
+        
+        <section class="section2">
+            <div class="section-header1">
+                <h2>UPCOMING THIS MONTH</h2>
+            </div>
+        </section>
+
+        <section class="hero">
+            <img id="heroBackdrop" class="hero-backdrop" alt="Backdrop">
+            
+        </section>
+
+        <section class="movie-details">
+            <div class="movie-head" id="movieTitle"></div>
+
+        
+            <div class="movie-meta">
+        
+                <div class="meta-left">
+                    <span class="tight">Release date</span>
+                    <span class="tight" class="genre" >Genre</span>
+                    <span class="tight">Vote / Votes</span>
+                    <span class="tight">ABOUT</span>
+                    <span class="tight">Popularity</span>
+                </div>
+                
+                <div class="meta-right">
+                    <strong class="tight" id="movieDate"></strong>
+                    <div class="vote-values">
+                        <span class="tight" id="movieVoteAvg" class="vote-score"></span>
+                        <span class="tight" id="movieVoteCount"></span>
+                    </div>
+                    <strong class id="movieAbout"></strong>
+                    <strong class id="moviePopularity"></strong>
+                    <strong id="movieGenre" class="genre"></strong>
+                </div>
+        
+            </div>
+        
+            <p id="movieOverview"></p>
+
+            <button class="subButon" type="submit">Add to my library</button>
+        </section>
+
+
     </main>
 
+    <script src="../src/js/catalog_mainbody.js"></script>
 
+</body>
+
+</html>
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+</head>
+<body>
+
+    <main class="page-container">
+    <div class="genre-select">
+        <button class="genre-btn" id="genreBtn">
+            Genre
+            <svg class="icon icon-chevron-down" id="genreIcon">
+                <use href="/darkscript-js_cinemania/assets/symbol-defs-BO-r7Cwx.svg#icon-chevron-down"></use>
+            </svg>
+        </button>
+        
+        <ul class="genre-dropdown" id="genreDropdown">
+            <li data-genre="Romance">Romance</li>
+            <li data-genre="Detective">Detective</li>
+            <li data-genre="Thriller">Thriller</li>
+            <li data-genre="Action">Action</li>
+            <li data-genre="Documentary">Documentary</li>
+            <li data-genre="Horror">Horror</li>
+        </ul>
+    </div>
+        <section class="container hidden">
+            <p class="search-movie" id="emptyState">OOPS... <br>
+                We are very sorry! <br>
+                You don't have any movies <br>
+                at your library.
+            </p>
+            <button class="search-button" type="submit">Search movie</button>
+        </section> 
+    
+        <section class="movie-list" id="movieList"></section>
+        <button class="load-more-btn" id="loadMoreBtn">
+            Load more
+        </button>
+    </main> 
+</body>
+</html>
+    </main>
 
 
   </body>

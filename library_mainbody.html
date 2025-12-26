@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+  <script type="module" crossorigin src="/darkscript-js_cinemania/assets/library_mainbody-DkZWOx8X.js"></script>
+  <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/library_mainbody-YhVPdHtU.css">
+</head>
+<body>
+
+    <main class="page-container">
+    <div class="genre-select">
+        <button class="genre-btn" id="genreBtn">
+            Genre
+            <svg class="icon icon-chevron-down" id="genreIcon">
+                <use href="/darkscript-js_cinemania/assets/symbol-defs-BO-r7Cwx.svg#icon-chevron-down"></use>
+            </svg>
+        </button>
+        
+        <ul class="genre-dropdown" id="genreDropdown">
+            <li data-genre="Romance">Romance</li>
+            <li data-genre="Detective">Detective</li>
+            <li data-genre="Thriller">Thriller</li>
+            <li data-genre="Action">Action</li>
+            <li data-genre="Documentary">Documentary</li>
+            <li data-genre="Horror">Horror</li>
+        </ul>
+    </div>
+        <section class="container hidden">
+            <p class="search-movie" id="emptyState">OOPS... <br>
+                We are very sorry! <br>
+                You don't have any movies <br>
+                at your library.
+            </p>
+            <button class="search-button" type="submit">Search movie</button>
+        </section> 
+    
+        <section class="movie-list" id="movieList"></section>
+        <button class="load-more-btn" id="loadMoreBtn">
+            Load more
+        </button>
+    </main> 
+</body>
+</html>
