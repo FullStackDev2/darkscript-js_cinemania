@@ -1,0 +1,87 @@
+/* Hero styles (mobile-first) */
+.hero {
+  /* Use CSS variable for hero image/overlay — overlay is a left->right dark fade */
+  --hero-overlay: var(--hero-overlay-dark);
+  --hero-image: var(--hero-image);
+  min-height: 56vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* content aligned left */
+  background-color: #0b0b0b; /* fallback */
+  background-repeat: no-repeat;
+  background-image: var(--hero-overlay), var(--hero-image);
+  background-size: cover;
+  background-position: right center; /* show photo on the right, overlay on the left */
+  color: #ffffff; /* keep hero text white so it's readable over the dark overlay */
+}
+
+.hero-content {
+	padding: 48px 16px;
+}
+
+.hero-title {
+	font-size: 28px;
+	line-height: 1.05;
+	margin: 0 0 12px 0;
+}
+
+.hero-description {
+	font-size: 14px;
+	color: white;
+	max-width: 48ch;
+	margin-bottom: 18px;
+}
+
+.btn-primary {
+	display: inline-block;
+	background: var(--color-primary);
+	color: #fff;
+	padding: 10px 18px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+/* Default Hero Stilleri */
+.hero-default {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Mobile (Varsayılan) */
+@media (max-width: 767px) {
+  .hero-default {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      -webkit-image-set(url('/src/images/background/mobile-1.jpg') 1x, url('/src/images/background/mobil-1-@2x.jpg') 2x);
+  }
+}
+
+/* Tablet (768px ve üzeri) */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .hero-default {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      -webkit-image-set(url('/src/images/background/tablet-1.jpg') 1x, url('/src/images/background/tablet-1-@2x.jpg') 2x);
+  }
+}
+
+/* Desktop (1280px ve üzeri) */
+@media (min-width: 1280px) {
+  .hero-default {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      -webkit-image-set(url('/src/images/background/desktop-1.jpg') 1x, url('/src/images/background/desktop-1-@2x.jpg') 2x);
+  }
+}
+
+@media (min-width: 768px) {
+	.hero {
+		min-height: 72vh;
+	}
+	.hero-title {
+		font-size: 48px;
+	}
+	.hero-description {
+		font-size: 16px;
+	}
+}
