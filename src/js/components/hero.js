@@ -8,19 +8,26 @@ export async function initHero() {
   const heroSection = document.getElementById('hero-section');
   if (!heroSection) return;
 
-  try {
-    const movies = await getTrending('day');
+  const pageType = heroSection.getAttribute('data-page'); // 'dynamic' veya 'library' olabilir
 
-    if (movies && movies.length > 0) {
-      const film = pickRandom(movies);
-      // render using the helper that handles background and responsive quality
-      renderHeroContent(heroSection, film);
-    } else {
-      // fallback: render default hero content (uses local defaults)
-      renderDefaultHero(heroSection);
+  if (pageType === 'dynamic') {
+    try {
+        const movies = await getTrending('day');
+
+        if (movies && movies.length > 0) {
+          const film = pickRandom(movies);
+          // API'den gelen filmle hero içeriğini oluştur
+          renderHeroContent(heroSection, film);
+        } else {
+          // Api'den veri gelmezse varsayılan hero içeriğini oluştur
+          renderDefaultHero(heroSection);
+        }
+    } catch (err) {
+        console.error('Hero yüklenirken hata:', err);
+        renderDefaultHero(heroSection);
     }
-  } catch (err) {
-    console.error('Hero yüklenirken hata:', err);
+  } else if (pageType === 'library') {
+    // Kütüphane sayfası için varsayılan hero içeriğini oluştur
     renderDefaultHero(heroSection);
   }
 }
