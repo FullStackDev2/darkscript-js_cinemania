@@ -51,6 +51,67 @@
   background-position: center;
 }
 
+.upcoming-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+}
+
+.hero-img {
+    width: 100%;
+    height: 500px; /* Görseldeki dikey his için */
+    object-fit: cover;
+    display: block;
+}
+
+.overlay-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 20px;
+    /* Alttan yukarı doğru kararma efekti */
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent 100%);
+}
+
+.movie-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+}
+
+.bottom-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meta-data {
+    color: #eee;
+    font-size: 14px;
+}
+
+.rating-stars {
+    color: #f39c12; /* Turuncu yıldızlar */
+    display: flex;
+    gap: 3px;
+}
+
+.subButon {
+    margin: 20px auto;
+    display: block;
+    background: linear-gradient(90deg, #ff6b6b, #ee5253);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 /* Mobile (Varsayılan) */
 @media (max-width: 767px) {
   .hero-default {
