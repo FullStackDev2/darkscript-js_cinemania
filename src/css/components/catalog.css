@@ -487,3 +487,76 @@
 .year-dropdown li[data-year=""] {
     display: none;
 }
+
+
+/* pagination dosyası */
+
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 40px 0;
+    background-color: #111; /* Arka plan koyu tema */
+}
+
+.pagination-list {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination-item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #B7B7B7;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    border: 1px solid #333; /* Gri halka */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Aktif sayfa tasarımı (Gradyan geçişli) */
+.pagination-item.active {
+    background: linear-gradient(141deg, #FFC226 0%, #F84119 100%);
+    color: white;
+    border: none;
+    box-shadow: 0px 4px 10px rgba(248, 65, 25, 0.3);
+}
+
+/* Üç nokta (...) tasarımı */
+.pagination-item.dots {
+    border: none;
+    cursor: default;
+    color: #fff;
+}
+
+/* Ok butonları */
+.pagination-arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.pagination-arrow svg {
+    width: 20px;
+    height: 20px;
+    stroke: #fff; /* Ok rengi beyaz */
+    fill: none;
+}
+
+/* Hover efekti */
+.pagination-item:hover:not(.dots, .active) {
+    border-color: #FFC226;
+    color: #fff;
+}

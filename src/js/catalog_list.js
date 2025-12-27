@@ -94,6 +94,7 @@ searchBtn.addEventListener("click", () => {
   searchAndRender(1);
 });
 
+// 🔥 sayfa numaraları
 
 function searchAndRender(page = 1) {
   const endpoint = currentQuery
@@ -126,7 +127,80 @@ function searchAndRender(page = 1) {
 }
 
 
+const totalPages = 24; // Toplam sayfa sayısı
+let currentPage = 1;   // Başlangıç sayfası
 
+const paginationList = document.querySelector('.pagination-list');
+const prevBtn = document.querySelector('.pagination-arrow.prev');
+const nextBtn = document.querySelector('.pagination-arrow.next');
+
+// Sayfa numaralarını render eden fonksiyon
+function renderPagination(page) {
+    paginationList.innerHTML = ''; // Listeyi temizle
+
+    // Sayfa numarasını 01, 02 formatına çeviren yardımcı fonksiyon
+    const formatNum = (num) => num.toString().padStart(2, '0');
+
+    // Mantık: Her zaman ilk sayfayı, son sayfayı ve aktif sayfanın çevresini göster
+    let pages = [];
+    
+    if (totalPages <= 5) {
+        for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+        if (page <= 3) {
+            pages = [1, 2, 3, '...', totalPages];
+        } else if (page >= totalPages - 2) {
+            pages = [1, '...', totalPages - 2, totalPages - 1, totalPages];
+        } else {
+            pages = [1, '...', page, '...', totalPages];
+        }
+    }
+
+    pages.forEach(p => {
+        const li = document.createElement('li');
+        li.classList.add('pagination-item');
+        
+        if (p === '...') {
+            li.textContent = '...';
+            li.classList.add('dots');
+        } else {
+            li.textContent = formatNum(p);
+            if (p === page) li.classList.add('active');
+            
+            li.addEventListener('click', () => {
+                currentPage = p;
+                updatePagination();
+            });
+        }
+        paginationList.appendChild(li);
+    });
+}
+
+function updatePagination() {
+    renderPagination(currentPage);
+    
+    // API çağrısı veya film listesini filtreleme fonksiyonunu burada çalıştırın
+    console.log(`Şu anki sayfa: ${currentPage}`);
+    // fetchMovies(currentPage); 
+}
+
+// Ok butonları için event listenerlar
+prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        updatePagination();
+    }
+});
+
+nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+        currentPage++;
+        updatePagination();
+    }
+});
+
+// İlk çalıştırma
+renderPagination(currentPage);
 
 
 
