@@ -4,6 +4,7 @@ const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
 
 const moviesContainer = document.getElementById("moviesContainer");
 const emptyMessage = document.getElementById("emptyMessage");
+
 let selectedYearValue = '';
 let currentPage = 1;
 let currentQuery = '';
@@ -25,10 +26,12 @@ function fetchTrendingMovies() {
 
 
 function renderMovies(movies) {
-  emptyMessage.hidden = true;
+  if (emptyMessage) emptyMessage.hidden = true;
+  if (!moviesContainer) return;
+
   moviesContainer.innerHTML = "";
 
-  movies.slice(0, 10).forEach(movie => {   // 🔥 SADECE 10 FİLM
+  movies.slice(0, 10).forEach(movie => {
     const card = `
       <a href="catalog_mainbody.html?id=${movie.id}" class="movie-card">
         <img src="${IMAGE_BASE + movie.poster_path}" alt="${movie.title}">
@@ -40,6 +43,7 @@ function renderMovies(movies) {
 }
 
 
+
 function showEmpty() {
   moviesContainer.innerHTML = "";
   emptyMessage.hidden = false;
@@ -47,13 +51,14 @@ function showEmpty() {
 
 const yearBtn = document.getElementById("yearBtn");
 const yearDropdown = document.getElementById("yearDropdown");
-const selectedYear = document.getElementById("selectedYear");
 
-yearBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  yearDropdown.classList.toggle("open");
-  yearBtn.classList.toggle("open");
-});
+if (yearBtn && yearDropdown) {
+  yearBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    yearDropdown.classList.toggle("open");
+    yearBtn.classList.toggle("open");
+  });
+}
 
 yearDropdown.addEventListener("click", (e) => {
   if (e.target.tagName === "LI") {
@@ -124,6 +129,7 @@ function searchAndRender(page = 1) {
     })
     .catch(err => console.error("Arama hatası:", err));
 }
+
 
 
 
