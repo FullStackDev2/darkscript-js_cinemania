@@ -2,7 +2,7 @@
     max-width: 320px;
     margin: 0 auto;
     width: 100%;
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .hero {
@@ -16,6 +16,7 @@
     height: 406px;
     margin: 0 auto;
 }
+
 .movie-details,
 .section {
     width: 100%;
@@ -133,9 +134,20 @@
     margin: 0 auto;
 }
 
-#moviesContainer{
+#moviesContainer {
     display: grid;
     gap: 16px;
+    width: 100%;
+}
+
+#emptyMessage {
+    gap: 8px;
+    text-align: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 400;
+    padding-top: 48px;
+    color: rgba(17, 17, 17, 1);
     width: 100%;
 }
 
@@ -150,14 +162,21 @@
 
 .movie-card-overlay {
     position: absolute;
+    display: flex;
+    align-items: flex-end;
     left: 0;
     bottom: 0;
     width: 100%;
+    height: -90px;
     padding: 16px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     position: absolute;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 0, 0, 0.6) 75%,
+            rgba(0, 0, 0, 0.9) 100%);
     inset: 0;
     z-index: 1;
     border-radius: 5px;
@@ -183,7 +202,10 @@
 
 .movie-card-text {
     max-width: 70%;
-    color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
 }
 
 .movie-title {
@@ -192,11 +214,17 @@
     margin-bottom: 4px;
     font-size: 12px;
     text-transform: uppercase;
+    color: rgba(255, 255, 255, 1);
 }
 
 .movie-meta {
-    font-size: 14px;
+    color: rgba(183, 183, 183, 1);
+    font-family: 500;
+    font-size: 11.5px;
+    ;
+    line-height: 1.67em;
     opacity: 0.85;
+    color: rgba(183, 183, 183, 1);
 }
 
 .movie-title,
@@ -204,8 +232,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+
 }
+
 
 .movie-card-rating {
     font-size: 14px;
@@ -287,7 +316,7 @@
     color: #F87719;
 }
 
-#movieGenre{
+#movieGenre {
     padding-top: 5px;
 }
 
@@ -295,26 +324,26 @@
 #movieVoteCount,
 #movieAbout,
 #moviePopularity,
-#movieGenre{
+#movieGenre {
     font-size: 16px;
     font-weight: 500;
     line-height: 1;
     color: #282828;
-    font-family: 'Roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
-.meta-right{
+.meta-right {
     padding-left: 50px;
 }
 
 #movieOverview {
-   padding-top: 50px;
-   text-align: justify;
-   padding-bottom: 24px;
-   font-size: 14px;
-   font-weight: 400;
-   color: rgba(40, 40, 40, 1);
-   line-height: 1.43;
+    padding-top: 50px;
+    text-align: justify;
+    padding-bottom: 24px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(40, 40, 40, 1);
+    line-height: 1.43;
 }
 
 .genre {
@@ -324,10 +353,10 @@
     line-height: 1.4;
 }
 
-.subButon{
+.subButon {
     background: linear-gradient(to bottom,
-                rgba(255, 194, 38, 1),
-                rgba(248, 65, 25, 1));
+            rgba(255, 194, 38, 1),
+            rgba(248, 65, 25, 1));
     font-weight: 500;
     font-size: 12px;
     line-height: 1.4;
@@ -449,12 +478,14 @@
     z-index: 999;
     top: 100%;
 }
+
 #selectedYear {
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
     color: #595959;
 }
+
 .year-dropdown.open {
     display: block;
 }
@@ -477,7 +508,7 @@
     text-align: center;
     padding: 8px 12px;
     cursor: pointer;
-    transition: color 0.2s ease,  ease;
+    transition: color 0.2s ease, ease;
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
@@ -490,77 +521,4 @@
 
 .year-dropdown li[data-year=""] {
     display: none;
-}
-
-
-/* pagination dosyası */
-
-.pagination-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 40px 0;
-    background-color: #111; /* Arka plan koyu tema */
-}
-
-.pagination-list {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    list-style: none;
-    padding: 0;
-}
-
-.pagination-item {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #B7B7B7;
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    border: 1px solid #333; /* Gri halka */
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Aktif sayfa tasarımı (Gradyan geçişli) */
-.pagination-item.active {
-    background: linear-gradient(141deg, #FFC226 0%, #F84119 100%);
-    color: white;
-    border: none;
-    box-shadow: 0px 4px 10px rgba(248, 65, 25, 0.3);
-}
-
-/* Üç nokta (...) tasarımı */
-.pagination-item.dots {
-    border: none;
-    cursor: default;
-    color: #fff;
-}
-
-/* Ok butonları */
-.pagination-arrow {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-}
-
-.pagination-arrow svg {
-    width: 20px;
-    height: 20px;
-    stroke: #fff; /* Ok rengi beyaz */
-    fill: none;
-}
-
-/* Hover efekti */
-.pagination-item:hover:not(.dots, .active) {
-    border-color: #FFC226;
-    color: #fff;
 }

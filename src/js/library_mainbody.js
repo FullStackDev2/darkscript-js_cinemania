@@ -5,6 +5,8 @@ const BASE_URL = "https://api.themoviedb.org/3/trending/movie/day";
 
 const emptySection = document.getElementById("emptySection");
 const movieList = document.getElementById("movieList");
+const container = document.getElementById("moviesContainer");
+
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchInitialMovies();
