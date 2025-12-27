@@ -9,15 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/library_mainbody-Bl1_8nfN.js"></script>
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js"></script>
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-DtLU6OHs.js"></script>
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/library_mainbody-YhVPdHtU.css">
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/catalog-CCH5ysD3.css">
+    <script type="module" crossorigin src="/darkscript-js_cinemania/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js">
+    <link rel="modulepreload" crossorigin href="/darkscript-js_cinemania/assets/main-B_zSWVXd.js">
   </head>
   <body>
-
+    
     <header class="header">
   <div class="container header-container">
     <a href="./index.html" class="logo">
@@ -50,8 +47,6 @@
     </nav>
   </div>
 </header>
-    
-
     <section class="hero" id="hero-section" data-page="dynamic">
       <div class="container hero-content">
         <h1 class="hero-title">Let's Make Your Own Cinema</h1>
@@ -59,6 +54,133 @@
         <button type="button" class="btn-primary" id="hero-btn">Get Started</button>
       </div>
 </section>
+    <main>
+        <section class="page-container">
+    <div class="genre-select">
+        <button class="genre-btn" id="genreBtn">
+            Genre
+            <svg class="icon icon-chevron-down" id="genreIcon">
+                <use href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
+            </svg>
+        </button>
+        
+        <ul class="genre-dropdown" id="genreDropdown">
+            <li data-genre="Romance">Romance</li>
+            <li data-genre="Detective">Detective</li>
+            <li data-genre="Thriller">Thriller</li>
+            <li data-genre="Action">Action</li>
+            <li data-genre="Documentary">Documentary</li>
+            <li data-genre="Horror">Horror</li>
+        </ul>
+    </div>
+        <section class="container hidden">
+            <p class="search-movie" id="emptyState">OOPS... <br>
+                We are very sorry! <br>
+                You don't have any movies <br>
+                at your library.
+            </p>
+            <button class="search-button" type="submit">Search movie</button>
+        </section> 
+    
+        <section class="movie-list" id="movieList"></section>
+        <button class="load-more-btn" id="loadMoreBtn">
+            Load more
+        </button>
+    </section> 
+        <section class="catalog-page">
+        <section class="section">
+            <div class="section-header">
+                <h2>WEEKLY TRENDS</h2>
+                <a href="catalog_list.html" class="see-all">See all</a>
+            </div>
+        
+            <div class="weekly-trends" id="weeklyTrends"></div>
+        
+        </section>
+        
+        <section class="section2">
+            <div class="section-header1">
+                <h2>UPCOMING THIS MONTH</h2>
+            </div>
+        </section>
+
+        <section class="hero">
+            <img id="heroBackdrop" class="hero-backdrop" alt="Backdrop">
+            
+        </section>
+
+        <section class="movie-details">
+            <div class="movie-head" id="movieTitle"></div>
+
+        
+            <div class="movie-meta">
+        
+                <div class="meta-left">
+                    <span class="tight">Release date</span>
+                    <span class="tight" class="genre" >Genre</span>
+                    <span class="tight">Vote / Votes</span>
+                    <span class="tight">ABOUT</span>
+                    <span class="tight">Popularity</span>
+                </div>
+                
+                <div class="meta-right">
+                    <strong class="tight" id="movieDate"></strong>
+                    <div class="vote-values">
+                        <span class="tight" id="movieVoteAvg" class="vote-score"></span>
+                        <span class="tight" id="movieVoteCount"></span>
+                    </div>
+                    <strong class id="movieAbout"></strong>
+                    <strong class id="moviePopularity"></strong>
+                    <strong id="movieGenre" class="genre"></strong>
+                </div>
+        
+            </div>
+        
+            <p id="movieOverview"></p>
+
+            <button class="subButon" type="submit">Add to my library</button>
+        </section>
+    </section>
+
+        <section class="catalog-page">
+    <div class="search-row">
+        <input type="text" class="search-input" placeholder="Film" />
+        <select class="search-select">
+            <option value="">Year</option>
+            <option>2023</option>
+            <option>2022</option>
+            <option>2021</option>
+            <option>2020</option>
+            <option>2019</option>
+            <option>2018</option>
+            <option>2017</option>
+            <option>2016</option>
+            <option>2015</option>
+        </select>
+        <input type="text" class="search-input1" placeholder="Search">
+    
+        <button class="search-btn">
+            🔍
+        </button>
+    </div>
+        
+        
+        </section>
+        <!-- 1️⃣ HERO  Günün Filmi -->
+        <section class="hero" id="hero">
+            <!-- JS ile doldurulacak -->
+        </section>
+
+        <!-- 3️⃣ MOVIE LIST -->
+        <section class="movie-list">
+            <div id="moviesContainer"></div>
+            <p id="emptyMessage" hidden>No movies found</p>
+        </section>
+
+        <!-- 4️⃣ PAGINATION -->
+        <section class="pagination" id="pagination"></section>
+    </section>
+    </main>
     <!-- FOOTER -->
 <footer class="footer">
   <p class="footer-copy">© 2023 | All Rights Reserved |</p>
@@ -174,128 +296,7 @@
   </div>
 </div>
 
-    <main>
-      <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalog</title>
-
-</head>
-
-<body>
-
-    <main class="catalog-page">
-
-        <section class="section">
-        
-            <div class="section-header">
-                <h2>WEEKLY TRENDS</h2>
-                <a href="catalog_list.html" class="see-all">See all</a>
-            </div>
-        
-            <div class="weekly-trends" id="weeklyTrends"></div>
-        
-        </section>
-        
-        <section class="section2">
-            <div class="section-header1">
-                <h2>UPCOMING THIS MONTH</h2>
-            </div>
-        </section>
-
-        <section class="hero">
-            <img id="heroBackdrop" class="hero-backdrop" alt="Backdrop">
-            
-        </section>
-
-        <section class="movie-details">
-            <div class="movie-head" id="movieTitle"></div>
-
-        
-            <div class="movie-meta">
-        
-                <div class="meta-left">
-                    <span class="tight">Release date</span>
-                    <span class="tight" class="genre" >Genre</span>
-                    <span class="tight">Vote / Votes</span>
-                    <span class="tight">ABOUT</span>
-                    <span class="tight">Popularity</span>
-                </div>
-                
-                <div class="meta-right">
-                    <strong class="tight" id="movieDate"></strong>
-                    <div class="vote-values">
-                        <span class="tight" id="movieVoteAvg" class="vote-score"></span>
-                        <span class="tight" id="movieVoteCount"></span>
-                    </div>
-                    <strong class id="movieAbout"></strong>
-                    <strong class id="moviePopularity"></strong>
-                    <strong id="movieGenre" class="genre"></strong>
-                </div>
-        
-            </div>
-        
-            <p id="movieOverview"></p>
-
-            <button class="subButon" type="submit">Add to my library</button>
-        </section>
-
-
-    </main>
-
-    <script src="../src/js/catalog_mainbody.js"></script>
-
-</body>
-
-</html>
-      <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library</title>
-</head>
-<body>
-
-    <main class="page-container">
-    <div class="genre-select">
-        <button class="genre-btn" id="genreBtn">
-            Genre
-            <svg class="icon icon-chevron-down" id="genreIcon">
-                <use href="/darkscript-js_cinemania/assets/symbol-defs-BO-r7Cwx.svg#icon-chevron-down"></use>
-            </svg>
-        </button>
-        
-        <ul class="genre-dropdown" id="genreDropdown">
-            <li data-genre="Romance">Romance</li>
-            <li data-genre="Detective">Detective</li>
-            <li data-genre="Thriller">Thriller</li>
-            <li data-genre="Action">Action</li>
-            <li data-genre="Documentary">Documentary</li>
-            <li data-genre="Horror">Horror</li>
-        </ul>
-    </div>
-        <section class="container hidden">
-            <p class="search-movie" id="emptyState">OOPS... <br>
-                We are very sorry! <br>
-                You don't have any movies <br>
-                at your library.
-            </p>
-            <button class="search-button" type="submit">Search movie</button>
-        </section> 
-    
-        <section class="movie-list" id="movieList"></section>
-        <button class="load-more-btn" id="loadMoreBtn">
-            Load more
-        </button>
-    </main> 
-</body>
-</html>
-    </main>
-
+ 
 
   </body>
 </html>
