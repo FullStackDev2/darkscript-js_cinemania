@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Library - Cinemania</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
+    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js"></script>
+    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-DtLU6OHs.js"></script>
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/library-lpy4vTTK.css">
+  </head>
+  <body>
+    <header class="header">
+  <div class="container header-container">
+    <a href="./index.html" class="logo">
+      <img src="./src/images/logo.svg" alt="Cinemania" class="logo-icon">
+      <span class="logo-text">Cinemania</span>
+    </a>
+
+    <div class="header-right">
+
+        <button type="button" class="menu-open-btn">
+            <span class="menu-text">MENU</span>
+        </button>
+
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+        </label>
+      </div>
+
+      
+    </div>
+    
+    <nav class="mobile-menu">
+      <ul class="nav-list">
+        <li><a href="./index.html" class="nav-link active">Home</a></li>
+        <li><a href="./catalog.html" class="nav-link">Catalog</a></li>
+        <li><a href="./library.html" class="nav-link">My library</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+    <main class="library-page">
+      <section class="container" id="hero-section" data-page="library">
+        <h1>My Library</h1>
+        <p class="muted">Saved movies will appear here. If it's empty, add items from the movie details or hero actions.</p>
+        <div id="library-list" class="grid-list">
+          <!-- Saved movies will be inserted here by the app's scripts -->
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>
