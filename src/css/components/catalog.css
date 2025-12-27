@@ -183,6 +183,7 @@
 
 .movie-card-text {
     max-width: 70%;
+    color: rgba(255, 255, 255, 1);
 }
 
 .movie-title {
