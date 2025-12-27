@@ -78,6 +78,7 @@ function renderWeeklyTrends(movies) {
   });
 }
 
+
 fetchMovieOfTheMonth();
 
 function fetchMovieOfTheMonth() {
@@ -169,5 +170,6 @@ function renderMovieDetails(movie) {
   setText("movieOverview", movie.overview);
 }
 
+document.getElementById("movieTitle").textContent = movie.title;
 
 

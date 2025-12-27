@@ -129,7 +129,6 @@
     border-radius: 5px;
     overflow: hidden;
     text-decoration: none;
-    color: #fff;
     max-width: 280px;
     margin: 0 auto;
 }
@@ -184,6 +183,7 @@
 
 .movie-card-text {
     max-width: 70%;
+    color: rgba(255, 255, 255, 1);
 }
 
 .movie-title {
@@ -311,6 +311,10 @@
    padding-top: 50px;
    text-align: justify;
    padding-bottom: 24px;
+   font-size: 14px;
+   font-weight: 400;
+   color: rgba(40, 40, 40, 1);
+   line-height: 1.43;
 }
 
 .genre {
