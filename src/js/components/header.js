@@ -1,62 +1,78 @@
-// Mobil menü açma/kapatma işlevselliği
-document.addEventListener('DOMContentLoaded', () => {
-	const menuBtn = document.querySelector('.menu-open-btn');
-	const mobileMenu = document.querySelector('.mobile-menu');
+// [header] header.js loaded
+console.log('[header] header.js checking in');
 
-	if (!menuBtn || !mobileMenu) return;
+let overlayEl = null;
 
-	menuBtn.setAttribute('aria-expanded', 'false');
+function createOverlay(closeFn) {
+    if (overlayEl) return;
+    overlayEl = document.createElement('div');
+    overlayEl.className = 'mobile-menu-overlay';
+    // Overlay stili için CSS'de .mobile-menu-overlay tanımlı olmalı
+    overlayEl.addEventListener('click', closeFn);
+    document.body.appendChild(overlayEl);
+}
 
-	let overlayEl = null;
+function removeOverlay() {
+    if (!overlayEl) return;
+    overlayEl.remove();
+    overlayEl = null;
+}
 
-	function createOverlay() {
-		if (overlayEl) return;
-		overlayEl = document.createElement('div');
-		overlayEl.className = 'mobile-menu-overlay';
-		overlayEl.addEventListener('click', closeMenu);
-		document.body.appendChild(overlayEl);
-	}
+function openMenu(menuBtn, mobileMenu) {
+    mobileMenu.classList.add('open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    createOverlay(() => closeMenu(menuBtn, mobileMenu));
+    document.body.style.overflow = 'hidden';
+}
 
-	function removeOverlay() {
-		if (!overlayEl) return;
-		overlayEl.removeEventListener('click', closeMenu);
-		document.body.removeChild(overlayEl);
-		overlayEl = null;
-	}
+function closeMenu(menuBtn, mobileMenu) {
+    mobileMenu.classList.remove('open');
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+    removeOverlay();
+    document.body.style.overflow = '';
+}
 
-	function openMenu() {
-		mobileMenu.classList.add('open');
-		menuBtn.setAttribute('aria-expanded', 'true');
-		createOverlay();
-		document.body.style.overflow = 'hidden';
-	}
+// Tek bir delegasyon üzerinden tüm tıklamaları yönetelim
+document.addEventListener('click', (e) => {
 
-	function closeMenu() {
-		mobileMenu.classList.remove('open');
-		menuBtn.setAttribute('aria-expanded', 'false');
-		removeOverlay();
-		document.body.style.overflow = '';
-	}
+    console.log('[header] Global click on:', e.target);
 
-	menuBtn.addEventListener('click', () => {
-		if (mobileMenu.classList.contains('open')) closeMenu();
-		else openMenu();
-	});
+    // 1. Menü Butonu Kontrolü
+    const btn = e.target.closest('.menu-open-btn');
+    if (btn) {
 
-	// Kullanıcı mobil menüde bir gezinme bağlantısına tıkladığında kapat
-	const navLinks = mobileMenu.querySelectorAll('.nav-link');
-	navLinks.forEach(link => {
-		link.addEventListener('click', () => {
-			// Belirli bir süre sonra kapatma için küçük bir zaman aşımı
-			setTimeout(closeMenu, 50);
-		});
-	});
+        console.log('[header] Menu btn detected!');
 
-	// ESC tuşuna basıldığında menüyü kapat
-	document.addEventListener('keydown', (e) => {
-		if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-			closeMenu();
-		}
-	});
+        const mobileMenu = document.querySelector('.mobile-menu');
+        if (!mobileMenu) return;
+        
+        console.log('[header] Menu toggle clicked');
+        if (mobileMenu.classList.contains('open')) {
+            closeMenu(btn, mobileMenu);
+        } else {
+            openMenu(btn, mobileMenu);
+        }
+        return; // İşlem tamam, aşağıya bakma
+    }
+
+    // 2. Nav Link Kontrolü (Menü içindeki linke tıklanırsa kapat)
+    const link = e.target.closest('.mobile-menu .nav-link');
+    if (link) {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const btn = document.querySelector('.menu-open-btn');
+        if (mobileMenu && mobileMenu.classList.contains('open')) {
+            setTimeout(() => closeMenu(btn, mobileMenu), 100);
+        }
+    }
 });
 
+// ESC Tuşu Kontrolü
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const btn = document.querySelector('.menu-open-btn');
+        if (mobileMenu && mobileMenu.classList.contains('open')) {
+            closeMenu(btn, mobileMenu);
+        }
+    }
+});

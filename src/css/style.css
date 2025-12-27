@@ -1,1 +1,6 @@
+@import './base/variables.css';
+@import './style.css';
+@import './components/hero.css';
 @import url('./components/header.css');
+@import url('./components/modal.css');
+@import url('./components/library.css');

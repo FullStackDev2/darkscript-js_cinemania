@@ -1,0 +1,32 @@
+/* My Library Özel Arka Planı */
+.hero-library-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  /* Koyu gradyan her zaman üstte kalsın ki yazılar okunsun */
+  background-image: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+}
+
+/* Mobile (Figma'dan aldığın 1x ve 2x) */
+@media (max-width: 767px) {
+  .hero-library-bg {
+    background-image: linear-gradient(90deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4)),
+      -webkit-image-set(url('/src/images/background/mobile-1.jpg') 1x, url('/src/images/background/mobil-1-@2x.jpg') 2x);
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .hero-library-bg {
+    background-image: linear-gradient(90deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4)),
+      -webkit-image-set(url('/src/images/background/tablet-2.jpg') 1x, url('/src/images/background/tablet-2-@2x.jpg') 2x);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .hero-library-bg {
+    background-image: linear-gradient(90deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4)),
+      -webkit-image-set(url('/src/images/background/desktop-2.jpg') 1x, url('/src/images/background/dektop-2-@2x.jpg') 2x);
+  }
+}

@@ -1,0 +1,74 @@
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal {
+  background: var(--color-bg);
+  color: var(--color-text);
+  width: 92vw;
+  max-width: 900px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+.modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px;
+}
+
+.modal .modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal .modal-content {
+  display: flex;
+  gap: 18px;
+}
+
+.modal .modal-poster {
+  width: 160px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modal .modal-info {
+  flex: 1;
+}
+
+.modal .modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Trailer iframe */
+.modal .trailer-iframe {
+  width: 100%;
+  height: 56vw; /* responsive-ish */
+  max-height: 480px;
+  border: none;
+}
+
+@media (min-width: 768px) {
+  .modal .modal-body { padding: 24px; }
+  .modal .modal-content { flex-direction: row; }
+  .modal .trailer-iframe { height: 360px; }
+}
