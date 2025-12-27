@@ -1,44 +1,65 @@
 /* FOOTER */
 .footer {
   background: #111;
-  color: #ccc;
+  color: #b7b7b7;
+  font-family: 'Roboto', sans-serif;
   padding: 20px;
   text-align: center;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
-.heart {
-  color: orange;
+.footer p {
+  margin: 0;
+}
+
+.footer-copy,
+.footer-mobile-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  gap: 6px;
 }
 
 .team-link {
   background: none;
   border: none;
-  color: #fff;
+  color: #b7b7b7;
   text-decoration: underline;
   cursor: pointer;
   font-size: inherit;
+  padding: 0;
 }
 
+.heart-icon {
+  width: 16px;
+  height: 16px;
+  margin: 0 4px;
+  fill: #f87719;
+}
 /* MODAL BACKDROP */
 .modal-backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.7);
-  display: none;
+  backdrop-filter: blur(5px);
+  display: none; /* JS ile açılacak */
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
 
-/* MODAL BOX */
 .modal {
   background: #fff;
   border-radius: 12px;
-  padding: 24px;
+  padding: 30px;
   width: 90%;
   max-width: 500px;
   position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   animation: scaleIn 0.3s ease;
 }
 
@@ -53,44 +74,88 @@
   }
 }
 
-.modal h2 {
-  margin-bottom: 16px;
-  text-align: center;
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
 }
 
-/* TEAM LIST */
+.modal h2 {
+  margin-bottom: 24px;
+  text-align: center;
+  color: #111;
+}
+
+/* EKİP LİSTESİ (GRID) */
 .team-list {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .team-list li {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
   text-align: center;
+  background: #fafafa;
 }
 
-.team-list li:last-child {
-  border-bottom: none;
+.team-list img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  border: 3px solid #f87719;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* CLOSE BUTTON */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
+.team-list h3 {
+  margin: 5px 0;
+  font-size: 1.1rem;
+}
+.team-list p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
 }
 
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: #333;
+  transition: fill 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover .icon {
+  fill: #f87719;
+  transform: scale(1.2);
+}
 /* 🔹 BREAKPOINT 1: Mobile (default) */
 
 /* 🔹 BREAKPOINT 2: Tablet */
 @media (min-width: 768px) {
   .footer {
-    font-size: 15px;
+    font-size: 16px;
+    flex-direction: row; /* İçeriği yan yana dizer */
+    justify-content: center; /* Yatayda tam ortalar */
+    gap: 5px;
   }
 
   .modal {
