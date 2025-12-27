@@ -130,11 +130,20 @@
     overflow: hidden;
     text-decoration: none;
     color: #fff;
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+#moviesContainer{
+    display: grid;
+    gap: 16px;
+    width: 100%;
 }
 
 .movie-card img {
     width: 100%;
     height: 406px;
+    aspect-ratio: 2 / 3;
     object-fit: cover;
     display: block;
 }
@@ -153,6 +162,24 @@
     inset: 0;
     z-index: 1;
     border-radius: 5px;
+}
+
+.movie-info {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.85),
+            rgba(0, 0, 0, 0));
+}
+
+.movie-rating {
+    font-size: 14px;
+    color: #F87719;
+    letter-spacing: 2px;
+    z-index: 2;
 }
 
 .movie-card-text {
@@ -316,11 +343,11 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 12px;
-    padding: 12px;
+    padding: 20px;
     padding-top: 40px;
 }
 
-/* Ortak input stilleri */
+
 .search-input,
 .search-input1,
 .search-select {
@@ -333,10 +360,10 @@
     background-color: #fff;
 }
 
-/* Film input */
+
 .search-input {
     flex: 2;
-    width: 100%;
+    max-width: 173px;
     height: 40px;
     color: #595959;
     font-weight: 500;
@@ -344,23 +371,22 @@
     line-height: 1;
 }
 
-/* Year dropdown */
+
 .search-select {
     flex: 1;
     width: 95px;
     height: 40px;
 }
 
-/* Search text input */
+
 .search-input1 {
     flex: 2;
-    width: 224px;
+    max-width: 224px;
     height: 40px;
     color: #595959;
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
-
 }
 
 .search-input,
@@ -370,9 +396,94 @@
     border-radius: 8px;
 }
 
-/* Focus efekti */
-.search-input:focus,
-.search-input1:focus,
-.search-select:focus {
-    border-color: #ff8a00;
+
+.search-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.year-select {
+    position: relative;
+    background: #fff;
+    width: 95px;
+}
+
+
+.year-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 95px;
+    height: 40px;
+    padding: 0 12px;
+    cursor: pointer;
+    width: 95px;
+    height: 40px;
+    background: #fff;
+    border: 1px solid #595959;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+}
+
+
+.year-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #595959;
+    border-radius: 8px;
+    list-style: none;
+    padding: 4px 0;
+    margin: 0;
+    display: none;
+    z-index: 999;
+    top: 100%;
+}
+#selectedYear {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+    color: #595959;
+}
+.year-dropdown.open {
+    display: block;
+}
+
+.year-btn .icon {
+    width: 16px;
+    height: 16px;
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+
+.year-btn.open .icon {
+    transform: rotate(0deg);
+}
+
+.year-dropdown li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: color 0.2s ease,  ease;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.year-dropdown li:hover {
+    color: #F87719;
+    transform: scale(1.15);
+}
+
+.year-dropdown li[data-year=""] {
+    display: none;
 }

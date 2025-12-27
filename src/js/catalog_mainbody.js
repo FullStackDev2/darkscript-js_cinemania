@@ -23,10 +23,6 @@ const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
 const params = new URLSearchParams(window.location.search);
 let movieId = params.get("id");
 
-if (!movieId) {
-  console.warn("Movie ID yok, default film yüklendi");
-  movieId = 550; 
-}
 
 fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
   .then(res => res.json())
@@ -81,11 +77,6 @@ function renderWeeklyTrends(movies) {
     container.insertAdjacentHTML("beforeend", card);
   });
 }
-
-console.log("URL:", window.location.href);
-console.log("search:", window.location.search);
-console.log("movieId:", movieId);
-
 
 fetchMovieOfTheMonth();
 
@@ -178,6 +169,5 @@ function renderMovieDetails(movie) {
   setText("movieOverview", movie.overview);
 }
 
-document.getElementById("movieTitle").textContent = movie.title;
 
 

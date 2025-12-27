@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/css/packof.css">
+</head>
+<body>
+        <section class="catalog-page">
+            <div class="search-row">
+            
+                <!-- FILM INPUT -->
+                <input type="text" class="search-input" placeholder="Film" />
+            
+                <!-- YEAR DROPDOWN -->
+                <div class="year-select">
+                    <button class="year-btn" id="yearBtn" type="button">
+                        <span id="selectedYear">Year</span>
+                        <svg class="icon icon-chevron-down" id="yearIcon">
+                            <use href="./src/images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
+                        </svg>
+                    </button>
+            
+                    <ul class="year-dropdown" id="yearDropdown">
+                        <li data-year="">Year</li>
+                        <li data-year="2023">2023</li>
+                        <li data-year="2022">2022</li>
+                        <li data-year="2021">2021</li>
+                        <li data-year="2020">2020</li>
+                        <li data-year="2019">2019</li>
+                        <li data-year="2018">2018</li>
+                        <li data-year="2017">2017</li>
+                        <li data-year="2016">2016</li>
+                        <li data-year="2015">2015</li>
+                    </ul>
+                </div>
+            
+
+                <input type="text" class="search-input1" placeholder="Search">
+            
+
+                <button class="search-btn">🔍</button>
+            
+            </div>
+        
+        
+        </section>
+        <section class="movie-list">
+            <div id="moviesContainer"></div>
+            <p id="emptyMessage" hidden>No movies found</p>
+        </section>
+        <script type="module" src="./src/js/catalog_list.js"></script>
+</body>
+</html>

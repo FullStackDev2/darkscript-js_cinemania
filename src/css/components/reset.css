@@ -1,6 +1,5 @@
-@import url('../css/equipment.css');
-@import url('../css/catalog.css');
-
+@import url('./catalog.css');
+@import url('./equipment.css');
 *,
 *::before,
 *::after {
