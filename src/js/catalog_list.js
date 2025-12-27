@@ -128,7 +128,7 @@ function searchAndRender(page = 1) {
 
 
 const totalPages = 24; // Toplam sayfa sayısı
-let currentPage = 1;   // Başlangıç sayfası
+
 
 const paginationList = document.querySelector('.pagination-list');
 const prevBtn = document.querySelector('.pagination-arrow.prev');
@@ -181,7 +181,7 @@ function updatePagination() {
     
     // API çağrısı veya film listesini filtreleme fonksiyonunu burada çalıştırın
     console.log(`Şu anki sayfa: ${currentPage}`);
-    // fetchMovies(currentPage); 
+    // searchAndRender(currentPage); 
 }
 
 // Ok butonları için event listenerlar
