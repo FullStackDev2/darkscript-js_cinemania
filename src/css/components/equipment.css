@@ -57,6 +57,15 @@
     border: 2px solid red;
 }
 
+.movie-card-rating {
+    margin-left: auto;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #ffb400;
+    width: auto;
+    height: auto;
+    text-align: right;
+}
 .equipment-page .movie-card::after {
     content: "";
     position: absolute;
@@ -72,6 +81,7 @@
     height: 100%;
     object-fit: cover;
     z-index: 1;
+    display: block;
 }
 
 .equipment-movie-info {
@@ -80,11 +90,17 @@
     left: 0;
     padding: 12px 12px;
     width: 100%;
-    color: #fff;
     box-sizing: border-box;
-    text-align: center;
+    text-align: left;
     gap: 2px;
     z-index: 3;
+    background: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0) 50%,
+                rgba(0, 0, 0, 0.6) 75%,
+                rgba(0, 0, 0, 0.9) 100%);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .equipment-movie-info h3 {
@@ -93,10 +109,11 @@
     font-size: 0.75em;
     line-height: 1.25em;
     font-weight: 500;
-    white-space: nowrap;
     text-align: left;
     text-transform: uppercase;
     padding-bottom: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .equipment-movie-info p {

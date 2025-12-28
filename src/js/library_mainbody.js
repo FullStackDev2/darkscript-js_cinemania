@@ -1,3 +1,5 @@
+
+
 let initialMovies = [];
 
 const API_KEY = "98ff2d6267ceea8e039422b0f46fb813";

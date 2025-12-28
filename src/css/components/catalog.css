@@ -2,7 +2,7 @@
     max-width: 320px;
     margin: 0 auto;
     width: 100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto',sans-serif;
 }
 
 .hero {
@@ -16,7 +16,6 @@
     height: 406px;
     margin: 0 auto;
 }
-
 .movie-details,
 .section {
     width: 100%;
@@ -134,7 +133,7 @@
     margin: 0 auto;
 }
 
-#moviesContainer {
+#moviesContainer{
     display: grid;
     gap: 16px;
     width: 100%;
@@ -174,9 +173,9 @@
     align-items: flex-end;
     position: absolute;
     background: linear-gradient(to bottom,
-            rgba(0, 0, 0, 0) 50%,
-            rgba(0, 0, 0, 0.6) 75%,
-            rgba(0, 0, 0, 0.9) 100%);
+                rgba(0, 0, 0, 0) 50%,
+                rgba(0, 0, 0, 0.6) 75%,
+                rgba(0, 0, 0, 0.9) 100%);
     inset: 0;
     z-index: 1;
     border-radius: 5px;
@@ -218,10 +217,8 @@
 }
 
 .movie-meta {
-    color: rgba(183, 183, 183, 1);
     font-family: 500;
-    font-size: 11.5px;
-    ;
+    font-size: 11.5px;;
     line-height: 1.67em;
     opacity: 0.85;
     color: rgba(183, 183, 183, 1);
@@ -232,7 +229,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
+    
 }
 
 
@@ -316,7 +313,7 @@
     color: #F87719;
 }
 
-#movieGenre {
+#movieGenre{
     padding-top: 5px;
 }
 
@@ -324,26 +321,26 @@
 #movieVoteCount,
 #movieAbout,
 #moviePopularity,
-#movieGenre {
+#movieGenre{
     font-size: 16px;
     font-weight: 500;
     line-height: 1;
     color: #282828;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto',sans-serif;
 }
 
-.meta-right {
+.meta-right{
     padding-left: 50px;
 }
 
 #movieOverview {
-    padding-top: 50px;
-    text-align: justify;
-    padding-bottom: 24px;
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(40, 40, 40, 1);
-    line-height: 1.43;
+   padding-top: 50px;
+   text-align: justify;
+   padding-bottom: 24px;
+   font-size: 14px;
+   font-weight: 400;
+   color: rgba(40, 40, 40, 1);
+   line-height: 1.43;
 }
 
 .genre {
@@ -353,10 +350,10 @@
     line-height: 1.4;
 }
 
-.subButon {
+.subButon{
     background: linear-gradient(to bottom,
-            rgba(255, 194, 38, 1),
-            rgba(248, 65, 25, 1));
+                rgba(255, 194, 38, 1),
+                rgba(248, 65, 25, 1));
     font-weight: 500;
     font-size: 12px;
     line-height: 1.4;
@@ -478,14 +475,12 @@
     z-index: 999;
     top: 100%;
 }
-
 #selectedYear {
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
     color: #595959;
 }
-
 .year-dropdown.open {
     display: block;
 }
@@ -508,7 +503,7 @@
     text-align: center;
     padding: 8px 12px;
     cursor: pointer;
-    transition: color 0.2s ease, ease;
+    transition: color 0.2s ease,  ease;
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
