@@ -108,6 +108,7 @@ function fetchMovieOfTheMonth() {
       if (!movie) return;
 
       renderMovieDetails(movie);
+      initLibraryButton(movie);
     })
     .catch(err => console.error("Upcoming error:", err));
 }
@@ -125,11 +126,11 @@ function renderMovieDetails(movie) {
     movie.release_date.split("-").reverse().join(".");
 
   document.getElementById("movieGenre").textContent =
-     movie.genre_ids
-      ?.map(id => GENRES[id])
-      .filter(Boolean)
-      .slice(0, 2)      
-      .join(", ") || "Unknown";
+   movie.genre_ids
+    ?.map(id => GENRES[id])
+    .filter(Boolean)
+    .slice(0, 2)       
+    .join(", ") || "Unknown";
 
   document.getElementById("movieVoteAvg").textContent =
     movie.vote_average.toFixed(1);
@@ -149,3 +150,47 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchWeeklyTrends();
   fetchMovieOfTheMonth();
 });
+
+function getFavorites() {
+  return JSON.parse(localStorage.getItem("favorites")) || [];
+}
+
+function isFavorite(movieId) {
+  return getFavorites().some(movie => movie.id === movieId);
+}
+
+function initLibraryButton(movie) {
+  const btn = document.getElementById("libraryToggleBtn");
+  if (!btn) return; 
+
+  function updateBtn() {
+    if (isFavorite(movie.id)) {
+      btn.textContent = "Remove from my library";
+      btn.classList.add("active");
+    } else {
+      btn.textContent = "Add to my library";
+      btn.classList.remove("active");
+    }
+  }
+
+  updateBtn();
+
+  btn.onclick = () => {
+    let favorites = getFavorites();
+
+    if (isFavorite(movie.id)) {
+      favorites = favorites.filter(f => f.id !== movie.id);
+    } else {
+      favorites.push({
+        id: movie.id,
+        title: movie.title,
+        poster_path: movie.poster_path,
+        release_date: movie.release_date,
+        genre_ids: movie.genre_ids
+      });
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    updateBtn();
+  };
+}

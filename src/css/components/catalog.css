@@ -263,15 +263,12 @@
 
 
 .movie-card-rating {
-    font-size: 14px;
+    font-size: 18px;
     color: #ffb400;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
+    line-height: 1;
     flex-shrink: 0;
-}
-
-.movie-card.large::after {
-    content: none;
-    background: none;
+    
 }
 
 .movie-head {
@@ -409,7 +406,7 @@
     line-height: 1.4;
 }
 
-.subButon{
+.subButon {
     background: linear-gradient(to bottom,
                 rgba(255, 194, 38, 1),
                 rgba(248, 65, 25, 1));
@@ -427,6 +424,24 @@
     margin: 0 auto;
 }
 
+.subButon:hover {
+    background: #fff;
+    border: 1px solid transparent;
+    background: #111111;
+    color: #F87719;
+}
+
+
+#libraryToggleBtn.active{
+    white-space: nowrap;
+    width: 176px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.6;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
 
 .search-row {
     display: flex;
