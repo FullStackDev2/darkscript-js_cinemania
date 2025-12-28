@@ -1,215 +1,151 @@
 const API_KEY = "98ff2d6267ceea8e039422b0f46fb813";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
-
-const moviesContainer = document.getElementById("moviesContainer");
-const emptyMessage = document.getElementById("emptyMessage");
-
-let selectedYearValue = '';
-let currentPage = 1;
-let currentQuery = '';
+let genreMap = {};
 
 
-fetchTrendingMovies();
-
-function fetchTrendingMovies() {
-  fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.results.length === 0) {
-        showEmpty();
-      } else {
-        renderMovies(data.results);
-      }
+fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`)
+  .then(res => res.json())
+  .then(data => {
+    data.genres.forEach(g => {
+      genreMap[g.id] = g.name;
     });
-}
-
-
-function renderMovies(movies) {
-  if (emptyMessage) emptyMessage.hidden = true;
-  if (!moviesContainer) return;
-
-  moviesContainer.innerHTML = "";
-
-  movies.slice(0, 10).forEach(movie => {
-    const card = `
-      <a href="catalog_mainbody.html?id=${movie.id}" class="movie-card">
-        <img src="${IMAGE_BASE + movie.poster_path}" alt="${movie.title}">
-        <h3>${movie.title}</h3>
-      </a>
-    `;
-    moviesContainer.insertAdjacentHTML("beforeend", card);
   });
+
+
+function getStars(vote) {
+  if (!vote) return "☆☆☆☆☆";
+  const count = Math.round(vote / 2);
+  return "★".repeat(count) + "☆".repeat(5 - count);
 }
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const moviesContainer = document.getElementById("moviesContainer");
+  const emptyMessage = document.getElementById("emptyMessage");
 
-function showEmpty() {
-  moviesContainer.innerHTML = "";
-  emptyMessage.hidden = false;
-}
+  const yearBtn = document.getElementById("yearBtn");
+  const yearDropdown = document.getElementById("yearDropdown");
+  const selectedYear = document.getElementById("selectedYear");
 
-const yearBtn = document.getElementById("yearBtn");
-const yearDropdown = document.getElementById("yearDropdown");
+  const filmInput = document.querySelector(".search-input1");
+  const searchBtn = document.querySelector(".search-btn");
 
-if (yearBtn && yearDropdown) {
-  yearBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    yearDropdown.classList.toggle("open");
-    yearBtn.classList.toggle("open");
-  });
-}
+  let selectedYearValue = "";
+  let currentQuery = "";
 
-yearDropdown.addEventListener("click", (e) => {
-  if (e.target.tagName === "LI") {
-    selectedYearValue = e.target.dataset.year; // 🔥 YIL
-    selectedYear.textContent = e.target.textContent;
 
-    yearDropdown.classList.remove("open");
-    yearBtn.classList.remove("open");
+  fetchTrending();
 
-    // 👉 Eğer query varsa, yıla göre yeniden ara
-    if (currentQuery) {
-      searchAndRender(1);
-    }
+  function fetchTrending() {
+    fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        renderMovies(data.results || []);
+      })
+      .catch(err => console.error(err));
   }
-});
-
-document.addEventListener("click", () => {
-  yearDropdown.classList.remove("open");
-  yearBtn.classList.remove("open");
-});
-
-const movieInput = document.querySelector(".search-input");
-const filmInput = document.querySelector(".search-input1"); 
-const searchBtn = document.querySelector(".search-btn");
 
 
-searchBtn.addEventListener("click", () => {
-  currentQuery = filmInput.value.trim();
-  currentPage = 1;
+  function renderMovies(movies) {
+  moviesContainer.innerHTML = "";
 
-  // Hiçbir şey yoksa → trending
-  if (!currentQuery && !selectedYearValue) {
-    fetchTrendingMovies();
+  if (!movies.length) {
+    emptyMessage.hidden = false;
     return;
   }
+  emptyMessage.hidden = true;
 
-  // 🔥 ARAMAYI BURASI BAŞLATIYOR
-  searchAndRender(1);
-});
+  movies.forEach(movie => {
+    const poster = movie.poster_path
+      ? `${IMAGE_BASE}${movie.poster_path}`
+      : "./placeholder.jpg";
 
-// 🔥 sayfa numaraları
+    const year = movie.release_date
+      ? movie.release_date.slice(0, 4)
+      : "N/A";
 
-function searchAndRender(page = 1) {
-  const endpoint = currentQuery
-    ? `${BASE_URL}/search/movie`
-    : `${BASE_URL}/discover/movie`;
+    const genres = movie.genre_ids && Object.keys(genreMap).length
+      ? movie.genre_ids
+      .map(id => genreMap[id])
+      .filter(Boolean)
+      .slice(0, 2)
+      .join(", ")
+      : "Unknown";
 
-  const url = new URL(endpoint);
+    const stars = getStars(movie.vote_average);
 
-  url.searchParams.append("api_key", API_KEY);
-  url.searchParams.append("page", page);
+    const card = document.createElement("a");
+    card.className = "movie-card";
+    card.href = "#";
 
-  if (currentQuery) {
-    url.searchParams.append("query", currentQuery);
+    card.innerHTML = `
+      <img src="${poster}" alt="${movie.title}">
+      <div class="movie-card-overlay">
+        <div class="movie-card-text">
+          <h3 class="movie-title">${movie.title}</h3>
+          <p class="movie-meta">${genres} | ${year}</p>
+        </div>
+        <div class="movie-card-rating">${stars}</div>
+      </div>
+    `;
+
+    moviesContainer.appendChild(card);
+  });
+}
+
+
+
+  if (yearBtn && yearDropdown) {
+    yearBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      yearDropdown.classList.toggle("open");
+    });
+
+    yearDropdown.addEventListener("click", e => {
+      if (e.target.tagName === "LI") {
+        selectedYearValue = e.target.dataset.year || "";
+        selectedYear.textContent = e.target.textContent;
+        yearDropdown.classList.remove("open");
+      }
+    });
+
+    document.addEventListener("click", () => {
+      yearDropdown.classList.remove("open");
+    });
   }
 
-  if (selectedYearValue) {
-    url.searchParams.append("primary_release_year", selectedYearValue);
-  }
 
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      if (!data.results || data.results.length === 0) {
-        showEmpty();
+  if (searchBtn) {
+    searchBtn.addEventListener("click", () => {
+      currentQuery = filmInput.value.trim();
+
+      if (!currentQuery && !selectedYearValue) {
+        fetchTrending();
         return;
       }
-      renderMovies(data.results);
-    })
-    .catch(err => console.error("Arama hatası:", err));
-}
 
-
-const totalPages = 24; // Toplam sayfa sayısı
-
-
-const paginationList = document.querySelector('.pagination-list');
-const prevBtn = document.querySelector('.pagination-arrow.prev');
-const nextBtn = document.querySelector('.pagination-arrow.next');
-
-// Sayfa numaralarını render eden fonksiyon
-function renderPagination(page) {
-    paginationList.innerHTML = ''; // Listeyi temizle
-
-    // Sayfa numarasını 01, 02 formatına çeviren yardımcı fonksiyon
-    const formatNum = (num) => num.toString().padStart(2, '0');
-
-    // Mantık: Her zaman ilk sayfayı, son sayfayı ve aktif sayfanın çevresini göster
-    let pages = [];
-    
-    if (totalPages <= 5) {
-        for (let i = 1; i <= totalPages; i++) pages.push(i);
-    } else {
-        if (page <= 3) {
-            pages = [1, 2, 3, '...', totalPages];
-        } else if (page >= totalPages - 2) {
-            pages = [1, '...', totalPages - 2, totalPages - 1, totalPages];
-        } else {
-            pages = [1, '...', page, '...', totalPages];
-        }
-    }
-
-    pages.forEach(p => {
-        const li = document.createElement('li');
-        li.classList.add('pagination-item');
-        
-        if (p === '...') {
-            li.textContent = '...';
-            li.classList.add('dots');
-        } else {
-            li.textContent = formatNum(p);
-            if (p === page) li.classList.add('active');
-            
-            li.addEventListener('click', () => {
-                currentPage = p;
-                updatePagination();
-            });
-        }
-        paginationList.appendChild(li);
+      searchMovies();
     });
-}
+  }
 
-function updatePagination() {
-    renderPagination(currentPage);
-    
-    // API çağrısı veya film listesini filtreleme fonksiyonunu burada çalıştırın
-    console.log(`Şu anki sayfa: ${currentPage}`);
-    // searchAndRender(currentPage); 
-}
+  function searchMovies() {
+    let url;
 
-// Ok butonları için event listenerlar
-prevBtn.addEventListener('click', () => {
-    if (currentPage > 1) {
-        currentPage--;
-        updatePagination();
+    if (currentQuery) {
+      url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(currentQuery)}`;
+      if (selectedYearValue) {
+        url += `&year=${selectedYearValue}`;
+      }
+    } else {
+      url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&primary_release_year=${selectedYearValue}`;
     }
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        renderMovies(data.results || []);
+      })
+      .catch(err => console.error(err));
+  }
 });
-
-nextBtn.addEventListener('click', () => {
-    if (currentPage < totalPages) {
-        currentPage++;
-        updatePagination();
-    }
-});
-
-// İlk çalıştırma
-renderPagination(currentPage);
-
-
-
-
-
-
-
