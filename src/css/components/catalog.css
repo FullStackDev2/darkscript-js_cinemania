@@ -208,7 +208,7 @@
 }
 
 .movie-card-text h3 {
-    color: rgba(255, 255, 255, 1);
+    color: var(--color-text);
     font-weight: 500;
     line-height: 1.67em;
     font-size: 12px;
