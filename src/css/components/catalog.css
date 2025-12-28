@@ -265,6 +265,7 @@
 .movie-card-rating {
     font-size: 18px;
     color: #ffb400;
+    padding-bottom: 3px;
     letter-spacing: 2.5px;
     line-height: 1;
     flex-shrink: 0;
