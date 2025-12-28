@@ -169,7 +169,7 @@ function renderMovieDetails(movie) {
   setText("movieGenre", genres);
   setText("movieOverview", movie.overview);
 }
-
-document.getElementById("movieTitle").textContent = movie.title;
+// movie tanımlanmamış ve js hata veriyor burası yüzünden. !!!!!!!!!!
+// document.getElementById("movieTitle").textContent = movie.title;
 
 

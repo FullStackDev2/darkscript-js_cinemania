@@ -1,4 +1,4 @@
-import { getTrending } from '../api/api-service';
+import { getTrending, getUpcoming, getGenres } from '../api/api-service.js';
 
 function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -126,12 +126,11 @@ function renderDefaultHero(container) {
   });
 }
 
-import apiService from '../api/api-service'; // Senin paylaştığın dosya
 
 async function renderUpcomingHero() {
     try {
-        const genres = await apiService.getGenres();
-        const upcomingData = await apiService.getUpcoming();
+        const genres = await getGenres();
+        const upcomingData = await getUpcoming();
         const movie = upcomingData.results[0]; // İlk filmi hero yapalım
 
         // 1. Tür (Genre) Çözümü: ID'leri isme çevir
