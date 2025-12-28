@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="/darkscript-js_cinemania/index.js"></script>
     <link rel="modulepreload" crossorigin href="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js">
-    <link rel="modulepreload" crossorigin href="/darkscript-js_cinemania/assets/main-DMxl8H1u.js">
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/index-Dz4jowyb.css">
+    <link rel="modulepreload" crossorigin href="/darkscript-js_cinemania/assets/main-B_zSWVXd.js">
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/index-CRS0_-sy.css">
   </head>
   <body>
     
@@ -35,7 +35,10 @@
           <div class="slider round"></div>
         </label>
       </div>
+
+      
     </div>
+    
     <nav class="mobile-menu">
       <ul class="nav-list">
         <li><a href="./index.html" class="nav-link active">Home</a></li>
@@ -52,30 +55,8 @@
         <button type="button" class="btn-primary" id="hero-btn">Get Started</button>
       </div>
 </section>
- <section class="upcoming-section">
-    <div id="upcomingHero" class="upcoming-card">
-        <div class="image-wrapper">
-            <img id="heroBackdrop" class="hero-img" alt="Backdrop">
-            <div class="overlay-content">
-                <h2 id="movieTitle" class="movie-title"></h2>
-                <div class="bottom-info">
-                    <div class="meta-data">
-                        <span id="movieGenre"></span>
-                        <span class="separator">|</span>
-                        <span id="movieDate"></span>
-                    </div>
-                    <div class="rating-stars" id="movieRating">
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="upcoming-actions">
-         <button class="subButon" id="addToLibrary">Add to my library</button>
-    </div>
-</section>
     <main>
-    <section class="catalog-page">
+      <section class="catalog-page">
     <div class="search-row">
 
         <!-- FILM INPUT -->
@@ -116,27 +97,12 @@
 </section>
 <section class="movie-list">
     <div id="moviesContainer"></div>
-    <p id="emptyMessage" hidden>No movies found</p>
+    <p id="emptyMessage" hidden>OOPS... <br>
+        We are very sorry! <br>
+        You don't have any results <br>
+        matching your search.</p>
 </section>
-
-<nav class="pagination-container">
-    <button class="pagination-arrow prev" aria-label="Previous page">
-        <svg class="icon"><use href="./src/images/icon.svg/symbol-defs.svg#icon-chevron-left"></use></svg>
-    </button>
-    
-    <ul class="pagination-list">
-        <li class="pagination-item active">01</li>
-        <li class="pagination-item">02</li>
-        <li class="pagination-item">03</li>
-        <li class="pagination-item dots">...</li>
-        <li class="pagination-item">24</li>
-    </ul>
-
-    <button class="pagination-arrow next" aria-label="Next page">
-        <svg class="icon"><use href="./src/images/icon.svg/symbol-defs.svg#icon-chevron-right"></use></svg>
-    </button>
-</nav>
-        <section class="catalog-page">
+          <section class="catalog-page">
         <section class="section">
             <div class="section-header">
                 <h2>WEEKLY TRENDS</h2>
@@ -191,7 +157,7 @@
         </section>
     </section>
 
-        <section class="page-container">
+          <section class="page-container">
     <div class="genre-select">
         <button class="genre-btn" id="genreBtn">
             Genre
@@ -201,13 +167,14 @@
         </button>
         
         <ul class="genre-dropdown" id="genreDropdown">
-            <li data-genre="Romance">Romance</li>
-            <li data-genre="Detective">Detective</li>
-            <li data-genre="Thriller">Thriller</li>
-            <li data-genre="Action">Action</li>
-            <li data-genre="Documentary">Documentary</li>
-            <li data-genre="Horror">Horror</li>
+            <li data-genre-id="10749">Romance</li>
+            <li data-genre-id="9648">Detective</li>
+            <li data-genre-id="53">Thriller</li>
+            <li data-genre-id="28">Action</li>
+            <li data-genre-id="99">Documentary</li>
+            <li data-genre-id="27">Horror</li>
         </ul>
+
     </div>
         <section class="container hidden">
             <p class="search-movie" id="emptyState">OOPS... <br>
@@ -230,7 +197,7 @@
   <div class="footer-mobile-text">
     <p class="footer-part">Developed with</p>
     <svg class="heart-icon">
-      <use xlink:href="../images/icon.svg/symbol-defs.svg#icon-heart"></use>
+      <use xlink:href="/src/css/icon.svg/symbol-defs.svg#icon-heart"></use>
     </svg>
     <span class="footer-span">by</span>
     <button class="team-link" id="openTeamModal">GoIT Students</button>
@@ -245,10 +212,7 @@
 
     <ul class="team-list">
       <li>
-        <img
-          src="https://avatars.githubusercontent.com/u/101416524?v=4"
-          alt="Nurettin Dinçer"
-        />
+        <img src="https://avatars.githubusercontent.com/u/101416524?v=4" alt="Nurettin Dinçer" />
         <h3>Nurettin DİNÇER</h3>
         <p>Team Lead</p>
         <div class="social-links">
@@ -278,10 +242,7 @@
         </div>
       </li>
       <li>
-        <img
-          src="https://avatars.githubusercontent.com/u/100768214?v=4"
-          alt="Egemen Yılmaz"
-        />
+        <img src="https://avatars.githubusercontent.com/u/100768214?v=4" alt="Egemen Yılmaz" />
         <h3>Egemen YILMAZ</h3>
         <p>Scrum Master</p>
         <div class="social-links">
