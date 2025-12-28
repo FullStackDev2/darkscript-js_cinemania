@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js"></script>
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-DFR1D_mr.js"></script>
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/style-Dho2l-VO.css">
+    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-jEAqns6I.js"></script>
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-Bkg5C4Sk.css">
   </head>
   <body>
     
@@ -19,9 +19,8 @@
   <div class="container header-container">
     <a href="/" class="logo-link">
       <svg class="logo-icon" width="32" height="32">
-        <use href="/symbol-defs.svg#icon-logo"></use>
+        <use href="/public/icon.svg#icon-logo"></use>
       </svg>
-      <span class="logo-text">Cinemania</span>
     </a>
 
     <div class="header-right">
@@ -30,12 +29,19 @@
             <span class="menu-text">MENU</span>
         </button>
 
-      <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox" />
-          <div class="slider round"></div>
-        </label>
-      </div>
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round">
+          <svg class="icon-sun" width="14" height="14">
+            <use href="/symbol-defs.svg#icon-sun"></use>
+          </svg>
+          <svg class="icon-moon" width="14" height="14">
+            <use href="/symbol-defs.svg#icon-moon"></use>
+          </svg>
+        </div>
+      </label>
+    </div>
 
       
     </div>
@@ -56,7 +62,8 @@
         <button type="button" class="btn-primary" id="hero-btn">Get Started</button>
       </div>
 </section>
-    <main>
+
+    <main class="site-content">
       <section class="catalog-page">
     <div class="search-row">
 
@@ -192,7 +199,9 @@
         </button>
     </section> 
     </main>
-    <!-- FOOTER -->
+
+    <footer id="site-footer">
+        <!-- FOOTER -->
 <footer class="footer">
   <p class="footer-copy">© 2023 | All Rights Reserved |</p>
   <div class="footer-mobile-text">
@@ -307,6 +316,7 @@
   </div>
 </div>
 
+    </footer>
 
     
 
