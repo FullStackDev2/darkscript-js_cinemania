@@ -1,4 +1,4 @@
-import { getTrending } from '../api/api-service';
+import { getTrending, getUpcoming, getGenres } from '../api/api-service.js';
 
 function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -125,3 +125,35 @@ function renderDefaultHero(container) {
     window.location.href = './catalog.html';
   });
 }
+
+
+async function renderUpcomingHero() {
+    try {
+        const genres = await getGenres();
+        const upcomingData = await getUpcoming();
+        const movie = upcomingData.results[0]; // İlk filmi hero yapalım
+
+        // 1. Tür (Genre) Çözümü: ID'leri isme çevir
+        const genreNames = movie.genre_ids
+            .map(id => genres.find(g => g.id === id)?.name)
+            .filter(name => name)
+            .slice(0, 2) // İlk 2 tanesini al
+            .join(', ');
+
+        // 2. Elementleri doldur
+        document.getElementById('movieTitle').textContent = movie.title;
+        document.getElementById('movieGenre').textContent = genreNames || 'Drama';
+        document.getElementById('movieDate').textContent = movie.release_date.split('-')[0];
+        document.getElementById('heroBackdrop').src = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
+
+        // 3. Yıldız Puanlama (10 üzerinden gelen puanı 5 yıldıza yay)
+        const ratingContainer = document.getElementById('movieRating');
+        const starCount = Math.round(movie.vote_average / 2);
+        ratingContainer.innerHTML = '★'.repeat(starCount) + '☆'.repeat(5 - starCount);
+
+    } catch (error) {
+        console.error("Yükleme hatası:", error);
+    }
+}
+
+renderUpcomingHero();

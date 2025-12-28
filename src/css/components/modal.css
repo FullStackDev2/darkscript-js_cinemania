@@ -1,74 +1,187 @@
-/* Modal styles */
+/* src/css/components/modal.css */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
+  background: rgba(0, 0, 0, 0.8); /* Daha koyu overlay */
+  display: none;
   align-items: center;
   justify-content: center;
-  z-index: 200;
+  z-index: 999;
+  padding: 20px;
+  backdrop-filter: blur(4px); /* Arkayı hafif bulanıklaştırır */
 }
 
 .modal {
-  background: var(--color-bg);
-  color: var(--color-text);
-  width: 92vw;
-  max-width: 900px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  overflow: hidden;
+  background: var(--color-bg, #111);
+  color: var(--color-text, #fff);
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  border-radius: 16px;
+  position: relative;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-.modal .modal-body {
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Details İçerik Yapısı */
+.details-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 18px;
+  gap: 24px;
+  padding: 40px 20px;
 }
 
-.modal .modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
-  border: none;
-  color: var(--color-text);
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.modal .modal-content {
-  display: flex;
-  gap: 18px;
-}
-
-.modal .modal-poster {
-  width: 160px;
-  flex-shrink: 0;
+.details-poster img {
+  width: 100%;
   border-radius: 8px;
-  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-.modal .modal-info {
+/* Liste Bilgileri */
+.details-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.details-item {
+  display: flex;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.details-label {
+  width: 120px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.details-value {
   flex: 1;
 }
 
-.modal .modal-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
+.accent-badge {
+  background: #f87117; /* Turuncu vurgu */
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: bold;
 }
 
-/* Trailer iframe */
-.modal .trailer-iframe {
-  width: 100%;
-  height: 56vw; /* responsive-ish */
-  max-height: 480px;
-  border: none;
+.details-about-title {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
+.details-about-text {
+  line-height: 1.6;
+  color: #ccc;
+  font-size: 14px;
+}
+
+/* Desktop Düzeni */
 @media (min-width: 768px) {
-  .modal .modal-body { padding: 24px; }
-  .modal .modal-content { flex-direction: row; }
-  .modal .trailer-iframe { height: 360px; }
+  .details-wrapper {
+    flex-direction: row;
+    padding: 40px;
+  }
+  
+  .details-poster {
+    width: 300px; /* Sabit genişlik */
+    flex-shrink: 0;
+  }
+}
+
+/* src/css/components/modal.css */
+
+/* Modalın ana gövdesi: Desktopta yan yana, mobilde alt alta */
+.details-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+}
+
+.details-poster img {
+  width: 100%;
+  max-width: 375px; /* Mobilde çok büyümesin */
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.details-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Veri listesi (Vote, Popularity, Genre) */
+.details-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.details-item {
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.details-label {
+  width: 120px; /* Etiketlerin hizalı durması için sabit genişlik */
+  color: #888;
+}
+
+.details-value {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.details-about-title {
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #888;
+}
+
+.details-about-text {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* --- Masaüstü Düzenlemesi --- */
+@media (min-width: 768px) {
+  .details-wrapper {
+    flex-direction: row; /* Poster ve bilgiler yan yana */
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .details-poster {
+    width: 375px; /* Tasarım gereği poster genişliği */
+    flex-shrink: 0;
+  }
+
+  .details-title {
+    font-size: 24px;
+  }
 }
