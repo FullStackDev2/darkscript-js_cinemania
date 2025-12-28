@@ -125,7 +125,11 @@ function renderMovieDetails(movie) {
     movie.release_date.split("-").reverse().join(".");
 
   document.getElementById("movieGenre").textContent =
-    movie.genres?.map(g => g.name).join(", ") || "";
+     movie.genre_ids
+      ?.map(id => GENRES[id])
+      .filter(Boolean)
+      .slice(0, 2)      
+      .join(", ") || "Unknown";
 
   document.getElementById("movieVoteAvg").textContent =
     movie.vote_average.toFixed(1);

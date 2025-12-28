@@ -24,30 +24,38 @@
             <div class="movie-head" id="movieTitle"></div>
 
         
-            <div class="movie-meta">
-        
-                <div class="meta-left">
-                    <span class="tight">Release date</span>
-                    <span class="tight genre">Genre</span>
-                    <span class="tight">Vote / Votes</span>
-                    <span class="tight">ABOUT</span>
-                    <span class="tight">Popularity</span>
+            <div class="movie-meta1">
+            
+                <div class="meta-row">
+                    <span class="meta-label">Release date</span>
+                    <strong class="meta-value" id="movieDate"></strong>
                 </div>
-                
-                <div class="meta-right">
-                    <strong class="tight" id="movieDate"></strong>
-                    <div class="vote-values">
-                        <span class="tight" id="movieVoteAvg" class="vote-score"></span>
-                        <span class="tight" id="movieVoteCount"></span>
-                    </div>
-                    <strong class id="movieAbout"></strong>
-                    <strong class id="moviePopularity"></strong>
-                    <strong id="movieGenre" class="genre"></strong>
+            
+                <div class="meta-row1">
+                    <span class="meta-label">Vote / Votes</span>
+                    <strong class="meta-value">
+                        <span id="movieVoteAvg"></span> <span class="stick">/</span>
+                        <span id="movieVoteCount"></span>
+                    </strong>
                 </div>
-        
+            
+                <div class="meta-row">
+                    <span class="meta-label">Popularity</span>
+                    <strong class="meta-value" id="moviePopularity"></strong>
+                </div>
+            
+                <div class="meta-row">
+                    <span class="meta-label">Genre</span>
+                    <strong class="meta-value genre" id="movieGenre"></strong>
+                </div>
+            
             </div>
-        
-            <p id="movieOverview"></p>
+            
+            <!-- ABOUT (AYRI BLOK) -->
+            <div class="movie-about">
+                <span class="meta-label">ABOUT</span>
+                <p id="movieOverview"></p>
+            </div>
 
             <button class="subButon" type="submit">Add to my library</button>
         </section>

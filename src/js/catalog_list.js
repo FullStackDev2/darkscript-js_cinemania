@@ -47,8 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  function renderMovies(movies) {
+function renderMovies(movies) {
   moviesContainer.innerHTML = "";
+
+  movies = movies.slice(0, 10);
 
   if (!movies.length) {
     emptyMessage.hidden = false;
@@ -67,10 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const genres = movie.genre_ids && Object.keys(genreMap).length
       ? movie.genre_ids
-      .map(id => genreMap[id])
-      .filter(Boolean)
-      .slice(0, 2)
-      .join(", ")
+          .map(id => genreMap[id])
+          .filter(Boolean)
+          .slice(0, 2)
+          .join(", ")
       : "Unknown";
 
     const stars = getStars(movie.vote_average);
@@ -94,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 }
 
-
+  
 
   if (yearBtn && yearDropdown) {
     yearBtn.addEventListener("click", e => {
@@ -128,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       searchMovies();
     });
   }
+
 
   function searchMovies() {
     let url;

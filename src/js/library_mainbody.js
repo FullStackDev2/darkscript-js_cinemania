@@ -132,6 +132,12 @@ function fetchMoviesByGenre() {
 }
 
 
+loadMoreBtn.addEventListener("click", () => {
+  if (!currentGenreId) return;
+
+  currentPage += 1;
+  fetchMoviesByGenre();
+});
 
 
 
