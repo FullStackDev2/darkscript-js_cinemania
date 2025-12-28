@@ -5,9 +5,12 @@
 }
 
 .header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+  justify-content: space-between; /* Elemanları sola, ortaya ve sağa dağıtır */
+  align-items: center;           /* Dikeyde hepsini hizalar */
+  padding: 10px 20px;
+  background-color: var(--color-bg);
+  position: relative; /* İçerideki elemanların hizalanması için */
 }
 
 .logo {
@@ -23,19 +26,29 @@
   font-size: 18px;
 }
 
+/* Logo en solda kalsın (Zaten öyle) */
+.logo-link {
+  flex: 0 0 auto;
+}
+
 .header-right {
   display: flex;
   align-items: center;
-  gap: 15px;
+  flex: 1; /* Kalan boşluğu kapla */
+  justify-content: space-between; /* İçindekileri (Buton ve Toggle) iki uca iter */
+  margin-left: 20px; /* Logo ile arasındaki boşluk */
 }
 
 .menu-open-btn {
-  background: none;
+    background: none;
   border: none;
-  color: var(--color-text);
   cursor: pointer;
-  font-family: inherit;
-  font-size: 14px;
+  
+  /* Butonu görsel olarak merkeze çeker */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-text);
 }
 
 /* Tema Switch Tasarımı */
@@ -45,6 +58,17 @@
   position: relative;
   width: 48px;
 }
+
+/* Toggle'ı en sağda tutmak için */
+.theme-switch-wrapper {
+  margin-left: auto; /* Kendisini sağa iter */
+}
+
+/* İkonların görünmeme ihtimaline karşı */
+.logo-icon, .icon-sun, .icon-moon {
+  display: block;
+}
+
 /* ... Slider stilleri buraya gelecek ... */
 
 /* Slider styles */
@@ -125,6 +149,40 @@
   background: rgba(0,0,0,0.45);
   z-index: 55;
 }
+
+/* Slider içindeki ikonları hizala */
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 5px;
+  position: relative;
+}
+
+.icon-sun, .icon-moon {
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  transition: opacity 0.3s ease;
+}
+
+/* Checkbox durumuna göre ikonların görünürlüğünü veya rengini değiştirme */
+/* Karanlık mod (işaretli değilken) */
+#checkbox:not(:checked) + .slider .icon-sun {
+  opacity: 0.2; /* Güneş soluk */
+}
+
+/* Aydınlık mod (işaretliyken) */
+#checkbox:checked + .slider .icon-moon {
+  opacity: 0.2; /* Ay soluk */
+}
+
+/* Slider yuvarlağının (ball) ikonların üstünde kalması için */
+.slider:before {
+  z-index: 2; /* Yuvarlak her zaman üstte */
+}
+
+
 
 /* Desktop: Menü Saklanır */
 @media (min-width: 768px) {

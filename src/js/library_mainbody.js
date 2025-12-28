@@ -23,6 +23,10 @@ fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=98ff2d6267ceea8e039
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  const movieList = document.getElementById("movieList");
+  // Eğer bu sayfada movieList yoksa bir şey yapma
+  if (!movieList) return;
+
   fetchInitialMovies();
   setupDropdown();
 });
@@ -89,18 +93,6 @@ function renderMovies(movies) {
   });
 }
 
-
-genreDropdown.addEventListener("click", (e) => {
-  if (e.target.tagName !== "LI") return;
-
-  currentGenreId = e.target.dataset.genreId;
-  currentPage = 1;
-
-  movieList.innerHTML = "";
-  emptyState.classList.add("hidden");
-
-  fetchMoviesByGenre();
-});
 
 
 function fetchMoviesByGenre() {
@@ -188,17 +180,4 @@ function setupDropdown() {
     }
   });
 }
-
-
-genreDropdown.addEventListener("click", (e) => {
-  if (e.target.tagName !== "LI") return;
-
-  currentGenreId = e.target.dataset.genreId;
-  currentPage = 1;
-
-  movieList.innerHTML = "";
-  emptyState.classList.add("hidden");
-
-  fetchMoviesByGenre();
-});
 
