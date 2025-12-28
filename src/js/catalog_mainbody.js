@@ -15,22 +15,15 @@ const GENRES = {
 };
 
 
+
 const API_KEY = "98ff2d6267ceea8e039422b0f46fb813";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+const IMAGE_HERO = "https://image.tmdb.org/t/p/original";
 
 
-const params = new URLSearchParams(window.location.search);
-let movieId = params.get("id");
 
-
-fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
-  .then(res => res.json())
-  .then(data => {
-    renderWeeklyTrends(data.results);
-  });
-
-  function getStars(voteAverage) {
+function getStars(voteAverage) {
   const rating = Math.round(voteAverage / 2);
   let stars = "";
   for (let i = 1; i <= 5; i++) {
@@ -39,8 +32,21 @@ fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
   return stars;
 }
 
+
+
+function fetchWeeklyTrends() {
+  fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
+    .then(res => res.json())
+    .then(data => {
+      renderWeeklyTrends(data.results);
+    })
+    .catch(err => console.error("Weekly trends error:", err));
+}
+
 function renderWeeklyTrends(movies) {
   const container = document.getElementById("weeklyTrends");
+  if (!container) return;
+
   container.innerHTML = "";
 
   movies.slice(0, 1).forEach(movie => {
@@ -57,21 +63,20 @@ function renderWeeklyTrends(movies) {
       : "./images/no-poster.jpg";
 
     const card = `
-  <a href="catalog_mainbody.html?id=${movie.id}" class="movie-card large">
-
-    <img src="${poster}" alt="${movie.title}">
-
-    <div class="movie-card-overlay">
-      <div class="movie-card-text">
-        <h3 class="movie-title">${movie.title}</h3>
-        <p class="movie-meta">${genres} | ${movie.release_date?.split("-")[0]}</p>
-      </div>
-
-      <div class="movie-card-rating">
-        ${stars}
-      </div>
-    </div>
-     </a>
+      <a href="catalog_mainbody.html?id=${movie.id}" class="movie-card large">
+        <img src="${poster}" alt="${movie.title}">
+        <div class="movie-card-overlay">
+          <div class="movie-card-text">
+            <h3 class="movie-title">${movie.title}</h3>
+            <p class="movie-meta">
+              ${genres} | ${movie.release_date?.split("-")[0]}
+            </p>
+          </div>
+          <div class="movie-card-rating">
+            ${stars}
+          </div>
+        </div>
+      </a>
     `;
 
     container.insertAdjacentHTML("beforeend", card);
@@ -79,7 +84,6 @@ function renderWeeklyTrends(movies) {
 }
 
 
-fetchMovieOfTheMonth();
 
 function fetchMovieOfTheMonth() {
   const now = new Date();
@@ -97,79 +101,47 @@ function fetchMovieOfTheMonth() {
   )
     .then(res => res.json())
     .then(data => {
-      if (!data.results || data.results.length === 0) {
-        console.warn("Ayın filmi bulunamadı");
-        return;
-      }
+      if (!data.results || data.results.length === 0) return;
 
-      const movie = data.results[0];
-      fetchMovieDetails(movie.id);
-    });
-}
 
-function fetchMovieDetails(movieId) {
-  fetch(
-    `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`
-  )
-    .then(res => res.json())
-    .then(movie => {
+      const movie = data.results.find(m => m.backdrop_path);
+      if (!movie) return;
+
       renderMovieDetails(movie);
-    });
+    })
+    .catch(err => console.error("Upcoming error:", err));
 }
+
+
 
 function renderMovieDetails(movie) {
-  
-  document.getElementById("movieTitle").textContent = movie.title;
-
-  document.getElementById("movieDate").textContent =
-    movie.release_date.split("-").reverse().join(".");
-
-  document.getElementById("movieGenre").textContent =
-    movie.genres.map(g => g.name).join(", ");
-
-  document.getElementById("moviePopularity").textContent =
-    movie.popularity.toFixed(1);
-
   const backdrop = document.getElementById("heroBackdrop");
-  if (backdrop && movie.backdrop_path) {
-    backdrop.src = IMAGE_BASE + movie.backdrop_path;
-  }
+  if (!backdrop) return;
 
-  const setText = (id, value) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
-  };
+  backdrop.src = IMAGE_HERO + movie.backdrop_path;
 
-  const genres = movie.genres.map(g => g.name).join(", ");
-
-  setText("movieDate", movie.release_date);
-  setText(
-    "movieVote",
-    `${movie.vote_average.toFixed(1)} / ${movie.vote_count}`
-  );
-
+  document.getElementById("movieTitle").textContent = movie.title;
   document.getElementById("movieDate").textContent =
     movie.release_date.split("-").reverse().join(".");
 
-  // Genre
   document.getElementById("movieGenre").textContent =
-    movie.genres.map(g => g.name).join(", ");
+    movie.genres?.map(g => g.name).join(", ") || "";
 
-  // Vote
   document.getElementById("movieVoteAvg").textContent =
     movie.vote_average.toFixed(1);
 
   document.getElementById("movieVoteCount").textContent =
     movie.vote_count;
 
-  // Popularity
   document.getElementById("moviePopularity").textContent =
     movie.popularity.toFixed(1);
-  setText("moviePopularity", movie.popularity.toFixed(1));
-  setText("movieGenre", genres);
-  setText("movieOverview", movie.overview);
+
+  document.getElementById("movieOverview").textContent =
+    movie.overview;
 }
-// movie tanımlanmamış ve js hata veriyor burası yüzünden. !!!!!!!!!!
-// document.getElementById("movieTitle").textContent = movie.title;
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  fetchWeeklyTrends();
+  fetchMovieOfTheMonth();
+});

@@ -139,6 +139,17 @@
     width: 100%;
 }
 
+#emptyMessage {
+    gap: 8px;
+    text-align: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 400;
+    padding-top: 48px;
+    color: rgba(17, 17, 17, 1);
+    width: 100%;
+}
+
 .movie-card img {
     width: 100%;
     height: 406px;
@@ -150,14 +161,21 @@
 
 .movie-card-overlay {
     position: absolute;
+    display: flex;
+    align-items: flex-end;
     left: 0;
     bottom: 0;
     width: 100%;
+    height: -90px;
     padding: 16px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     position: absolute;
+    background: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0) 50%,
+                rgba(0, 0, 0, 0.6) 75%,
+                rgba(0, 0, 0, 0.9) 100%);
     inset: 0;
     z-index: 1;
     border-radius: 5px;
@@ -183,7 +201,25 @@
 
 .movie-card-text {
     max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.movie-card-text h3 {
     color: rgba(255, 255, 255, 1);
+    font-weight: 500;
+    line-height: 1.67em;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.movie-card-text p {
+    color: rgba(183, 183, 183, 1);
+    font-family: 500;
+    font-size: 12px;
+    line-height: 1.67;
 }
 
 .movie-title {
@@ -192,20 +228,28 @@
     margin-bottom: 4px;
     font-size: 12px;
     text-transform: uppercase;
+    color: rgba(255, 255, 255, 1);
 }
 
 .movie-meta {
-    font-size: 14px;
+    font-family: 500;
+    font-size: 11.5px;;
+    line-height: 1.67em;
     opacity: 0.85;
+    color: rgba(183, 183, 183, 1);
 }
 
 .movie-title,
 .movie-meta {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-word;
 }
+
 
 .movie-card-rating {
     font-size: 14px;
@@ -490,77 +534,4 @@
 
 .year-dropdown li[data-year=""] {
     display: none;
-}
-
-
-/* pagination dosyası */
-
-.pagination-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 40px 0;
-    background-color: #111; /* Arka plan koyu tema */
-}
-
-.pagination-list {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    list-style: none;
-    padding: 0;
-}
-
-.pagination-item {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #B7B7B7;
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    border: 1px solid #333; /* Gri halka */
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Aktif sayfa tasarımı (Gradyan geçişli) */
-.pagination-item.active {
-    background: linear-gradient(141deg, #FFC226 0%, #F84119 100%);
-    color: white;
-    border: none;
-    box-shadow: 0px 4px 10px rgba(248, 65, 25, 0.3);
-}
-
-/* Üç nokta (...) tasarımı */
-.pagination-item.dots {
-    border: none;
-    cursor: default;
-    color: #fff;
-}
-
-/* Ok butonları */
-.pagination-arrow {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-}
-
-.pagination-arrow svg {
-    width: 20px;
-    height: 20px;
-    stroke: #fff; /* Ok rengi beyaz */
-    fill: none;
-}
-
-/* Hover efekti */
-.pagination-item:hover:not(.dots, .active) {
-    border-color: #FFC226;
-    color: #fff;
 }
