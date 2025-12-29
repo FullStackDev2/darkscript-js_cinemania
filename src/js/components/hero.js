@@ -1,4 +1,4 @@
-import { getTrending, getUpcoming, getGenres } from '../api/api-service.js';
+import { getTrending } from '../api/api-service';
 
 function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -125,4 +125,3 @@ function renderDefaultHero(container) {
     window.location.href = './catalog.html';
   });
 }
-

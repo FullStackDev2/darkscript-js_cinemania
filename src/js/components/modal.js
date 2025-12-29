@@ -26,7 +26,7 @@ function createModalRoot() {
     <div class="modal-content" id="modal-content"></div>
   `;
 
-  overlay.appendChild(modalElement);
+  overlay.appendChild(modal);
   document.body.appendChild(overlay);
 
   // Kapatma Eventleri (Backdrop tıklaması, Buton, ESC tuşu)
