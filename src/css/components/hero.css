@@ -15,6 +15,22 @@
   color: #ffffff; /* keep hero text white so it's readable over the dark overlay */
 }
 
+.hero,
+.catalog-page #hero-section,
+.library-page #hero-section {
+    min-height: 56vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero, 
+.catalog-page #hero-section {
+    margin-bottom: 40px; /* Kendisinden sonra gelen her şeyi 40px aşağı iter */
+}
+
 .hero-content {
 	padding: 48px 16px;
 }
@@ -51,6 +67,39 @@
   background-position: center;
 }
 
+/* Figma'daki Turuncu Gradient Buton (Watch Trailer) */
+.btn-primary {
+    background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
+    border-radius: 74px; /* Figma'daki tam yuvarlak hat */
+    padding: 12px 28px;
+    font-weight: 500;
+    color: #ffffff;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(248, 65, 25, 0.4);
+}
+
+/* Figma'daki Şeffaf Buton (More Details) */
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 74px;
+    padding: 12px 28px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-left: 12px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #ffffff;
+    color: #111111;
+}
+
 /* Mobile (Varsayılan) */
 @media (max-width: 767px) {
   .hero-default {
@@ -58,6 +107,14 @@
       -webkit-image-set(url('/src/images/background/mobile-1.jpg') 1x, url('/src/images/background/mobil-1-@2x.jpg') 2x);
   }
 }
+
+
+
+
+
+/* --------------- Desktop ve Tablet -------------------------------------------- */
+/* --- Tablet ve Desktop (768px ve üzeri) --- */
+
 
 /* Tablet (768px ve üzeri) */
 @media (min-width: 768px) and (max-width: 1279px) {
@@ -85,4 +142,60 @@
 	.hero-description {
 		font-size: 16px;
 	}
+}
+
+@media (min-width: 768px) {
+  .hero {
+    min-height: 80vh; /* Daha sinematik yükseklik */
+    background-position: center right;
+  }
+
+    .hero, 
+    .catalog-page #hero-section {
+        margin-bottom: 80px; /* Kendisinden sonra gelen her şeyi 40px aşağı iter */
+    }
+
+  .hero-content {
+    padding: 60px 40px;
+    max-width: 800px; /* İçeriğin çok yayılmasını engelle */
+  }
+
+  .hero-title {
+    font-size: 48px;
+    margin-bottom: 24px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 450px; /* Okunabilirlik için metni daralt */
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+  }
+
+    .hero,
+    .catalog-page #hero-section,
+    .library-page #hero-section {
+        min-height: 80vh; /* Tablet ve Desktop yüksekliği sabitlendi */
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 32px;
+    }
+}
+
+@media (min-width: 1280px) {
+  .hero-title {
+    font-size: 64px;
+  }
+  
+  .hero-content {
+    padding-left: 80px; /* Sol tarafta daha fazla boşluk */
+  }
 }

@@ -76,3 +76,22 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+function setActiveNavLink() {
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    // Eğer linkin href'i mevcut URL ile eşleşiyorsa active ekle
+    if (currentPath.includes(link.getAttribute('href').replace('./', ''))) {
+      link.classList.add('active');
+    }
+  });
+
+  // Eğer ana dizindeysek varsayılan Home
+  if (currentPath === '/' || currentPath.endsWith('index.html')) {
+    document.querySelector('.nav-link[href="./index.html"]')?.classList.add('active');
+  }
+}
+document.addEventListener('DOMContentLoaded', setActiveNavLink);
