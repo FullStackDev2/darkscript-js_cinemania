@@ -1,25 +1,26 @@
-/* variables.css */
 :root {
-  /* Varsayılan (Dark) */
-  --color-bg: #111111;
-  --color-text: #ffffff;
-  --color-secondary: #595959;
-  --color-primary: #f87115;
+  /* Renk Paleti (Dark Mode - Varsayılan) */
+  --color-primary: #f87115;      /* Turuncu Butonlar */
+  --color-bg: #111111;           /* Koyu Arka Plan */
+  --color-text: #ffffff;         /* Beyaz Yazı */
+  --color-secondary: #595959;    /* İkincil Yazı/Gri */
+  --color-black: #000000;
+  
+  /* Geçişler */
+  --transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Fontlar */
   --font-main: 'Roboto', sans-serif;
-  --transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* Hero overlays: keep dark overlay left->right so theme toggle doesn't turn it white */
+  --hero-overlay-dark: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%);
+  --hero-overlay-light: linear-gradient(90deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.6) 60%);
+  --hero-image: none;
 }
 
-/* JS'deki isimle aynı olmalı: light-theme */
-body.light-theme {
+/* Light Mode Değişkenleri */
+body.light-mode {
   --color-bg: #ffffff;
   --color-text: #111111;
   --color-secondary: #282828;
-}
-
-/* Bu kural tüm sayfaya renkleri yayar */
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-main);
-  transition: var(--transition);
 }
