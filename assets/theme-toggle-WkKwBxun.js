@@ -1,2 +1,0 @@
-document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector("#checkbox"),t=localStorage.getItem("theme");if(t==="light"?document.body.classList.add("light-mode"):document.body.classList.remove("light-mode"),!e)return;e.checked=t==="light";function o(c){c.target.checked?(document.body.classList.add("light-mode"),localStorage.setItem("theme","light")):(document.body.classList.remove("light-mode"),localStorage.setItem("theme","dark"))}e.addEventListener("change",o,!1)});
-//# sourceMappingURL=theme-toggle-WkKwBxun.js.map
