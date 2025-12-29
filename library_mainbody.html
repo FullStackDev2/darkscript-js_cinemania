@@ -1,9 +1,9 @@
-    <section class="page-container">
+  <section class="page-container">
     <div class="genre-select">
         <button class="genre-btn" id="genreBtn">
             Genre
             <svg class="icon icon-chevron-down" id="genreIcon">
-                <use href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-chevron-down"></use>
+                <use href="/darkscript-js_cinemania/assets/symbol-defs-Dv_PlyeR.svg#icon-chevron-down"></use>
             </svg>
         </button>
         
@@ -17,17 +17,19 @@
         </ul>
 
     </div>
-        <section class="container hidden">
-            <p class="search-movie" id="emptyState">OOPS... <br>
+        <section class="container hidden" id="emptySection">
+            <p class="search-movie" id="emptyState">
+                OOPS... <br>
                 We are very sorry! <br>
                 You don't have any movies <br>
                 at your library.
             </p>
             <button class="search-button" type="submit">Search movie</button>
-        </section> 
-    
+        </section>
+        
         <section class="movie-list" id="movieList"></section>
-        <button class="load-more-btn" id="loadMoreBtn">
+        
+        <button class="load-more-btn hidden" id="loadMoreBtn">
             Load more
         </button>
     </section> 
