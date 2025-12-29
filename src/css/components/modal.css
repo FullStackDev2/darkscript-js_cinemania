@@ -1,187 +1,226 @@
-/* src/css/components/modal.css */
-
-.modal-overlay {
+/* --- BACKDROP & ANIMATION --- */
+.backdrop {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8); /* Daha koyu overlay */
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  padding: 20px;
-  backdrop-filter: blur(4px); /* Arkayı hafif bulanıklaştırır */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Yarı saydam siyah */
+  z-index: 100;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: scroll; /* Mobilde uzun içerik olursa scroll olsun */
+  padding: 20px; /* Mobilde kenarlara yapışmasın */
 }
 
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+body.modal-open {
+  overflow: hidden; /* Arkadaki sayfa kaymasın */
+}
+
+/* --- MODAL CONTAINER --- */
 .modal {
-  background: var(--color-bg, #111);
-  color: var(--color-text, #fff);
-  width: 100%;
-  max-width: 800px;
-  max-height: 90vh;
-  border-radius: 16px;
   position: relative;
-  overflow-y: auto;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 30px;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 10;
-}
-
-/* Details İçerik Yapısı */
-.details-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  background-color: #ffffff;
+  border-radius: 10px; /* Tasarımdaki köşe yuvarlatma */
   padding: 40px 20px;
+  max-width: 280px; /* Mobile width */
+  margin: 0 auto; /* Ortala */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.details-poster img {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-}
-
-/* Liste Bilgileri */
-.details-list {
-  list-style: none;
+/* Modal Close Button */
+.modal-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   padding: 0;
-  margin: 20px 0;
+  transition: transform 250ms ease;
 }
 
-.details-item {
+.modal-close-btn:hover {
+  transform: scale(1.1);
+}
+
+/* --- CONTENT LAYOUT --- */
+.modal-img-wrapper {
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.modal-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.modal-title {
+  font-family: 'Roboto', sans-serif; /* Font varsayılanı */
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+/* --- STATS GRID --- */
+.modal-stats {
+  margin-bottom: 20px;
+}
+
+.stats-item {
   display: flex;
-  margin-bottom: 12px;
-  font-size: 14px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 1.33;
 }
 
-.details-label {
-  width: 120px;
-  color: #888;
+.stats-key {
+  color: #8c8c8c; /* Gri renk */
+  width: 108px; /* Sabit genişlik hizalama için */
+  flex-shrink: 0;
+}
+
+.stats-value {
+  color: #000000;
+}
+
+/* Vote Styling */
+.vote-average {
+  background-color: #ff6b08; /* Turuncu arka plan */
+  color: #ffffff;
+  padding: 1px 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.vote-count {
+  background-color: #f7f7f7;
+  padding: 1px 10px;
+  border-radius: 5px;
+  margin-left: 4px;
+}
+
+/* --- ABOUT SECTION --- */
+.modal-about-title {
+  font-size: 12px;
+  line-height: 1.33;
   text-transform: uppercase;
+  margin-bottom: 8px;
+  color: #000000;
 }
 
-.details-value {
-  flex: 1;
-}
-
-.accent-badge {
-  background: #f87117; /* Turuncu vurgu */
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-.details-about-title {
-  text-transform: uppercase;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.details-about-text {
+.modal-about-text {
+  font-size: 12px;
   line-height: 1.6;
-  color: #ccc;
-  font-size: 14px;
+  color: #000000;
+  margin-bottom: 20px;
 }
 
-/* Desktop Düzeni */
-@media (min-width: 768px) {
-  .details-wrapper {
-    flex-direction: row;
+/* --- BUTTONS --- */
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-modal {
+  border-radius: 5px;
+  padding: 12px 24px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 110px;
+}
+
+/* Add to Library Button Style */
+.btn-add-library {
+  background-color: transparent;
+  border: 1px solid #000000;
+  color: #000000;
+}
+
+.btn-add-library:hover,
+.btn-add-library.active {
+  background-color: #ff6b08;
+  border-color: #ff6b08;
+  color: #ffffff;
+  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+}
+
+/* --- RESPONSIVE TABLET & DESKTOP (min-width: 768px) --- */
+@media screen and (min-width: 768px) {
+  .modal {
+    max-width: 704px;
     padding: 40px;
+    top: 50%;
+    transform: translateY(-50%) scale(1);
+  }
+
+  /* Flexbox ile resmi sola, içeriği sağa al */
+  .modal-content {
+    display: flex;
+    gap: 68px; /* Resim ile metin arası boşluk */
+  }
+
+  .modal-img-wrapper {
+    margin-bottom: 0;
+    flex-shrink: 0; /* Resim küçülmesin */
+    width: 264px;
   }
   
-  .details-poster {
-    width: 300px; /* Sabit genişlik */
-    flex-shrink: 0;
+  .modal-img {
+     width: 264px;
+     height: 374px; /* Sabit yükseklik veya auto */
+  }
+
+  .modal-info {
+    flex-grow: 1;
+    padding-top: 20px; /* Tasarımda biraz üstten boşluk var gibi */
+  }
+
+  .modal-title {
+    font-size: 30px; /* Başlık büyüyor */
+    line-height: 1.16;
+  }
+  
+  .btn-modal {
+    padding: 14px 10px; /* Buton biraz büyüyor */
   }
 }
 
-/* src/css/components/modal.css */
-
-/* Modalın ana gövdesi: Desktopta yan yana, mobilde alt alta */
-.details-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 10px;
-}
-
-.details-poster img {
-  width: 100%;
-  max-width: 375px; /* Mobilde çok büyümesin */
-  border-radius: 8px;
-  display: block;
-  margin: 0 auto;
-}
-
-.details-title {
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-/* Veri listesi (Vote, Popularity, Genre) */
-.details-list {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 20px;
-}
-
-.details-item {
-  display: flex;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.details-label {
-  width: 120px; /* Etiketlerin hizalı durması için sabit genişlik */
-  color: #888;
-}
-
-.details-value {
-  color: var(--color-text);
-  font-weight: 500;
-}
-
-.details-about-title {
-  text-transform: uppercase;
-  font-size: 14px;
-  margin-bottom: 10px;
-  color: #888;
-}
-
-.details-about-text {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-/* --- Masaüstü Düzenlemesi --- */
-@media (min-width: 768px) {
-  .details-wrapper {
-    flex-direction: row; /* Poster ve bilgiler yan yana */
-    gap: 30px;
-    padding: 20px;
+/* --- DESKTOP (Ekstra ayar gerekirse) --- */
+@media screen and (min-width: 1280px) {
+  .modal {
+    max-width: 806px;
+    padding: 40px 12px;
+  }
+  
+  .modal-img-wrapper {
+    width: 375px;
+    height: 478px;
+  }
+  
+  .modal-img {
+    width: 375px;
+    height: 478px;
   }
 
-  .details-poster {
-    width: 375px; /* Tasarım gereği poster genişliği */
-    flex-shrink: 0;
-  }
-
-  .details-title {
-    font-size: 24px;
+  .modal-content {
+    gap: 16px; /* Desktopta gap değişiyor mu kontrol et */
+    justify-content: center;
   }
 }

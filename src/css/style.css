@@ -8,6 +8,8 @@
 @import url('./components/equipment.css');
 @import url('./components/catalog.css');
 @import url('./components/footer.css');
+@import url('./components/scrollup.css');
+@import url('./components/pagination.css');
 
 /* Sayfanın temel iskeleti */
 html, body {
