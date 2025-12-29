@@ -63,7 +63,7 @@ function renderWeeklyTrends(movies) {
       : "./images/no-poster.jpg";
 
     const card = `
-      <a href="catalog_mainbody.html?id=${movie.id}" class="movie-card large">
+      <a href="#" class="movie-card large" data-id="${movie.id}">
         <img src="${poster}" alt="${movie.title}">
         <div class="movie-card-overlay">
           <div class="movie-card-text">
