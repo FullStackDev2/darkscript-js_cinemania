@@ -25,6 +25,10 @@ function getStars(vote) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const moviesContainer = document.getElementById("moviesContainer");
+
+  // Eğer container yoksa bir şey yapma
+  if (!moviesContainer) return;
+  
   const emptyMessage = document.getElementById("emptyMessage");
   const paginationContainer = document.getElementById("pagination");
 

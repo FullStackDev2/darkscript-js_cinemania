@@ -1,28 +1,34 @@
-// Theme toggle: safe initialization and guard for missing element
-document.addEventListener('DOMContentLoaded', () => {
-    const toggleSwitch = document.querySelector('#checkbox');
-    const currentTheme = localStorage.getItem('theme');
+export function initTheme() {
+  const themeSwitch = document.querySelector('#checkbox');
+  const savedTheme = localStorage.getItem('theme') || 'dark';
 
-    if (currentTheme === 'light') {
-        document.body.classList.add('light-mode');
-    } else {
-        document.body.classList.remove('light-mode');
-    }
+  // Body'ye temayı hemen uygula (Switch'i bekleme)
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+  } else {
+    document.body.classList.remove('light-theme');
+  }
 
-    if (!toggleSwitch) return; // nothing to bind
+  // Eğer switch henüz DOM'da yoksa (Header yüklenmemiş olabilir)
+  if (!themeSwitch) {
+    // 100ms sonra tekrar kontrol et (Header yüklenmesi için zaman tanı)
+    setTimeout(initTheme, 100);
+    return;
+  }
 
-    // Set initial checkbox state
-    toggleSwitch.checked = currentTheme === 'light';
+  themeSwitch.checked = (savedTheme === 'light');
 
-    function switchTheme(e) {
-        if (e.target.checked) {
-            document.body.classList.add('light-mode');
-            localStorage.setItem('theme', 'light');
-        } else {
-            document.body.classList.remove('light-mode');
-            localStorage.setItem('theme', 'dark');
-        }
-    }
-
-    toggleSwitch.addEventListener('change', switchTheme, false);
-});
+  // Olay dinleyiciyi sadece bir kez ekle
+  if (!themeSwitch.dataset.listenerAdded) {
+    themeSwitch.addEventListener('change', () => {
+      if (themeSwitch.checked) {
+        document.body.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+    themeSwitch.dataset.listenerAdded = 'true';
+  }
+}

@@ -1,15 +1,17 @@
-// JS ana dosyası Bu dosya, uygulamanın ana JavaScript giriş noktasıdır ve tüm bileşenleri ve işlevselliği yükler.
+// main.js
 
-import './utils/theme-toggle.js';
+// 1. Sadece bir kez import et
+import { initTheme } from './utils/theme-toggle.js';
+
+// 2. Hemen çalıştır
+initTheme(); 
+
+// 3. Diğer bileşenler
 import './components/header.js';
 import './components/hero.js';
 import './components/footer.js';
 import './components/modal.js';
-import './components/scrollup.js';
-import './components/pagination.js';
-import './catalog_list.js';
 
-// Şimdilik yorumda bırakıldı, hata çözülene kadar
-
+// 4. Sayfa özelindeki JS'ler
+import "./catalog_list.js";
 import "./library_mainbody.js";
-// import "./js/catalog_mainbody.js"; // Hata çözülene kadar yorumda kalsın tanımsız movie hatası veriyor
