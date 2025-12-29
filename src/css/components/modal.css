@@ -1,74 +1,226 @@
-/* Modal styles */
-.modal-overlay {
+/* --- BACKDROP & ANIMATION --- */
+.backdrop {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Yarı saydam siyah */
+  z-index: 100;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: scroll; /* Mobilde uzun içerik olursa scroll olsun */
+  padding: 20px; /* Mobilde kenarlara yapışmasın */
 }
 
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+body.modal-open {
+  overflow: hidden; /* Arkadaki sayfa kaymasın */
+}
+
+/* --- MODAL CONTAINER --- */
 .modal {
-  background: var(--color-bg);
-  color: var(--color-text);
-  width: 92vw;
-  max-width: 900px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  overflow: hidden;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 10px; /* Tasarımdaki köşe yuvarlatma */
+  padding: 40px 20px;
+  max-width: 280px; /* Mobile width */
+  margin: 0 auto; /* Ortala */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.modal .modal-body {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 18px;
-}
-
-.modal .modal-close {
+/* Modal Close Button */
+.modal-close-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 8px;
+  right: 8px;
   background: transparent;
   border: none;
-  color: var(--color-text);
-  font-size: 20px;
   cursor: pointer;
+  padding: 0;
+  transition: transform 250ms ease;
 }
 
-.modal .modal-content {
-  display: flex;
-  gap: 18px;
+.modal-close-btn:hover {
+  transform: scale(1.1);
 }
 
-.modal .modal-poster {
-  width: 160px;
-  flex-shrink: 0;
-  border-radius: 8px;
+/* --- CONTENT LAYOUT --- */
+.modal-img-wrapper {
+  border-radius: 5px;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
-.modal .modal-info {
-  flex: 1;
-}
-
-.modal .modal-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-/* Trailer iframe */
-.modal .trailer-iframe {
+.modal-img {
+  display: block;
   width: 100%;
-  height: 56vw; /* responsive-ish */
-  max-height: 480px;
-  border: none;
+  height: auto;
+  object-fit: cover;
 }
 
-@media (min-width: 768px) {
-  .modal .modal-body { padding: 24px; }
-  .modal .modal-content { flex-direction: row; }
-  .modal .trailer-iframe { height: 360px; }
+.modal-title {
+  font-family: 'Roboto', sans-serif; /* Font varsayılanı */
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+/* --- STATS GRID --- */
+.modal-stats {
+  margin-bottom: 20px;
+}
+
+.stats-item {
+  display: flex;
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+.stats-key {
+  color: #8c8c8c; /* Gri renk */
+  width: 108px; /* Sabit genişlik hizalama için */
+  flex-shrink: 0;
+}
+
+.stats-value {
+  color: #000000;
+}
+
+/* Vote Styling */
+.vote-average {
+  background-color: #ff6b08; /* Turuncu arka plan */
+  color: #ffffff;
+  padding: 1px 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.vote-count {
+  background-color: #f7f7f7;
+  padding: 1px 10px;
+  border-radius: 5px;
+  margin-left: 4px;
+}
+
+/* --- ABOUT SECTION --- */
+.modal-about-title {
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: #000000;
+}
+
+.modal-about-text {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+/* --- BUTTONS --- */
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-modal {
+  border-radius: 5px;
+  padding: 12px 24px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 110px;
+}
+
+/* Add to Library Button Style */
+.btn-add-library {
+  background-color: transparent;
+  border: 1px solid #000000;
+  color: #000000;
+}
+
+.btn-add-library:hover,
+.btn-add-library.active {
+  background-color: #ff6b08;
+  border-color: #ff6b08;
+  color: #ffffff;
+  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+}
+
+/* --- RESPONSIVE TABLET & DESKTOP (min-width: 768px) --- */
+@media screen and (min-width: 768px) {
+  .modal {
+    max-width: 704px;
+    padding: 40px;
+    top: 50%;
+    transform: translateY(-50%) scale(1);
+  }
+
+  /* Flexbox ile resmi sola, içeriği sağa al */
+  .modal-content {
+    display: flex;
+    gap: 68px; /* Resim ile metin arası boşluk */
+  }
+
+  .modal-img-wrapper {
+    margin-bottom: 0;
+    flex-shrink: 0; /* Resim küçülmesin */
+    width: 264px;
+  }
+  
+  .modal-img {
+     width: 264px;
+     height: 374px; /* Sabit yükseklik veya auto */
+  }
+
+  .modal-info {
+    flex-grow: 1;
+    padding-top: 20px; /* Tasarımda biraz üstten boşluk var gibi */
+  }
+
+  .modal-title {
+    font-size: 30px; /* Başlık büyüyor */
+    line-height: 1.16;
+  }
+  
+  .btn-modal {
+    padding: 14px 10px; /* Buton biraz büyüyor */
+  }
+}
+
+/* --- DESKTOP (Ekstra ayar gerekirse) --- */
+@media screen and (min-width: 1280px) {
+  .modal {
+    max-width: 806px;
+    padding: 40px 12px;
+  }
+  
+  .modal-img-wrapper {
+    width: 375px;
+    height: 478px;
+  }
+  
+  .modal-img {
+    width: 375px;
+    height: 478px;
+  }
+
+  .modal-content {
+    gap: 16px; /* Desktopta gap değişiyor mu kontrol et */
+    justify-content: center;
+  }
 }

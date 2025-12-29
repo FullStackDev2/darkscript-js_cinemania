@@ -4,3 +4,33 @@
 @import url('./components/header.css');
 @import url('./components/modal.css');
 @import url('./components/library.css');
+@import url('./components/reset.css');
+@import url('./base/variables.css');
+@import url('./components/equipment.css');
+@import url('./components/catalog.css');
+@import url('./components/footer.css');
+@import url('./components/scrollup.css');
+@import url('./components/pagination.css');
+
+/* Sayfanın temel iskeleti */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main alanı tüm boşluğu doldursun */
+main {
+  flex: 1 0 auto;
+}
+
+/* Footer her zaman en altta kalsın */
+#site-footer {
+  flex-shrink: 0;
+  width: 100%;
+}

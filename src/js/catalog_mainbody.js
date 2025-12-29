@@ -109,20 +109,19 @@ function renderWeeklyTrends(movies) {
       ? IMAGE_BASE + movie.poster_path
       : "./images/no-poster.jpg";
 
-    const year = movie.release_date
-      ? movie.release_date.split("-")[0]
-      : "N/A";
-
-    const card = document.createElement("a");
-    card.className = "movie-card large";
-    card.href = `catalog_mainbody.html?id=${movie.id}`;
-
-    card.innerHTML = `
-      <img src="${poster}" alt="${movie.title}">
-      <div class="movie-card-overlay">
-        <div class="movie-card-text">
-          <h3 class="movie-title">${movie.title}</h3>
-          <p class="movie-meta">${genres} | ${year}</p>
+    const card = `
+      <a href="#" class="movie-card large" data-id="${movie.id}">
+        <img src="${poster}" alt="${movie.title}">
+        <div class="movie-card-overlay">
+          <div class="movie-card-text">
+            <h3 class="movie-title">${movie.title}</h3>
+            <p class="movie-meta">
+              ${genres} | ${movie.release_date?.split("-")[0]}
+            </p>
+          </div>
+          <div class="movie-card-rating">
+            ${stars}
+          </div>
         </div>
         <div class="movie-rating-stars"></div>
       </div>
