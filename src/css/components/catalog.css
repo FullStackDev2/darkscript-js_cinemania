@@ -20,6 +20,7 @@
 .section {
     width: 100%;
     padding: 0;
+    
 }
 
 .hero-backdrop {
@@ -33,6 +34,8 @@
 
 .movie-details {
     padding: 0px 16px;
+    max-width: 320px;
+    margin: 0 auto;
 }
 
 .movie-meta-list {
@@ -166,12 +169,8 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: -90px;
     padding: 16px;
-    display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    position: absolute;
     background: linear-gradient(to bottom,
                 rgba(0, 0, 0, 0) 50%,
                 rgba(0, 0, 0, 0.6) 75%,
@@ -192,27 +191,23 @@
             rgba(0, 0, 0, 0));
 }
 
-.movie-rating {
-    font-size: 14px;
-    color: #F87719;
-    letter-spacing: 2px;
-    z-index: 2;
-}
-
 .movie-card-text {
-    max-width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 4px;
     overflow: hidden;
+    max-width: none;
 }
 
 .movie-card-text h3 {
-    color: var(--color-text);
+    color: rgba(255, 255, 255, 1);
     font-weight: 500;
     line-height: 1.67em;
     font-size: 12px;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: normal;
 }
 
 .movie-card-text p {
@@ -229,38 +224,36 @@
     font-size: 12px;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 1);
-}
-
-.movie-meta {
-    font-family: 500;
-    font-size: 11.5px;;
-    line-height: 1.67em;
-    opacity: 0.85;
-    color: rgba(183, 183, 183, 1);
-}
-
-.movie-title,
-.movie-meta {
-    white-space: nowrap;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
     white-space: normal;
     word-break: break-word;
 }
 
-
-.movie-card-rating {
-    font-size: 14px;
-    color: #ffb400;
-    letter-spacing: 2px;
-    flex-shrink: 0;
+.movie-meta {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    font-family: 500;
+    font-size: 12px;
+    line-height: 1.67em;
+    opacity: 0.85;
+    color: rgba(183, 183, 183, 1);
+    white-space: normal;
+    word-break: break-word;
 }
 
-.movie-card.large::after {
-    content: none;
-    background: none;
+.movie-rating-stars {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    right: 12px;
+    bottom: 17px;
+    line-height: 1;
+    padding-bottom: 3px; 
+}
+
+.star {
+    width: 14px;
+    height: 14px;
 }
 
 .movie-head {
@@ -273,63 +266,10 @@
     padding-bottom: 20px;
 }
 
-.movie-meta {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    column-gap: 20px;
-    font-size: 13px;
-}
-
-.meta-left,
-.meta-right {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    /* ← satırlar arası boşluk */
-}
-
-.meta-left span {
-    font-weight: 500;
-    color: #111111;
-    white-space: nowrap;
-}
-
-.meta-right strong {
-    font-weight: 500;
-    color: #111111;
-}
-
-.vote-values {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.vote-score {
-    background: #f2f2f2;
-    padding: 2px 8px;
-    border-radius: 8px;
-    font-size: 12px;
-}
-
-.meta-left {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1;
-    color: #111111;
-    padding-left: 4px;
-}
-
-.meta-left .tight {
-    margin-bottom: -12px;
-}
-
 #movieDate {
     color: #F87719;
 }
+
 
 #movieGenre{
     padding-top: 5px;
@@ -347,18 +287,101 @@
     font-family: 'Roboto',sans-serif;
 }
 
-.meta-right{
-    padding-left: 50px;
+
+
+.meta-label {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    color: #282828;
+    font-family: 'Roboto', sans-serif;
+}
+
+.meta-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meta-row1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+}
+
+#moviePopularity{
+    padding-right: 20px;
+}
+
+#movieGenre {
+    padding-top: 0;
+    margin-right: 0;
+    padding-right: 16px;
+}
+
+.movie-meta1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.movie-details {
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.movie-about {
+    margin-top: 20px;
+}
+
+.movie-about p {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+#movieVoteAvg {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+#movieVoteCount {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.stick {
+    color: rgba(248, 248, 248, 1);
 }
 
 #movieOverview {
-   padding-top: 50px;
+   padding-top: 16px;
    text-align: justify;
    padding-bottom: 24px;
    font-size: 14px;
    font-weight: 400;
    color: rgba(40, 40, 40, 1);
    line-height: 1.43;
+}
+
+.meta-value {
+    min-width: 90px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .genre {
@@ -368,7 +391,7 @@
     line-height: 1.4;
 }
 
-.subButon{
+.subButon {
     background: linear-gradient(to bottom,
                 rgba(255, 194, 38, 1),
                 rgba(248, 65, 25, 1));
@@ -384,6 +407,39 @@
     border: none;
     cursor: pointer;
     margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.subButon:hover {
+    background: #fff;
+    border: 1px solid transparent;
+    background-image:
+            linear-gradient(#fff, #fff),
+            linear-gradient(160deg, #FFC226, #F84119);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: #F87719;
+}
+
+#libraryToggleBtn.active{
+    white-space: nowrap;
+    width: 176px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.6;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid transparent;
+    background-image:
+            linear-gradient(#fff, #fff),
+            linear-gradient(160deg, #FFC226, #F84119);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: #F87719;
 }
 
 .search-row {
@@ -442,13 +498,6 @@
 .search-select {
     border: 1px solid #595959;
     border-radius: 8px;
-}
-
-
-.search-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
 }
 
 
@@ -525,6 +574,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
+    
 }
 
 .year-dropdown li:hover {
@@ -535,3 +585,28 @@
 .year-dropdown li[data-year=""] {
     display: none;
 }
+.search-btn .icon-search3 .icon{
+    fill: currentColor;
+}
+
+.icon-chevron {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    fill: #F84119;
+}
+
+.icon-search3 {
+    fill: black;
+    margin: 0 auto;
+}
+
+.search-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);
+    cursor: pointer;
+}
+

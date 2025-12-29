@@ -1,14 +1,6 @@
-// main.js
-
-// 1. Sadece bir kez import et
-import { initTheme } from './utils/theme-toggle.js';
-
-// 2. Hemen çalıştır
-initTheme(); 
-
-// 3. Diğer bileşenler
 import './components/header.js';
 import './components/hero.js';
+import './components/mainbody.js';
 import './components/footer.js';
 import './components/modal.js';
 
