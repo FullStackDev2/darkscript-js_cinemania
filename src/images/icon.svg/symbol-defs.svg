@@ -99,12 +99,19 @@
 <path fill="none" stroke="#f8f8f8" style="stroke: var(--color1, #f8f8f8)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M29.333 29.333l-28-28M29.333 1.333l-28 28"></path>
 </symbol>
 <symbol id="icon-search3" viewBox="0 0 32 32">
-<path fill="none" stroke="#fff" style="stroke: var(--color19, #fff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0800" d="M14.667 25.333c0.039 0 0.085 0.001 0.131 0.001 5.891 0 10.667-4.776 10.667-10.667s-4.776-10.667-10.667-10.667c-0.046 0-0.092 0-0.138 0.001l0.007-0c-5.835 0.074-10.537 4.821-10.537 10.666s4.702 10.593 10.53 10.666l0.007 0M28 28l-5.8-5.8"></path>
+<path fill="currentColor" stroke="currentColor" style="stroke: var(--color19, #fff)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0800" d="M14.667 25.333c0.039 0 0.085 0.001 0.131 0.001 5.891 0 10.667-4.776 10.667-10.667s-4.776-10.667-10.667-10.667c-0.046 0-0.092 0-0.138 0.001l0.007-0c-5.835 0.074-10.537 4.821-10.537 10.666s4.702 10.593 10.53 10.666l0.007 0M28 28l-5.8-5.8"></path>
 </symbol>
 <symbol id="icon-linkedin2" viewBox="0 0 32 32">
 <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
 <path d="M2 12h6v18h-6v-18z"></path>
 <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+</symbol>
+<symbol id="icon-search3black" viewBox="0 0 32 32">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0800" d="M14.667 25.333c5.891 0 10.667-4.776 10.667-10.667s-4.776-10.667-10.667-10.667c-5.891 0-10.667 4.776-10.667 10.667s4.776 10.667 10.667 10.667z"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.0800" d="M28 28l-5.8-5.8"></path>
+</symbol>
+<symbol id="icon-chevron" viewBox="0 0 32 32">
+<path fill="currentColor" stroke="#595959" style="stroke: var(--color1, #595959)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M7 20.5l9-9 9 9"></path>
 </symbol>
 </defs>
 </svg>
