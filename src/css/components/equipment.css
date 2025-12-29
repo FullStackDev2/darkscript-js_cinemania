@@ -1,7 +1,8 @@
 .page-container{
    font-family: 'Roboto', sans-serif;
-   max-width: 320px;
-   max-height: 317px;
+   width: 100%;
+   max-width: 1280px;
+   /* max-height: 317px;  Bu kod tablet ve desktop görünümünde sorun yaratıyor ve boyutu kısıtlıyor.*/
    margin: 0 auto;
 }
 .container .search-movie{

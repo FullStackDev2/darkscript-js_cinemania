@@ -1,5 +1,5 @@
 .catalog-page {
-    max-width: 320px;
+    /* max-width: 320px; Tasarımda sorun yaratıyor */
     margin: 0 auto;
     width: 100%;
     font-family: 'Roboto',sans-serif;
@@ -12,8 +12,7 @@
     overflow: hidden;
     border-radius: 5px;
     padding: 0 18px;
-    width: 280px;
-    height: 406px;
+    min-height: 56vh;
     margin: 0 auto;
 }
 .movie-details,
@@ -392,9 +391,12 @@
     align-items: center;
     gap: 12px;
     padding: 20px;
-    padding-top: 40px;
+    margin-top: 32px;
+    position: relative;
+    clear: both;
+    z-index: 5;
+    background-color: var(--color-bg);
 }
-
 
 .search-input,
 .search-input1,
@@ -442,13 +444,6 @@
 .search-select {
     border: 1px solid #595959;
     border-radius: 8px;
-}
-
-
-.search-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
 }
 
 
@@ -534,4 +529,37 @@
 
 .year-dropdown li[data-year=""] {
     display: none;
+}
+
+
+/* --------------- Desktop ve Tablet -------------------------------------------- */
+
+
+@media (min-width: 768px) {
+    .catalog-page {
+        max-width: 100%; /* Sayfa genişlesin */
+    }
+
+    .hero, 
+    .catalog-page #hero-section,
+    .library-page #hero-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 80vh !important; /* Figma'daki gibi uzun hero */
+        display: flex;
+        align-items: center;
+        border-radius: 0; /* Büyük ekranda tam ekran olsun */
+    }
+
+    .hero-content {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-left: 32px;
+        width: 100%;
+    }
+
+    .search-row {
+        margin-top: 60px;
+        padding: 0 32px;
+    }
 }

@@ -28,7 +28,11 @@
 
 /* Logo en solda kalsın (Zaten öyle) */
 .logo-link {
+    display: flex;
   flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
 }
 
 .header-right {
@@ -182,10 +186,73 @@
   z-index: 2; /* Yuvarlak her zaman üstte */
 }
 
+/* --- Mobil Ayarlar (Zaten sende var ama ekleme yapıyoruz) --- */
+.logo-text.desktop-only {
+  display: none; /* Mobilde gizli */
+}
+
+.desktop-nav {
+  display: none; /* Mobilde gizli */
+}
+
 
 
 /* Desktop: Menü Saklanır */
 @media (min-width: 768px) {
   .menu-open-btn { display: none; }
   .mobile-menu { display: none; }
+}
+
+
+
+
+
+
+/* --------------- Desktop ve Tablet -------------------------------------------- */
+
+
+/* --- Tablet ve Desktop (768px ve üzeri) --- */
+@media (min-width: 768px) {
+  /* Logo yanına yazı gelsin */
+  .logo-text.desktop-only {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-left: 8px;
+  }
+
+  /* MENU yazısını kaldır */
+  .menu-open-btn.mobile-only {
+    display: none;
+  }
+
+  /* Ortadaki Navigasyonu göster */
+  .desktop-nav {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .desktop-nav .nav-list {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .desktop-nav .nav-link {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .desktop-nav .nav-link.active {
+    color: var(--color-primary);
+  }
 }
