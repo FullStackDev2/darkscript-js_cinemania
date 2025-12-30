@@ -29,9 +29,14 @@
       <section class="catalog-page">
         <div class="search-row">
       
-          <!-- FILM INPUT -->
+         <div class="film-input">
+          <svg class="icon icon-Vectorx">
+            <use xlink:href="./images/icons/symbol-defs.svg#icon-Vectorx"></use>
+          </svg>
+
           <input type="text" class="search-input" placeholder="Film" />
-      
+    
+        </div>
           <!-- YEAR DROPDOWN -->
           <div class="year-select">
             <button class="year-btn" id="yearBtn" type="button">
@@ -52,17 +57,31 @@
               <li data-year="2017">2017</li>
               <li data-year="2016">2016</li>
               <li data-year="2015">2015</li>
-              <svg class="icon icon-chevron">
-                <use xlink:href="./images/icon.svg/symbol-defs.svg#icon-chevron"></use>
-              </svg>
             </ul>
       
       
           </div>
       
-      
-          <input type="text" class="search-input1" placeholder="Search">
-      
+      <div class="cntry-select" id="countrySelect">
+        
+        <span id="selectedCountry">Country</span>
+
+        <svg class="icon icon-chevron-down" id="countryIcon">
+          <use href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
+        </svg>
+
+          <input type="text" class="search-input1">
+         <ul class="country-list">
+          <li data-country>United States</li>
+          <li data-country>Germany</li>
+          <li data-country>France</li>
+          <li data-country>Italy</li>
+          <li data-country>Spain</li>
+          <li data-country>United Kingdom</li>
+          <li data-country>Japan</li>
+          <li data-country>Belgium</li>
+         </ul>
+      </div>
       
           <button class="search-btn">
             <svg class="icon icon-search3" width="18px" height="18px">
@@ -82,7 +101,6 @@
           matching your search.</p>
       </section>
     </main>
-
 
 
     <script src="./js/catalog_list.js"></script>

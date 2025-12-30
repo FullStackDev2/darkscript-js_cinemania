@@ -1,5 +1,25 @@
 function initCatalog() {
   // ======================
+  // STATE
+  // ======================
+  let selectedYearValue = "";
+  let currentQuery = "";
+  let selectedCountryCode = "";
+  let hasSearched = false;
+  let genreMap = {};
+
+  const COUNTRY_MAP = {
+    "United States": "US",
+    "Germany": "DE",
+    "France": "FR",
+    "Italy": "IT",
+    "Spain": "ES",
+    "United Kingdom": "GB",
+    "Japan": "JP",
+    "Belgium": "BE",
+  };
+
+  // ======================
   // API CONFIG
   // ======================
   const API_KEY = "98ff2d6267ceea8e039422b0f46fb813";
@@ -7,141 +27,54 @@ function initCatalog() {
   const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
 
   // ======================
-  // DOM GUARD
+  // DOM
   // ======================
   const moviesContainer = document.getElementById("moviesContainer");
   const emptyMessage = document.getElementById("emptyMessage");
 
-  if (!moviesContainer || !emptyMessage) {
-    console.warn("Catalog DOM bulunamadı");
-    return;
-  }
+  const filmInput = document.querySelector(".search-input");
+  const clearBtn = document.getElementById("clearSearch");
+  const searchBtn = document.querySelector(".search-btn");
 
   const yearBtn = document.getElementById("yearBtn");
   const yearDropdown = document.getElementById("yearDropdown");
   const selectedYear = document.getElementById("selectedYear");
 
-  const filmInput = document.querySelector(".search-input1");
-  const searchBtn = document.querySelector(".search-btn");
+  const countrySelect = document.getElementById("countrySelect");
+  const countryInput = countrySelect?.querySelector(".search-input1");
+  const countryList = countrySelect?.querySelector(".country-list");
 
-  let selectedYearValue = "";
-  let currentQuery = "";
-  // ======================
-  // GENRE MAP
-  // ======================
-  let genreMap = {};
+  if (!moviesContainer || !emptyMessage) return;
 
+  // ======================
+  // GENRES
+  // ======================
   fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`)
-    .then(res => res.json())
-    .then(data => {
-      data.genres.forEach(g => {
-        genreMap[g.id] = g.name;
-      });
+    .then(r => r.json())
+    .then(d => d.genres.forEach(g => (genreMap[g.id] = g.name)));
+
+  // ======================
+  // COUNTRY DROPDOWN
+  // ======================
+  if (countrySelect && countryInput && countryList) {
+    countryInput.readOnly = true;
+
+    countrySelect.addEventListener("click", e => {
+      e.stopPropagation();
+      countrySelect.classList.toggle("open");
     });
 
-  // ======================
-  // STAR RENDER
-  // ======================
-  function renderStarsToRating(el, rating) {
-    if (!el) return;
+    countrySelect.addEventListener("mousedown", e => e.preventDefault());
 
-    el.innerHTML = "";
-
-    const fullStars = Math.floor(rating / 2);
-    const hasHalfStar = rating % 2 >= 1;
-
-    for (let i = 0; i < 5; i++) {
-      let fillType = "empty";
-      if (i < fullStars) fillType = "full";
-      else if (i === fullStars && hasHalfStar) fillType = "half";
-
-      const gradientId = `star-${Math.random().toString(36).slice(2)}`;
-
-      el.innerHTML += `
-        <svg viewBox="0 0 32 32" width="14" height="14">
-          <defs>
-            <linearGradient id="${gradientId}-full" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#F84119"/>
-              <stop offset="100%" stop-color="#F89F19"/>
-            </linearGradient>
-            <linearGradient id="${gradientId}-half" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#F84119"/>
-              <stop offset="50%" stop-color="#F89F19"/>
-              <stop offset="50%" stop-color="#bfbfbf"/>
-              <stop offset="100%" stop-color="#bfbfbf"/>
-            </linearGradient>
-          </defs>
-          <path
-            d="M24.622 30L16 24.173 7.378 30l3.135-9.286-8.125-5.572h10.024L16 5.833l3.025 9.313h10.024l-8.128 5.569z"
-            fill="${
-              fillType === "full"
-                ? `url(#${gradientId}-full)`
-                : fillType === "half"
-                ? `url(#${gradientId}-half)`
-                : "#bfbfbf"
-            }"
-          />
-        </svg>
-      `;
-    }
-  }
-
-  // ======================
-  // FETCH TRENDING
-  // ======================
-  fetchTrending();
-
-  function fetchTrending() {
-    fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
-      .then(res => res.json())
-      .then(data => renderMovies(data.results || []));
-  }
-
-  function renderMovies(movies) {
-    moviesContainer.innerHTML = "";
-
-    if (!movies.length) {
-      emptyMessage.hidden = false;
-      return;
-    }
-
-    emptyMessage.hidden = true;
-
-    movies.slice(0, 10).forEach(movie => {
-      const poster = movie.poster_path
-        ? `${IMAGE_BASE}${movie.poster_path}`
-        : "https://via.placeholder.com/300x450";
-
-      const year = movie.release_date?.slice(0, 4) || "N/A";
-
-      const genres =
-        movie.genre_ids
-          ?.map(id => genreMap[id])
-          .filter(Boolean)
-          .slice(0, 2)
-          .join(", ") || "Unknown";
-
-      const card = document.createElement("a");
-      card.className = "movie-card";
-      card.href = `catalog_mainbody.html?id=${movie.id}`;
-
-      card.innerHTML = `
-        <img src="${poster}" alt="${movie.title}">
-        <div class="movie-card-overlay">
-          <div class="movie-card-text">
-            <h3 class="movie-title">${movie.title}</h3>
-            <p class="movie-meta">${genres} | ${year}</p>
-          </div>
-          <div class="movie-rating-stars"></div>
-        </div>
-      `;
-
-      renderStarsToRating(
-        card.querySelector(".movie-rating-stars"),
-        movie.vote_average
-      );
-
-      moviesContainer.appendChild(card);
+    countryList.querySelectorAll("li").forEach(li => {
+      li.addEventListener("click", e => {
+        e.stopPropagation();
+        const name = li.textContent.trim();
+        countryInput.value = name;
+        selectedCountryCode = COUNTRY_MAP[name] || "";
+        countrySelect.classList.add("has-value");
+        countrySelect.classList.remove("open");
+      });
     });
   }
 
@@ -161,40 +94,113 @@ function initCatalog() {
         yearDropdown.classList.remove("open");
       }
     });
+  }
 
-    document.addEventListener("click", () => {
-      yearDropdown.classList.remove("open");
+  // ======================
+  // SEARCH BUTTON
+  // ======================
+  searchBtn.addEventListener("click", () => {
+    currentQuery = filmInput.value.trim();
+    hasSearched = true;
+
+    if (!currentQuery && !selectedYearValue && !selectedCountryCode) {
+      hasSearched = false;
+      fetchTrending();
+      return;
+    }
+
+    searchMovies();
+  });
+
+  // ======================
+  // CLEAR (X)
+  // ======================
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      filmInput.value = "";
+      countryInput && (countryInput.value = "");
+      selectedYear.textContent = "Year";
+
+      currentQuery = "";
+      selectedYearValue = "";
+      selectedCountryCode = "";
+      hasSearched = false;
+
+      countrySelect?.classList.remove("has-value");
+      fetchTrending();
     });
   }
 
   // ======================
-  // SEARCH
+  // SEARCH LOGIC
   // ======================
-  if (searchBtn) {
-    searchBtn.addEventListener("click", () => {
-      currentQuery = filmInput.value.trim();
-
-      if (!currentQuery && !selectedYearValue) {
-        fetchTrending();
-        return;
-      }
-
-      searchMovies();
-    });
-  }
-
   function searchMovies() {
     let url;
 
     if (currentQuery) {
       url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(currentQuery)}`;
-      if (selectedYearValue) url += `&year=${selectedYearValue}`;
     } else {
-      url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&primary_release_year=${selectedYearValue}`;
+      url = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
     }
 
+    if (selectedYearValue) url += `&year=${selectedYearValue}`;
+    if (selectedCountryCode) url += `&with_origin_country=${selectedCountryCode}`;
+
     fetch(url)
-      .then(res => res.json())
-      .then(data => renderMovies(data.results || []));
+      .then(r => r.json())
+      .then(d => renderMovies(d.results || []));
+  }
+
+  // ======================
+  // TRENDING
+  // ======================
+  fetchTrending();
+
+  function fetchTrending() {
+    emptyMessage.style.display = "none";
+    fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
+      .then(r => r.json())
+      .then(d => renderMovies(d.results || []));
+  }
+
+  // ======================
+  // RENDER
+  // ======================
+  function renderMovies(movies) {
+    moviesContainer.innerHTML = "";
+
+    if (!movies.length) {
+      emptyMessage.style.display = hasSearched ? "block" : "none";
+      return;
+    }
+
+    emptyMessage.style.display = "none";
+
+    movies.slice(0, 10).forEach(movie => {
+      const card = document.createElement("a");
+      card.className = "movie-card";
+      card.href = `catalog_mainbody.html?id=${movie.id}`;
+
+      const poster = movie.poster_path
+        ? `${IMAGE_BASE}${movie.poster_path}`
+        : "https://via.placeholder.com/300x450";
+
+      const year = movie.release_date?.slice(0, 4) || "N/A";
+      const genres =
+        movie.genre_ids?.map(id => genreMap[id]).filter(Boolean).slice(0, 2).join(", ") || "Unknown";
+
+      card.innerHTML = `
+        <img src="${poster}">
+        <div class="movie-card-overlay">
+          <div class="movie-card-text">
+            <h3>${movie.title}</h3>
+            <p>${genres} | ${year}</p>
+          </div>
+          <div class="movie-rating-stars"></div>
+        </div>
+      `;
+
+      moviesContainer.appendChild(card);
+    });
   }
 }
