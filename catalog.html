@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <script type="module" crossorigin src="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js"></script>
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-D5wRIM0Q.js"></script>
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-DOiVspPQ.css">
+    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-LezNK-hq.js"></script>
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-B8DK-_dd.css">
   </head>
-  <body>
+<body data-page="catalog">
+
     <header class="header">
   <div class="container header-container">
     <a href="/" class="logo-link">
@@ -74,7 +75,83 @@
           <!-- Cards from API will be inserted here by the app's scripts -->
         </div>
       </section>
+
+      <section class="catalog-page">
+        <div class="search-row">
+      
+         <div class="film-input">
+          <svg class="icon icon-Vectorx">
+            <use xlink:href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-Vectorx"></use>
+          </svg>
+
+          <input type="text" class="search-input" placeholder="Film" />
+    
+        </div>
+          <!-- YEAR DROPDOWN -->
+          <div class="year-select">
+            <button class="year-btn" id="yearBtn" type="button">
+              <span id="selectedYear">Year</span>
+              <svg class="icon icon-chevron-down" id="yearIcon">
+                <use href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
+              </svg>
+            </button>
+      
+            <ul class="year-dropdown" id="yearDropdown">
+              <li data-year="">Year</li>
+              <li data-year="2023">2023</li>
+              <li data-year="2022">2022</li>
+              <li data-year="2021">2021</li>
+              <li data-year="2020">2020</li>
+              <li data-year="2019">2019</li>
+              <li data-year="2018">2018</li>
+              <li data-year="2017">2017</li>
+              <li data-year="2016">2016</li>
+              <li data-year="2015">2015</li>
+            </ul>
+      
+      
+          </div>
+      
+      <div class="cntry-select" id="countrySelect">
+        
+        <span id="selectedCountry">Country</span>
+
+        <svg class="icon icon-chevron-down" id="countryIcon">
+          <use href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
+        </svg>
+
+          <input type="text" class="search-input1">
+         <ul class="country-list">
+          <li data-country>United States</li>
+          <li data-country>Germany</li>
+          <li data-country>France</li>
+          <li data-country>Italy</li>
+          <li data-country>Spain</li>
+          <li data-country>United Kingdom</li>
+          <li data-country>Japan</li>
+          <li data-country>Belgium</li>
+         </ul>
+      </div>
+      
+          <button class="search-btn">
+            <svg class="icon icon-search3" width="18px" height="18px">
+              <use xlink:href="./images/icon.svg/symbol-defs.svg#icon-search3"></use>
+            </svg>
+          </button>
+      
+        </div>
+      
+      
+      </section>
+      <section class="movie-list">
+        <div id="moviesContainer"></div>
+        <p id="emptyMessage" hidden>OOPS... <br>
+          We are very sorry! <br>
+          You don't have any results <br>
+          matching your search.</p>
+      </section>
     </main>
+
 
   </body>
 </html>

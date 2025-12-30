@@ -16,8 +16,8 @@
       rel="stylesheet"
     />
     <script type="module" crossorigin src="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js"></script>
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-D5wRIM0Q.js"></script>
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-DOiVspPQ.css">
+    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-LezNK-hq.js"></script>
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-B8DK-_dd.css">
   </head>
   <body>
     <header class="header">
@@ -78,59 +78,11 @@
 </section>
 
     <main class="site-content">
-      <section class="catalog-page">
-    <div class="search-row">
-
-        <!-- FILM INPUT -->
-        <input type="text" class="search-input" placeholder="Film" />
-
-        <!-- YEAR DROPDOWN -->
-        <div class="year-select">
-            <button class="year-btn" id="yearBtn" type="button">
-                <span id="selectedYear">Year</span>
-                <svg class="icon icon-chevron-down" id="yearIcon">
-                    <use href="./src/images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
-                </svg>
-            </button>
-
-            <ul class="year-dropdown" id="yearDropdown">
-                <li data-year="">Year</li>
-                <li data-year="2023">2023</li>
-                <li data-year="2022">2022</li>
-                <li data-year="2021">2021</li>
-                <li data-year="2020">2020</li>
-                <li data-year="2019">2019</li>
-                <li data-year="2018">2018</li>
-                <li data-year="2017">2017</li>
-                <li data-year="2016">2016</li>
-                <li data-year="2015">2015</li>
-            </ul>
-        </div>
-
-
-        <input type="text" class="search-input1" placeholder="Search">
-
-
-        <button class="search-btn">🔍</button>
-
-    </div>
-
-
-</section>
-<section class="movie-list">
-    <div id="moviesContainer"></div>
-    <p id="emptyMessage" hidden>OOPS... <br>
-        We are very sorry! <br>
-        You don't have any results <br>
-        matching your search.</p>
-
-      <div id="pagination" class="pagination-container"></div>  
-</section>
           <section class="catalog-page">
         <section class="section">
             <div class="section-header">
                 <h2>WEEKLY TRENDS</h2>
-                <a href="catalog_list.html" class="see-all">See all</a>
+                <a href="catalog.html" class="see-all">See all</a>
             </div>
         
             <div class="weekly-trends" id="weeklyTrends"></div>
@@ -143,7 +95,7 @@
             </div>
         </section>
 
-        <section class="hero">
+        <section class="hero1">
             <img id="heroBackdrop" class="hero-backdrop" alt="Backdrop">
             
         </section>
@@ -152,36 +104,43 @@
             <div class="movie-head" id="movieTitle"></div>
 
         
-            <div class="movie-meta">
-        
-                <div class="meta-left">
-                    <span class="tight">Release date</span>
-                    <span class="tight genre">Genre</span>
-                    <span class="tight">Vote / Votes</span>
-                    <span class="tight">ABOUT</span>
-                    <span class="tight">Popularity</span>
+            <div class="movie-meta1">
+            
+                <div class="meta-row">
+                    <span class="meta-label">Release date</span>
+                    <strong class="meta-value" id="movieDate"></strong>
                 </div>
-                
-                <div class="meta-right">
-                    <strong class="tight" id="movieDate"></strong>
-                    <div class="vote-values">
-                        <span class="tight" id="movieVoteAvg" class="vote-score"></span>
-                        <span class="tight" id="movieVoteCount"></span>
-                    </div>
-                    <strong class id="movieAbout"></strong>
-                    <strong class id="moviePopularity"></strong>
-                    <strong id="movieGenre" class="genre"></strong>
+            
+                <div class="meta-row1">
+                    <span class="meta-label">Vote / Votes</span>
+                    <strong class="meta-value">
+                        <span id="movieVoteAvg"></span> <span class="stick">/</span>
+                        <span id="movieVoteCount"></span>
+                    </strong>
                 </div>
-        
+            
+                <div class="meta-row">
+                    <span class="meta-label">Popularity</span>
+                    <strong class="meta-value" id="moviePopularity"></strong>
+                </div>
+            
+                <div class="meta-row">
+                    <span class="meta-label">Genre</span>
+                    <strong class="meta-value genre" id="movieGenre"></strong>
+                </div>
+            
             </div>
-        
-            <p id="movieOverview"></p>
+            
+            <!-- ABOUT (AYRI BLOK) -->
+            <div class="movie-about">
+                <span class="meta-label">ABOUT</span>
+                <p id="movieOverview"></p>
+            </div>
 
-            <button class="subButon" type="submit">Add to my library</button>
+            <button class="subButon" type="submit" id="libraryToggleBtn">Add to my library</button>
         </section>
     </section>
 
-      
     </main>
 
     <footer id="site-footer">
