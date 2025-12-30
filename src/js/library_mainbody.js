@@ -1,184 +1,62 @@
-const API_KEY = "98ff2d6267ceea8e039422b0f46fb813";
-const BASE_URL = "https://api.themoviedb.org/3";
-
-
-const emptySection = document.getElementById("emptySection");
-const movieList = document.getElementById("movieList");
-const container = document.getElementById("moviesContainer");
-const loadMoreBtn = document.getElementById("loadMoreBtn");
-const emptyState = document.getElementById("emptyState");
-
-let currentPage = 1;
-let currentGenreId = null;
-let genreMap = {};
-let initialMovies = [];
-
-fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=98ff2d6267ceea8e039422b0f46fb813&language=en-US")
-  .then(res => res.json())
-  .then(data => {
-    data.genres.forEach(g => {
-      genreMap[g.id] = g.name;
-    });
-  });
-
-
-document.addEventListener("DOMContentLoaded", () => {
+function initLibrary() {
   const movieList = document.getElementById("movieList");
-  // Eğer bu sayfada movieList yoksa bir şey yapma
-  if (!movieList) return;
+  const emptySection = document.getElementById("emptySection");
+  const loadMoreBtn = document.getElementById("loadMoreBtn");
 
-  fetchInitialMovies();
-  setupDropdown();
-});
+  // 🔒 DOM GUARD (EN ÖNEMLİ)
+  if (!movieList || !emptySection || !loadMoreBtn) {
+    console.warn("Library DOM bulunamadı, initLibrary çalışmadı");
+    return;
+  }
 
+  function getFavoriteMovies() {
+    return JSON.parse(localStorage.getItem("favorites")) || [];
+  }
 
+  renderLibrary();
 
-function fetchInitialMovies() {
-  fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}`)
-    .then(res => {
-      if (!res.ok) {
-        throw new Error("HTTP error: " + res.status);
-      }
-      return res.json();
-    })
-    .then(data => {
-      if (!data || !Array.isArray(data.results)) return;
-
-      movieList.innerHTML = "";
-      renderMovies(data.results.slice(0, 9));
-    })
-    .catch(err => console.error("Initial fetch error:", err));
-}
+  function renderLibrary() {
+    const favorites = getFavoriteMovies();
+    movieList.innerHTML = "";
 
 
+    if (favorites.length === 0) {
+      emptySection.classList.remove("hidden");
+      loadMoreBtn.classList.add("hidden");
+      return;
+    }
 
-function getStars(vote) {
-  const count = Math.round(vote / 2);
-  return "★".repeat(count) + "☆".repeat(5 - count);
-}
+    emptySection.classList.add("hidden");
 
-function renderMovies(movies) {
-  const movieList = document.getElementById("movieList");
+    // İlk 9 favori
+    renderMovies(favorites.slice(0, 9));
 
-  movies.forEach(movie => {
-    if (!movie.poster_path) return;
+    // Load more kontrol
+    if (favorites.length > 9) {
+      loadMoreBtn.classList.remove("hidden");
+    } else {
+      loadMoreBtn.classList.add("hidden");
+    }
+  }
 
-    const year = movie.release_date?.slice(0, 4) || "N/A";
+  function renderMovies(movies) {
+    movies.forEach(movie => {
+      if (!movie.poster_path) return;
 
-    const genres = movie.genre_ids && genreMap
-      ? movie.genre_ids
-          .map(id => genreMap[id])
-          .filter(Boolean)
-          .slice(0, 2)
-          .join(", ")
-      : "Unknown";
+      const year = movie.release_date?.slice(0, 4) || "N/A";
 
-    const stars = getStars(movie.vote_average);
+      const card = document.createElement("article");
+      card.className = "movie-card";
 
-    const card = document.createElement("article");
-    card.className = "movie-card";
-    card.dataset.id = movie.id;
-
-    card.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-      <div class="movie-card-overlay">
-        <div class="movie-card-text">
+      card.innerHTML = `
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+        <div class="movie-card-overlay">
           <h3>${movie.title}</h3>
-          <p>${genres} | ${year}</p>
+          <p>${year}</p>
         </div>
-        <div class="movie-card-rating">${stars}</div>
-      </div>
-    `;
+      `;
 
-    movieList.appendChild(card);
-  });
+      movieList.appendChild(card);
+    });
+  }
 }
-
-
-
-function fetchMoviesByGenre() {
-  if (!currentGenreId) return;
-
-  fetch(
-    `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${currentGenreId}&page=${currentPage}`
-  )
-    .then(res => {
-      if (!res.ok) {
-        throw new Error("HTTP error: " + res.status);
-      }
-      return res.json();
-    })
-    .then(data => {
-      if (!data || !Array.isArray(data.results)) return;
-
-      // 🔥 SADECE 9 FİLM
-      const limitedMovies = data.results.slice(0, 9);
-
-      if (!limitedMovies.length && currentPage === 1) {
-        emptyState.classList.remove("hidden");
-        return;
-      }
-
-      renderMovies(limitedMovies);
-    })
-    .catch(err => console.error("Genre fetch error:", err));
-}
-
-
-
-
-
-function showEmptyState() {
-  const emptySection = document.getElementById("emptySection");
-  const movieList = document.getElementById("movieList");
-
-  if (!emptySection || !movieList) return;
-
-  emptySection.classList.remove("hidden");
-  movieList.innerHTML = "";
-}
-
-function hideEmptyState() {
-  const emptySection = document.getElementById("emptySection");
-  if (!emptySection) return;
-
-  emptySection.classList.add("hidden");
-}
-
-
-
-function setupDropdown() {
-  const genreBtn = document.getElementById('genreBtn');
-  const genreDropdown = document.getElementById("genreDropdown");
-  const genreIcon = document.getElementById('genreIcon');
-
-  genreBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    genreDropdown.classList.toggle('active');
-    genreIcon.classList.toggle('rotate');
-  });
-
-
-  genreDropdown.addEventListener("click", (e) => {
-    if (e.target.tagName === "LI") {
-      const genreId = e.target.dataset.genreId;
-      fetchMoviesByGenre(genreId);
-
-      genreDropdown.classList.remove('active');
-      genreIcon.classList.remove('rotate');
-    }
-  });
-
-  document.addEventListener('click', () => {
-    genreDropdown.classList.remove('active');
-    genreIcon.classList.remove('rotate');
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      genreDropdown.classList.remove('active');
-      genreIcon.classList.remove('rotate');
-    }
-  });
-}
-

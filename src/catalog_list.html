@@ -1,6 +1,5 @@
 <section class="catalog-page">
     <div class="search-row">
-
         <!-- FILM INPUT -->
         <input type="text" class="search-input" placeholder="Film" />
 
@@ -9,7 +8,7 @@
             <button class="year-btn" id="yearBtn" type="button">
                 <span id="selectedYear">Year</span>
                 <svg class="icon icon-chevron-down" id="yearIcon">
-                    <use href="./src/images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
+                    <use href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
                 </svg>
             </button>
 
@@ -24,14 +23,22 @@
                 <li data-year="2017">2017</li>
                 <li data-year="2016">2016</li>
                 <li data-year="2015">2015</li>
+                <svg class="icon icon-chevron">
+                    <use xlink:href="./images/icon.svg/symbol-defs.svg#icon-chevron"></use>
+                </svg>
             </ul>
-        </div>
 
+            
+        </div>
 
         <input type="text" class="search-input1" placeholder="Search">
 
 
-        <button class="search-btn">🔍</button>
+        <button class="search-btn">
+            <svg class="icon icon-search3" width="18px" height="18px">
+                <use xlink:href="./images/icon.svg/symbol-defs.svg#icon-search3"></use>
+            </svg>
+        </button>
 
     </div>
 
@@ -43,6 +50,4 @@
         We are very sorry! <br>
         You don't have any results <br>
         matching your search.</p>
-
-      <div id="pagination" class="pagination-container"></div>  
 </section>

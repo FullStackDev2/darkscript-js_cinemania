@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body>
+<body data-page="catalog">
+
     <load src="./partials/header.html" />
 
     <main class="catalog-page">
@@ -24,8 +25,67 @@
           <!-- Cards from API will be inserted here by the app's scripts -->
         </div>
       </section>
+
+      <section class="catalog-page">
+        <div class="search-row">
+      
+          <!-- FILM INPUT -->
+          <input type="text" class="search-input" placeholder="Film" />
+      
+          <!-- YEAR DROPDOWN -->
+          <div class="year-select">
+            <button class="year-btn" id="yearBtn" type="button">
+              <span id="selectedYear">Year</span>
+              <svg class="icon icon-chevron-down" id="yearIcon">
+                <use href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
+              </svg>
+            </button>
+      
+            <ul class="year-dropdown" id="yearDropdown">
+              <li data-year="">Year</li>
+              <li data-year="2023">2023</li>
+              <li data-year="2022">2022</li>
+              <li data-year="2021">2021</li>
+              <li data-year="2020">2020</li>
+              <li data-year="2019">2019</li>
+              <li data-year="2018">2018</li>
+              <li data-year="2017">2017</li>
+              <li data-year="2016">2016</li>
+              <li data-year="2015">2015</li>
+              <svg class="icon icon-chevron">
+                <use xlink:href="./images/icon.svg/symbol-defs.svg#icon-chevron"></use>
+              </svg>
+            </ul>
+      
+      
+          </div>
+      
+      
+          <input type="text" class="search-input1" placeholder="Search">
+      
+      
+          <button class="search-btn">
+            <svg class="icon icon-search3" width="18px" height="18px">
+              <use xlink:href="./images/icon.svg/symbol-defs.svg#icon-search3"></use>
+            </svg>
+          </button>
+      
+        </div>
+      
+      
+      </section>
+      <section class="movie-list">
+        <div id="moviesContainer"></div>
+        <p id="emptyMessage" hidden>OOPS... <br>
+          We are very sorry! <br>
+          You don't have any results <br>
+          matching your search.</p>
+      </section>
     </main>
 
+
+
+    <script src="./js/catalog_list.js"></script>
     <script type="module" src="/js/main.js"></script>
   </body>
 </html>
