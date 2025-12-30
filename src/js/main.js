@@ -15,3 +15,21 @@ import './components/modal.js';
 // 4. Sayfa özelindeki JS'ler
 import "./catalog_list.js";
 import "./library_mainbody.js";
+import "./catalog_mainbody.js";
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const page = document.body.dataset.page;
+
+  if (page === "catalog") {
+    initCatalog();
+  }
+
+  if (page === "library") {
+    initLibrary();
+  }
+});
