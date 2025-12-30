@@ -1,4 +1,4 @@
-function initLibrary() {
+export function initLibrary() {
   const movieList = document.getElementById("movieList");
   const emptySection = document.getElementById("emptySection");
   const loadMoreBtn = document.getElementById("loadMoreBtn");
