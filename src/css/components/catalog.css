@@ -145,6 +145,7 @@
     width: 100%;
 }
 
+
 #emptyMessage {
     display: none;
     gap: 8px;
@@ -156,6 +157,8 @@
     color: rgba(17, 17, 17, 1);
     width: 100%;
 }
+
+
 
 .movie-card img {
     width: 100%;
@@ -280,26 +283,10 @@
 
 
 #movieGenre{
-    padding-top: 5px;
-    padding-top: 0;
     margin-right: 0;
     padding-right: 12px;
-
+    transform: translateY(14px);
 }
-
-#movieVoteAvg,
-#movieVoteCount,
-#movieAbout,
-#moviePopularity,
-#movieGenre{
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1;
-    color: #282828;
-    font-family: 'Roboto',sans-serif;
-}
-
-
 
 .meta-label {
     font-size: 16px;
@@ -309,12 +296,15 @@
     font-family: 'Roboto', sans-serif;
 }
 
+
+
 .meta-row {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 
 .meta-row1 {
     width: 100%;
@@ -326,6 +316,7 @@
 
 #moviePopularity{
     padding-right: 20px;
+    color: #282828;
 }
 
 .movie-meta1 {
@@ -384,18 +375,27 @@
    line-height: 1.43;
 }
 
+#movieOverview::after {
+    color: #F8F8F8;
+}
+
 .meta-value {
     min-width: 90px;
-    text-align: center;
     margin: 0 auto;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.4;
 }
 
 .genre {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
-    line-height: 1.4;
+    max-width: 160px;
     text-align: center;
+    line-height: 1.4;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .subButon {
@@ -459,9 +459,26 @@
     padding: 20px;
 }
 
+.country-btn {
+    width: 100%;
+    height: 40px;
+    padding: 0 14px;
+    border: 1px solid #595959;
+    border-radius: 8px;
+    background: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: #595959;
+    cursor: pointer;
+}
+
 
 .search-input,
-.search-input1,
 .search-select {
     height: 44px;
     padding: 0 14px;
@@ -481,6 +498,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
+    padding-right: 36px;
 }
 
 
@@ -490,21 +508,7 @@
     height: 40px;
 }
 
-
-.search-input1 {
-    flex: 2;
-    max-width: 224px;
-    height: 40px;
-    color: #595959;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1;
-    padding-right: 35px;
-    pointer-events: none;
-}
-
 .search-input,
-.search-input1,
 .search-select {
     border: 1px solid #595959;
     border-radius: 8px;
@@ -547,9 +551,13 @@
     list-style: none;
     padding: 4px 0;
     margin: 0;
-    display: none;
     z-index: 999;
     top: 100%;
+    transform: scaleY(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(.4, 0, .2, 1),
+            opacity 0.2s ease;
 }
 
 #selectedYear {
@@ -559,18 +567,13 @@
     color: #595959;
 }
 .year-dropdown.open {
-    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
-.year-btn .icon {
-    width: 16px;
-    height: 16px;
-    transform: rotate(180deg);
-    transition: transform 0.3s ease;
-}
-
-.year-btn.open .icon {
-    transform: rotate(0deg);
+.icon-chevron {
+    transition: transform 0.25s ease;
 }
 
 .year-dropdown li {
@@ -592,34 +595,35 @@
     transform: scale(1.15);
 }
 
-.year-dropdown li[data-year=""] {
-    display: none;
-}
-
-.icon-Vectorx {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    fill: #F84119;
-}
-
-.icon {
-    border: 2px solid blue;
-}
-
-.icon-search3{
-    margin: 0 auto;
-    fill: #111111;
-}
-
-
 .search-btn {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: none;
+    display: flex;
     background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+}
+
+.search-btn:hover {
+    background: #fff;
+    border: 1px solid transparent;
+    background-image:
+        linear-gradient(#fff, #fff),
+        linear-gradient(160deg, #FFC226, #F84119);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: #F87719;
+}
+
+.year-btn.open .icon-chevron {
+    transform: rotate(180deg);
+}
+
+.search-btn svg {
+    position: relative;
 }
 
 .film-input {
@@ -638,6 +642,11 @@
     pointer-events: none;
 }
 
+.country-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 /* açık hali */
 .cntry-select.open .country-list {
     display: block;
@@ -645,42 +654,36 @@
 
 /* item */
 .country-list li {
-    padding: 8px 12px;
+    padding: 8px 14px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
     color: #282828;
+    position: relative;
+    left: 9px;
+}
+
+
+
+.country-list li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    right: 18px;
+    bottom: 0;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+    
+}
+
+.country-list li:hover {
+    color: #F87719;
+    transform: scale(1.1);
 }
 
 .cntry-select {
     position: relative;
     width: 224px;
-}
-
-.country-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border-radius: 6px;
-    margin-top: 4px;
-    padding: 6px 0;
-    list-style: none;
-    max-height: 180px;
-    overflow-y:auto;
-    display: none;
-    z-index: 999;
-}
-
-.cntry-select.open .country-list {
-    display: block;
-    
-}
-
-.cntry-select .search-input1 {
-    width: 100%;
-    box-sizing: border-box;
-    padding-right: 40px;
-    height: 40px;
 }
 
 .cntry-select .icon {
@@ -696,20 +699,88 @@
 
 #selectedCountry {
     position: absolute;
-    padding-left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    flex: 2;
+    left: 14px;
+    pointer-events: none;
     color: #595959;
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
 }
 
+
+
+
 .cntry-select.open #countryIcon {
-    transform: translateY(-50%) rotate(180deg);
+    transform: rotate(180deg);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .cntry-select.has-value #selectedCountry {
     display: none;
+}
+
+.cntry-select {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    flex-wrap: nowrap;
+}
+
+
+.country-chevron {
+    flex-shrink: 0;
+    color: #595959;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: transform 0.25s ease;
+}
+
+.country-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #595959;
+    border-radius: 6px;
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+    z-index: 1000;
+    display: none;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.country-select {
+    position: relative;
+}
+
+.cntry-select.open {
+    display: block;
+}
+
+.cntry-select.open .country-chevron {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.search-clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #595959;
+}
+
+.search-clear-btn:hover {
+    color: #F87719;
 }

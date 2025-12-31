@@ -143,6 +143,23 @@ color: #F87719;
     text-align: left;
 }
 
+.genre-wrapper {
+    display: inline-block;
+    /* veya flex */
+}
+
+.genre-select {
+    transition: opacity 0.25s ease;
+}
+
+.genre-hidden {
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+    display: none;
+}
+
 .genre-select {
     position: relative;
     width: 173px;
@@ -168,6 +185,8 @@ color: #F87719;
     position: relative;
     z-index: 2;
 }
+
+
 
 .genre-dropdown {
     position: absolute;

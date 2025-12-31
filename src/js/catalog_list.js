@@ -48,9 +48,104 @@ export function initCatalog() {
   const countrySelect = document.getElementById('countrySelect');
   const countryInput = countrySelect?.querySelector('.search-input1');
   const countryList = countrySelect?.querySelector('.country-list');
+  const countryBtn = countrySelect.querySelector(".country-btn");
+
+
+  if (sessionStorage.getItem("scrollCatalog") === "true") {
+  sessionStorage.removeItem("scrollCatalog");
+
+  // DOM + filmler render olduktan sonra scroll
+  setTimeout(() => {
+    const posterImg = document.querySelector(".movie-card img");
+
+    if (!posterImg) return;
+
+    const posterHeight = posterImg.getBoundingClientRect().height;
+
+    window.scrollBy({
+      top: posterHeight * 2.5, // 🎯 2.5 AFİŞ
+      behavior: "smooth"
+    });
+  }, 600); // 🔥 filmler yüklensin diye bekliyoruz
+}
   const paginationContainer = document.getElementById('pagination');
   if (!moviesContainer || !emptyMessage) return;
-  // ======================
+
+  const input = document.querySelector(".search-input");
+const parent = input.parentElement;
+
+parent.insertAdjacentHTML(
+  "beforeend",
+  `
+  <button class="search-clear-btn">
+    <svg viewBox="0 0 32 32" width="14" height="14">
+      <path
+        d="M29.333 29.333l-28-28M29.333 1.333l-28 28"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.6667"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+  `
+  );
+  
+  const clearInputBtn = parent.querySelector(".search-clear-btn");
+  clearInputBtn.style.display = "none";
+  
+  const chevronSVG = `
+  <svg class="icon-chevron" width="14" height="14" viewBox="0 0 32 32" aria-hidden="true">
+  <path
+    d="M7 20.5l9-9 9 9"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
+`;
+
+yearBtn.insertAdjacentHTML("beforeend", chevronSVG);
+
+  if (searchBtn) {
+  searchBtn.innerHTML = `
+    <svg viewBox="0 0 32 32" width="18" height="18">
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        stroke-width="2.08"
+        d="M14.667 25.333c5.891 0 10.667-4.776 10.667-10.667
+           S20.558 4 14.667 4 4 8.776 4 14.667
+           s4.776 10.666 10.667 10.666M28 28l-5.8-5.8"
+      />
+    </svg>
+  `;
+  }
+
+  const countryChevronSVG = `
+<svg class="country-chevron" width="14" height="14" viewBox="0 0 32 32" aria-hidden="true">
+  <path
+    d="M7 20.5l9-9 9 9"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
+`;
+
+// span'den hemen sonra ekle
+const selectedCountry = document.getElementById("selectedCountry");
+selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
+
+  
+    // ======================
   // 3. PAGINATION KURULUMU
   // ======================
   function setupPagination(totalResults, page) {
@@ -107,6 +202,25 @@ export function initCatalog() {
   // STAR RENDER (TEK DOSYA)
   // ======================
 
+  
+  parent.addEventListener("click", (e) => {
+  const btn = e.target.closest(".search-clear-btn");
+  if (!btn) return;
+
+  input.value = "";
+  input.focus();
+});
+
+  parent.addEventListener("input", (e) => {
+  if (e.target !== input) return;
+
+  const btn = parent.querySelector(".search-clear-btn");
+  if (btn) {
+    btn.style.display = input.value ? "block" : "none";
+  }
+});
+
+
   function renderStarsToRating(el, rating) {
     if (!el) return;
 
@@ -154,19 +268,85 @@ export function initCatalog() {
         />
       </svg>
     `;
-    }
+  }
   }
 
+  
+
+  countryBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  countrySelect.classList.toggle("open");
+});
+
+countryList.querySelectorAll("li").forEach(li => {
+  li.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const countryName = li.textContent.trim();
+    selectedCountry.textContent = countryName;
+    selectedCountryCode = COUNTRY_MAP[countryName] || "";
+
+    countrySelect.classList.remove("open");
+  });
+});
+
+document.addEventListener("click", (e) => {
+  if (!countrySelect.contains(e.target)) {
+    countrySelect.classList.remove("open");
+  }
+});
+
+  if (countryList && !countryList.dataset.init) {
+  const li = document.createElement("li");
+  li.textContent = "Country";
+  countryList.prepend(li);
+  countryList.dataset.init = "true";
+}
+  
+  clearInputBtn.addEventListener("click", () => {
+  filmInput.value = "";
+  filmInput.focus();
+  clearInputBtn.style.display = "none"; // 🔥 SADECE BURADA
+});
+
+ 
+countrySelect.querySelectorAll(".country-list li").forEach(item => {
+  item.addEventListener("click", () => {
+    selectedCountry.textContent = item.textContent;
+    countrySelect.classList.remove("open");
+  });
+});
+
+countrySelect.querySelectorAll(".country-list li").forEach(item => {
+  item.addEventListener("click", () => {
+    const countryName = item.textContent.trim();
+
+    selectedCountry.textContent = countryName;
+    selectedCountryCode = COUNTRY_MAP[countryName] || "";
+
+    countrySelect.classList.remove("open");
+
+  });
+});
+  
+  document.addEventListener("click", (e) => {
+  const countrySelect = document.getElementById("countrySelect");
+
+  // Tıklanan yer countrySelect'in DIŞINDA ise
+  if (!countrySelect.contains(e.target)) {
+    countrySelect.classList.remove("open");
+  }
+  });
+
+  
+  
   // ======================
   // COUNTRY DROPDOWN
   // ======================
   if (countrySelect && countryInput && countryList) {
     countryInput.readOnly = true;
 
-    countrySelect.addEventListener('click', e => {
-      e.stopPropagation();
-      countrySelect.classList.toggle('open');
-    });
+
 
     countryList.querySelectorAll('li').forEach(li => {
       li.addEventListener('click', e => {
@@ -180,23 +360,44 @@ export function initCatalog() {
     });
   }
 
+
   // ======================
   // YEAR DROPDOWN
   // ======================
-  if (yearBtn && yearDropdown) {
-    yearBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      yearDropdown.classList.toggle('open');
-    });
 
-    yearDropdown.addEventListener('click', e => {
-      if (e.target.tagName === 'LI') {
-        selectedYearValue = e.target.dataset.year || '';
-        selectedYear.textContent = e.target.textContent;
-        yearDropdown.classList.remove('open');
-      }
-    });
+  
+  if (yearBtn && yearDropdown) {
+  yearBtn.addEventListener("click", e => {
+    e.stopPropagation();
+
+    const isOpen = yearDropdown.classList.toggle("open");
+    yearBtn.classList.toggle("open", isOpen); // ✅ OK DÖNER
+  });
+
+  yearDropdown.addEventListener("click", e => {
+    e.stopPropagation();
+    if (e.target.tagName === "LI") {
+      selectedYearValue = e.target.dataset.year || "";
+      selectedYear.textContent = e.target.textContent;
+
+      yearDropdown.classList.remove("open");
+      yearBtn.classList.remove("open"); // ✅ OK GERİ DÖNER
+    }
+  });
+}
+  
+  
+
+// dış tıklama
+document.addEventListener("click", e => {
+  if (!yearDropdown.classList.contains("open")) return;
+
+  if (!yearDropdown.contains(e.target) && !yearBtn.contains(e.target)) {
+    yearDropdown.classList.remove("open");
+    yearBtn.classList.remove("open"); // 🔥 OK RESET
   }
+});
+
 
   // ======================
   // SEARCH
@@ -233,23 +434,36 @@ export function initCatalog() {
   // ======================
   // SEARCH LOGIC
   // ======================
-  function searchMovies(page = 1) {
-    let url = currentQuery
-      ? `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
-          currentQuery
-        )}`
-      : `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
+  function searchMovies() {
+  let url = "";
 
-    if (selectedYearValue) url += `&year=${selectedYearValue}`;
-    if (selectedCountryCode)
-      url += `&with_origin_country=${selectedCountryCode}`;
-      url += `&page=${page}`;
-    fetch(url)
-      .then(r => r.json())
-      .then(d => {
-        renderMovies(d.results || []);
-      setupPagination(d.total_results, page); });
+  // 🔎 Eğer film adı girildiyse
+  if (currentQuery) {
+    url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(currentQuery)}`;
+
+    // ⚠️ search endpoint'te yıl filtresi GÜVENİLİR DEĞİL
+    // Bu yüzden YIL SEÇİLDİYSE discover'a düş
+    if (selectedYearValue || selectedCountryCode) {
+      url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_text_query=${encodeURIComponent(currentQuery)}`;
+    }
+  } else {
+    // 🎯 Sadece filtre varsa
+    url = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
   }
+
+  // ✅ DOĞRU YIL PARAMETRESİ
+  if (selectedYearValue) {
+    url += `&primary_release_year=${selectedYearValue}`;
+  }
+
+  if (selectedCountryCode) {
+    url += `&with_origin_country=${selectedCountryCode}`;
+  }
+
+  fetch(url)
+    .then(r => r.json())
+    .then(d => renderMovies(d.results || []));
+}
 
   // ======================
   // TRENDING
