@@ -47,7 +47,7 @@ export function initLibrary() {
 
       const card = document.createElement("article");
       card.className = "movie-card";
-
+      card.setAttribute("data-id", movie.id);
       card.innerHTML = `
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
         <div class="movie-card-overlay">
