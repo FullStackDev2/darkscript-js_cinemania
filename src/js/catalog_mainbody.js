@@ -114,6 +114,7 @@ export function initCatalogHome() {
 
       const card = document.createElement("a");
       card.className = "movie-card large";
+      card.setAttribute("data-id", movie.id);
       card.href = `catalog_mainbody.html?id=${movie.id}`;
 
       card.innerHTML = `

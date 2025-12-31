@@ -6,12 +6,17 @@
     <title>Catalog - Cinemania</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-<body data-page="catalog">
-
+  <body data-page="catalog">
     <load src="./partials/header.html" />
 
     <main class="catalog-page">
@@ -28,24 +33,26 @@
 
       <section class="catalog-page">
         <div class="search-row">
-      
-         <div class="film-input">
-          <svg class="icon icon-Vectorx">
-            <use xlink:href="./images/icons/symbol-defs.svg#icon-Vectorx"></use>
-          </svg>
+          <div class="film-input">
+            <svg class="icon icon-Vectorx">
+              <use
+                xlink:href="./images/icons/symbol-defs.svg#icon-Vectorx"
+              ></use>
+            </svg>
 
-          <input type="text" class="search-input" placeholder="Film" />
-    
-        </div>
+            <input type="text" class="search-input" placeholder="Film" />
+          </div>
           <!-- YEAR DROPDOWN -->
           <div class="year-select">
             <button class="year-btn" id="yearBtn" type="button">
               <span id="selectedYear">Year</span>
               <svg class="icon icon-chevron-down" id="yearIcon">
-                <use href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
+                <use
+                  href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"
+                ></use>
               </svg>
             </button>
-      
+
             <ul class="year-dropdown" id="yearDropdown">
               <li data-year="">Year</li>
               <li data-year="2023">2023</li>
@@ -58,50 +65,69 @@
               <li data-year="2016">2016</li>
               <li data-year="2015">2015</li>
             </ul>
-      
-      
           </div>
-      
-      <div class="cntry-select" id="countrySelect">
-        
-        <span id="selectedCountry">Country</span>
 
-        <svg class="icon icon-chevron-down" id="countryIcon">
-          <use href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
-        </svg>
+          <div class="cntry-select" id="countrySelect">
+            <span id="selectedCountry">Country</span>
 
-          <input type="text" class="search-input1">
-         <ul class="country-list">
-          <li data-country>United States</li>
-          <li data-country>Germany</li>
-          <li data-country>France</li>
-          <li data-country>Italy</li>
-          <li data-country>Spain</li>
-          <li data-country>United Kingdom</li>
-          <li data-country>Japan</li>
-          <li data-country>Belgium</li>
-         </ul>
-      </div>
-      
+            <svg class="icon icon-chevron-down" id="countryIcon">
+              <use
+                href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"
+              ></use>
+            </svg>
+
+            <input type="text" class="search-input1" />
+            <ul class="country-list">
+              <li data-country>United States</li>
+              <li data-country>Germany</li>
+              <li data-country>France</li>
+              <li data-country>Italy</li>
+              <li data-country>Spain</li>
+              <li data-country>United Kingdom</li>
+              <li data-country>Japan</li>
+              <li data-country>Belgium</li>
+            </ul>
+          </div>
+
           <button class="search-btn">
             <svg class="icon icon-search3" width="18px" height="18px">
-              <use xlink:href="./images/icon.svg/symbol-defs.svg#icon-search3"></use>
+              <use
+                xlink:href="./images/icon.svg/symbol-defs.svg#icon-search3"
+              ></use>
             </svg>
           </button>
-      
         </div>
-      
-      
       </section>
       <section class="movie-list">
         <div id="moviesContainer"></div>
-        <p id="emptyMessage" hidden>OOPS... <br>
-          We are very sorry! <br>
-          You don't have any results <br>
-          matching your search.</p>
+        <p id="emptyMessage" hidden>
+          OOPS... <br />
+          We are very sorry! <br />
+          You don't have any results <br />
+          matching your search.
+        </p>
+        <div id="pagination" class="pagination-container"></div>
       </section>
     </main>
-
+    <footer class="footer">
+      <div class="container footer-container">
+        <div class="footer-text-wrapper">
+          <p class="footer-text">
+            © 2023 | All Rights Reserved | Developed with
+            <svg class="footer-heart-icon" width="14" height="13">
+              <use href="./images/icon.svg/symbol-defs.svg#icon-heart"></use>
+            </svg>
+            by <span class="footer-student-name">GoIT Students</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll Up Button -->
+    <button class="scroll-up" id="scrollUpBtn" aria-label="Sayfanın başına git">
+      <svg width="20" height="20" viewBox="0 0 24 24">
+        <path d="M12 4l-8 8h5v8h6v-8h5z" fill="currentColor" />
+      </svg>
+    </button>
 
     <script type="module" src="/js/main.js"></script>
   </body>
