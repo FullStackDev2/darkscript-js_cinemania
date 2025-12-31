@@ -7,6 +7,8 @@ export function initLibrary() {
   const genreDropdown = document.getElementById("genreDropdown");
   const genreBtn = document.getElementById("genreBtn");
   const genreIcon = document.getElementById("genreIcon");
+  const searchMovieBtn = document.querySelector(".search-button");
+
   let selectedGenreId = null;
   // 🔒 DOM GUARD
   if (!movieList || !emptySection || !loadMoreBtn) {
@@ -20,6 +22,12 @@ export function initLibrary() {
     genreDropdown.classList.remove("active");
     genreIcon?.classList.remove("rotate");
   });
+
+if (searchMovieBtn) {
+  searchMovieBtn.addEventListener("click", () => {
+    window.location.href = "/catalog.html";
+  });
+}
 
 genreDropdown?.addEventListener("click", (e) => {
   const li = e.target.closest("li");

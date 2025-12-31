@@ -44,7 +44,8 @@ export function initCatalog() {
   const countryInput = countrySelect?.querySelector(".search-input1");
   const countryList = countrySelect?.querySelector(".country-list");
   const countryBtn = countrySelect.querySelector(".country-btn");
-  const yearSelect = document.querySelector(".year-select");
+
+
 
 
   if (!moviesContainer || !emptyMessage) return;
@@ -134,6 +135,8 @@ selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
   // ======================
   // STAR RENDER (TEK DOSYA)
   // ======================
+
+  
   parent.addEventListener("click", (e) => {
   const btn = e.target.closest(".search-clear-btn");
   if (!btn) return;
@@ -201,6 +204,38 @@ selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
     `;
   }
   }
+
+  
+
+  countryBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  countrySelect.classList.toggle("open");
+});
+
+countryList.querySelectorAll("li").forEach(li => {
+  li.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    const countryName = li.textContent.trim();
+    selectedCountry.textContent = countryName;
+    selectedCountryCode = COUNTRY_MAP[countryName] || "";
+
+    countrySelect.classList.remove("open");
+  });
+});
+
+document.addEventListener("click", (e) => {
+  if (!countrySelect.contains(e.target)) {
+    countrySelect.classList.remove("open");
+  }
+});
+
+  if (countryList && !countryList.dataset.init) {
+  const li = document.createElement("li");
+  li.textContent = "Country";
+  countryList.prepend(li);
+  countryList.dataset.init = "true";
+}
   
   clearInputBtn.addEventListener("click", () => {
   filmInput.value = "";
@@ -208,10 +243,7 @@ selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
   clearInputBtn.style.display = "none"; // 🔥 SADECE BURADA
 });
 
-  countryBtn.addEventListener("click", () => {
-  countrySelect.classList.toggle("open");
-});
-
+ 
 countrySelect.querySelectorAll(".country-list li").forEach(item => {
   item.addEventListener("click", () => {
     selectedCountry.textContent = item.textContent;
@@ -228,7 +260,6 @@ countrySelect.querySelectorAll(".country-list li").forEach(item => {
 
     countrySelect.classList.remove("open");
 
-    fetchMoviesByCountry(); // 🔥 ülkeye göre ara
   });
 });
   
@@ -249,10 +280,7 @@ countrySelect.querySelectorAll(".country-list li").forEach(item => {
   if (countrySelect && countryInput && countryList) {
     countryInput.readOnly = true;
 
-    countrySelect.addEventListener("click", e => {
-      e.stopPropagation();
-      countrySelect.classList.toggle("open");
-    });
+
 
     countryList.querySelectorAll("li").forEach(li => {
       li.addEventListener("click", e => {
@@ -266,31 +294,43 @@ countrySelect.querySelectorAll(".country-list li").forEach(item => {
     });
   }
 
+  
+
 
   // ======================
   // YEAR DROPDOWN
   // ======================
+
+  
   if (yearBtn && yearDropdown) {
-    yearBtn.addEventListener("click", e => {
-      e.stopPropagation();
-      yearDropdown.classList.toggle("open");
-    });
+  yearBtn.addEventListener("click", e => {
+    e.stopPropagation();
 
-    yearDropdown.addEventListener("click", e => {
-      if (e.target.tagName === "LI") {
-        selectedYearValue = e.target.dataset.year || "";
-        selectedYear.textContent = e.target.textContent;
-        yearDropdown.classList.remove("open");
-      }
-    });
-  }
+    const isOpen = yearDropdown.classList.toggle("open");
+    yearBtn.classList.toggle("open", isOpen); // ✅ OK DÖNER
+  });
 
-  document.addEventListener("click", (e) => {
+  yearDropdown.addEventListener("click", e => {
+    e.stopPropagation();
+    if (e.target.tagName === "LI") {
+      selectedYearValue = e.target.dataset.year || "";
+      selectedYear.textContent = e.target.textContent;
+
+      yearDropdown.classList.remove("open");
+      yearBtn.classList.remove("open"); // ✅ OK GERİ DÖNER
+    }
+  });
+}
+  
+  
+
+// dış tıklama
+document.addEventListener("click", e => {
   if (!yearDropdown.classList.contains("open")) return;
 
-  // Year butonu veya dropdown DIŞINA tıklandıysa
-  if (!yearBtn.contains(e.target) && !yearDropdown.contains(e.target)) {
+  if (!yearDropdown.contains(e.target) && !yearBtn.contains(e.target)) {
     yearDropdown.classList.remove("open");
+    yearBtn.classList.remove("open"); // 🔥 OK RESET
   }
 });
 
@@ -331,17 +371,35 @@ countrySelect.querySelectorAll(".country-list li").forEach(item => {
   // SEARCH LOGIC
   // ======================
   function searchMovies() {
-    let url = currentQuery
-      ? `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(currentQuery)}`
-      : `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
+  let url = "";
 
-    if (selectedYearValue) url += `&year=${selectedYearValue}`;
-    if (selectedCountryCode) url += `&with_origin_country=${selectedCountryCode}`;
+  // 🔎 Eğer film adı girildiyse
+  if (currentQuery) {
+    url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(currentQuery)}`;
 
-    fetch(url)
-      .then(r => r.json())
-      .then(d => renderMovies(d.results || []));
+    // ⚠️ search endpoint'te yıl filtresi GÜVENİLİR DEĞİL
+    // Bu yüzden YIL SEÇİLDİYSE discover'a düş
+    if (selectedYearValue || selectedCountryCode) {
+      url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_text_query=${encodeURIComponent(currentQuery)}`;
+    }
+  } else {
+    // 🎯 Sadece filtre varsa
+    url = `${BASE_URL}/discover/movie?api_key=${API_KEY}`;
   }
+
+  // ✅ DOĞRU YIL PARAMETRESİ
+  if (selectedYearValue) {
+    url += `&primary_release_year=${selectedYearValue}`;
+  }
+
+  if (selectedCountryCode) {
+    url += `&with_origin_country=${selectedCountryCode}`;
+  }
+
+  fetch(url)
+    .then(r => r.json())
+    .then(d => renderMovies(d.results || []));
+}
 
   // ======================
   // TRENDING
