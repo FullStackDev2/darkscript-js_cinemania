@@ -5,8 +5,9 @@ import { initTheme } from './utils/theme-toggle.js';
 import { initLibrary } from "./library_mainbody.js";
 import { initCatalog } from "./catalog_list.js";
 import { initCatalogHome } from "./catalog_mainbody.js";
-// 2. Hemen çalıştır
-initTheme(); 
+import { initScrollUp } from './components/scrollup.js';
+
+
 
 // 3. Diğer bileşenler
 import './components/header.js';
@@ -16,13 +17,16 @@ import './components/modal.js';
 
 // 4. Sayfa özelindeki JS'ler
 import './catalog_list.js';
-import "./library_mainbody.js";
+import './components/pagination.js';
 import "./catalog_mainbody.js";
+import './components/scrollup.js';
 
-
-
+// 2. Hemen çalıştır
+initTheme(); 
 
 document.addEventListener("DOMContentLoaded", () => {
+  initScrollUp();
+
   // Home / Catalog ana sayfa
   if (document.getElementById("weeklyTrends")) {
     initCatalogHome();

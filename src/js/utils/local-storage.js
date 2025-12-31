@@ -1,4 +1,4 @@
-const KEY = 'myLibrary';
+const KEY = 'favorites';
 
 export function getLibrary() {
   try {
