@@ -43,9 +43,64 @@ export function initCatalog() {
   const countrySelect = document.getElementById("countrySelect");
   const countryInput = countrySelect?.querySelector(".search-input1");
   const countryList = countrySelect?.querySelector(".country-list");
+  const countryBtn = countrySelect.querySelector(".country-btn");
+  const yearSelect = document.querySelector(".year-select");
+  const inputWrapper = document.querySelector(".search-input-wrapper");
+
 
   if (!moviesContainer || !emptyMessage) return;
 
+  const chevronSVG = `
+  <svg class="icon-chevron" width="14" height="14" viewBox="0 0 32 32" aria-hidden="true">
+  <path
+    d="M7 20.5l9-9 9 9"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
+`;
+
+yearBtn.insertAdjacentHTML("beforeend", chevronSVG);
+
+  if (searchBtn) {
+  searchBtn.innerHTML = `
+    <svg viewBox="0 0 32 32" width="18" height="18">
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        stroke-width="2.08"
+        d="M14.667 25.333c5.891 0 10.667-4.776 10.667-10.667
+           S20.558 4 14.667 4 4 8.776 4 14.667
+           s4.776 10.666 10.667 10.666M28 28l-5.8-5.8"
+      />
+    </svg>
+  `;
+  }
+
+  const countryChevronSVG = `
+<svg class="country-chevron" width="14" height="14" viewBox="0 0 32 32" aria-hidden="true">
+  <path
+    d="M7 20.5l9-9 9 9"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
+`;
+
+// span'den hemen sonra ekle
+const selectedCountry = document.getElementById("selectedCountry");
+selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
+
+  
+  
   // ======================
   // GENRES
   // ======================
@@ -106,8 +161,44 @@ export function initCatalog() {
       </svg>
     `;
   }
-}
+  }
+  
 
+  countryBtn.addEventListener("click", () => {
+  countrySelect.classList.toggle("open");
+});
+
+countrySelect.querySelectorAll(".country-list li").forEach(item => {
+  item.addEventListener("click", () => {
+    selectedCountry.textContent = item.textContent;
+    countrySelect.classList.remove("open");
+  });
+});
+
+countrySelect.querySelectorAll(".country-list li").forEach(item => {
+  item.addEventListener("click", () => {
+    const countryName = item.textContent.trim();
+
+    selectedCountry.textContent = countryName;
+    selectedCountryCode = COUNTRY_MAP[countryName] || "";
+
+    countrySelect.classList.remove("open");
+
+    fetchMoviesByCountry(); // 🔥 ülkeye göre ara
+  });
+});
+  
+  document.addEventListener("click", (e) => {
+  const countrySelect = document.getElementById("countrySelect");
+
+  // Tıklanan yer countrySelect'in DIŞINDA ise
+  if (!countrySelect.contains(e.target)) {
+    countrySelect.classList.remove("open");
+  }
+  });
+
+  
+  
   // ======================
   // COUNTRY DROPDOWN
   // ======================
@@ -131,6 +222,7 @@ export function initCatalog() {
     });
   }
 
+
   // ======================
   // YEAR DROPDOWN
   // ======================
@@ -148,6 +240,16 @@ export function initCatalog() {
       }
     });
   }
+
+  document.addEventListener("click", (e) => {
+  if (!yearDropdown.classList.contains("open")) return;
+
+  // Year butonu veya dropdown DIŞINA tıklandıysa
+  if (!yearBtn.contains(e.target) && !yearDropdown.contains(e.target)) {
+    yearDropdown.classList.remove("open");
+  }
+});
+
 
   // ======================
   // SEARCH

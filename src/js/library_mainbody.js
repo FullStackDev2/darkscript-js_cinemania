@@ -1,24 +1,63 @@
 export function initLibrary() {
+
   const movieList = document.getElementById("movieList");
   const emptySection = document.getElementById("emptySection");
   const loadMoreBtn = document.getElementById("loadMoreBtn");
-
-  // 🔒 DOM GUARD (EN ÖNEMLİ)
+  const genreWrapper = document.querySelector(".genre-wrapper");
+  const genreDropdown = document.getElementById("genreDropdown");
+  const genreBtn = document.getElementById("genreBtn");
+  const genreIcon = document.getElementById("genreIcon");
+  let selectedGenreId = null;
+  // 🔒 DOM GUARD
   if (!movieList || !emptySection || !loadMoreBtn) {
     console.warn("Library DOM bulunamadı, initLibrary çalışmadı");
     return;
   }
 
+  // ⬇️ Dışarı tıklayınca dropdown kapansın
+  document.addEventListener("click", () => {
+    if (!genreDropdown?.classList.contains("active")) return;
+    genreDropdown.classList.remove("active");
+    genreIcon?.classList.remove("rotate");
+  });
+
+genreDropdown?.addEventListener("click", (e) => {
+  const li = e.target.closest("li");
+  if (!li) return;
+
+  selectedGenreId = li.dataset.genreId
+    ? Number(li.dataset.genreId)
+    : null;
+
+  genreDropdown.classList.remove("active");
+  genreIcon?.classList.remove("rotate");
+
+  renderLibrary();
+});
+
   function getFavoriteMovies() {
     return JSON.parse(localStorage.getItem("favorites")) || [];
   }
 
+  
   renderLibrary();
 
   function renderLibrary() {
     const favorites = getFavoriteMovies();
+    const filteredFavorites = selectedGenreId
+  ? favorites.filter(movie =>
+      movie.genre_ids?.includes(selectedGenreId)
+    )
+  : favorites;
     movieList.innerHTML = "";
 
+    // ✅ SADECE WRAPPER KONTROL
+    if (genreWrapper) {
+      genreWrapper.classList.toggle(
+        "genre-hidden",
+        favorites.length === 0
+      );
+    }
 
     if (favorites.length === 0) {
       emptySection.classList.remove("hidden");
@@ -28,16 +67,32 @@ export function initLibrary() {
 
     emptySection.classList.add("hidden");
 
-    // İlk 9 favori
     renderMovies(favorites.slice(0, 9));
-
-    // Load more kontrol
-    if (favorites.length > 9) {
-      loadMoreBtn.classList.remove("hidden");
-    } else {
-      loadMoreBtn.classList.add("hidden");
-    }
+    loadMoreBtn.classList.toggle("hidden", favorites.length <= 9);
   }
+
+  // ⬇️ Genre butonuna tıklayınca aç/kapa
+  genreBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    genreDropdown.classList.toggle("active");
+    genreIcon?.classList.toggle("rotate");
+  });
+
+  genreDropdown?.addEventListener("click", (e) => {
+  const li = e.target.closest("li");
+  if (!li) return;
+
+  selectedGenreId = li.dataset.genreId
+    ? Number(li.dataset.genreId)
+    : null;
+
+  // dropdown kapat
+  genreDropdown.classList.remove("active");
+  genreIcon?.classList.remove("rotate");
+
+  renderLibrary();
+});
+
 
   function renderMovies(movies) {
     movies.forEach(movie => {

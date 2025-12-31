@@ -161,13 +161,42 @@ export function initCatalogHome() {
   }
 
   function renderMovieDetails(movie) {
-    const backdrop = document.getElementById("heroBackdrop");
-    if (!backdrop) return;
+  const backdrop = document.getElementById("heroBackdrop");
+  if (!backdrop) return;
 
-    backdrop.src = IMAGE_HERO + movie.backdrop_path;
-    document.getElementById("movieTitle").textContent = movie.title;
-    document.getElementById("movieOverview").textContent = movie.overview;
-  }
+  backdrop.src = IMAGE_HERO + movie.backdrop_path;
+
+  // TITLE
+  document.getElementById("movieTitle").textContent = movie.title;
+
+  // ABOUT
+  document.getElementById("movieOverview").textContent =
+    movie.overview || "No overview available.";
+
+  // RELEASE DATE
+  document.getElementById("movieDate").textContent =
+    movie.release_date || "N/A";
+
+  // VOTE
+  document.getElementById("movieVoteAvg").textContent =
+    movie.vote_average?.toFixed(1) || "0";
+
+  document.getElementById("movieVoteCount").textContent =
+    movie.vote_count || "0";
+
+  // POPULARITY
+  document.getElementById("moviePopularity").textContent =
+    movie.popularity?.toFixed(0) || "0";
+
+  // GENRE
+  const genres = movie.genre_ids
+    ?.map(id => GENRES[id])
+    .filter(Boolean)
+    .join(", ");
+
+  document.getElementById("movieGenre").textContent =
+    genres || "N/A";
+}
 
   // ======================
   // LIBRARY BUTTON
