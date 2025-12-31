@@ -46,7 +46,23 @@ export function initCatalog() {
   const countryBtn = countrySelect.querySelector(".country-btn");
 
 
+  if (sessionStorage.getItem("scrollCatalog") === "true") {
+  sessionStorage.removeItem("scrollCatalog");
 
+  // DOM + filmler render olduktan sonra scroll
+  setTimeout(() => {
+    const posterImg = document.querySelector(".movie-card img");
+
+    if (!posterImg) return;
+
+    const posterHeight = posterImg.getBoundingClientRect().height;
+
+    window.scrollBy({
+      top: posterHeight * 2.5, // 🎯 2.5 AFİŞ
+      behavior: "smooth"
+    });
+  }, 600); // 🔥 filmler yüklensin diye bekliyoruz
+}
 
   if (!moviesContainer || !emptyMessage) return;
 
@@ -293,8 +309,6 @@ countrySelect.querySelectorAll(".country-list li").forEach(item => {
       });
     });
   }
-
-  
 
 
   // ======================

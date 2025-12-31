@@ -42,6 +42,15 @@ genreDropdown?.addEventListener("click", (e) => {
 
   renderLibrary();
 });
+  
+  if (searchMovieBtn) {
+  searchMovieBtn.addEventListener("click", () => {
+    // 🔥 Catalog’a scroll yapılacağını söyle
+    sessionStorage.setItem("scrollCatalog", "true");
+
+    window.location.href = "./catalog.html";
+  });
+}
 
   function getFavoriteMovies() {
     return JSON.parse(localStorage.getItem("favorites")) || [];
