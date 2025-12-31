@@ -45,11 +45,34 @@ export function initCatalog() {
   const countryList = countrySelect?.querySelector(".country-list");
   const countryBtn = countrySelect.querySelector(".country-btn");
   const yearSelect = document.querySelector(".year-select");
-  const inputWrapper = document.querySelector(".search-input-wrapper");
 
 
   if (!moviesContainer || !emptyMessage) return;
 
+  const input = document.querySelector(".search-input");
+const parent = input.parentElement;
+
+parent.insertAdjacentHTML(
+  "beforeend",
+  `
+  <button class="search-clear-btn">
+    <svg viewBox="0 0 32 32" width="14" height="14">
+      <path
+        d="M29.333 29.333l-28-28M29.333 1.333l-28 28"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.6667"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+  `
+  );
+  
+  const clearInputBtn = parent.querySelector(".search-clear-btn");
+  clearInputBtn.style.display = "none";
+  
   const chevronSVG = `
   <svg class="icon-chevron" width="14" height="14" viewBox="0 0 32 32" aria-hidden="true">
   <path
@@ -111,8 +134,24 @@ selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
   // ======================
   // STAR RENDER (TEK DOSYA)
   // ======================
+  parent.addEventListener("click", (e) => {
+  const btn = e.target.closest(".search-clear-btn");
+  if (!btn) return;
 
-  
+  input.value = "";
+  input.focus();
+});
+
+  parent.addEventListener("input", (e) => {
+  if (e.target !== input) return;
+
+  const btn = parent.querySelector(".search-clear-btn");
+  if (btn) {
+    btn.style.display = input.value ? "block" : "none";
+  }
+});
+
+
   function renderStarsToRating(el, rating) {
   if (!el) return;
 
@@ -163,6 +202,11 @@ selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
   }
   }
   
+  clearInputBtn.addEventListener("click", () => {
+  filmInput.value = "";
+  filmInput.focus();
+  clearInputBtn.style.display = "none"; // 🔥 SADECE BURADA
+});
 
   countryBtn.addEventListener("click", () => {
   countrySelect.classList.toggle("open");

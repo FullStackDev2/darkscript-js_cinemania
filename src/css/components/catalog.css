@@ -496,6 +496,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
+    padding-right: 36px;
 }
 
 
@@ -611,6 +612,17 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.search-btn:hover {
+    background: #fff;
+    border: 1px solid transparent;
+    background-image:
+        linear-gradient(#fff, #fff),
+        linear-gradient(160deg, #FFC226, #F84119);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: #F87719;
 }
 
 .year-btn.open .icon-chevron {
@@ -739,11 +751,9 @@
 .cntry-select {
     display: flex;
     align-items: center;
-    /* 🔥 dikey ortalama */
     gap: 8px;
     position: relative;
     flex-wrap: nowrap;
-    /* 🔥 satır kırılmasını engeller */
 }
 
 
@@ -769,4 +779,15 @@
 
 .cntry-select.open .country-list {
     display: block;
+}
+
+.search-clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #595959;
 }
