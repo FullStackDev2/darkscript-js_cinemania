@@ -196,4 +196,4 @@ import{a as ne}from"./vendor-BWC8OeqA.js";(function(){const t=document.createEle
           </iframe>
         </div>
       `}else n.innerHTML='<div class="no-trailer-msg">Sorry, no trailer found for this movie.</div>'}catch(s){console.error("Trailer loading error:",s),n.innerHTML='<p style="text-align:center; padding:20px;">An error occurred while fetching the video.</p>'}});K();document.addEventListener("DOMContentLoaded",()=>{ie(),document.getElementById("weeklyTrends")&&ae(),document.getElementById("moviesContainer")&&se(),document.getElementById("movieList")&&oe()});
-//# sourceMappingURL=main-Cx0wfNRi.js.map
+//# sourceMappingURL=main-DoUapkU1.js.map
