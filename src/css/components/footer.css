@@ -1,9 +1,7 @@
 /* FOOTER */
 .footer {
-  background: #111;
   color: #b7b7b7;
   font-family: 'Roboto', sans-serif;
-  padding: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
