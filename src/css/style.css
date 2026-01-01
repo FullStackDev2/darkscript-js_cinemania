@@ -29,7 +29,12 @@ main {
 }
 
 /* Footer her zaman en altta kalsın */
+footer, 
+.footer, 
 #site-footer {
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
   width: 100%;
+  position: relative !important; /* Asla fixed olmamalı */
+  z-index: 10;
+  margin-top: auto !important; /* Ekstra güvenlik: en alta it */
 }
