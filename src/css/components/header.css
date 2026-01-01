@@ -22,6 +22,14 @@
   text-decoration: none;
 }
 
+.icon-logo {
+  width: 32px;  
+  height: 32px; 
+  fill: var(--color-text); 
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .logo-text {
   color: var(--color-text);
   font-weight: 500;
@@ -168,8 +176,8 @@
 
 .icon-sun, .icon-moon {
   z-index: 1;
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   transition: opacity 0.3s ease;
 }
 

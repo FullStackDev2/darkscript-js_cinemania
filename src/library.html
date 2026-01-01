@@ -6,8 +6,14 @@
     <title>My Library - Cinemania</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body data-page="library">
@@ -23,43 +29,54 @@
     <main class="library-page">
 
       <section class="page-container">
-    <div id="genreWrapper" class="genre-wrapper genre-hidden">
-      <div class="genre-select" hidden id="genreSelect">
-        <button class="genre-btn" id="genreBtn">
-          Genre
-          <svg class="icon icon-chevron-down" id="genreIcon">
-            <use href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"></use>
-          </svg>
-        </button>
-    
-        <ul class="genre-dropdown" id="genreDropdown">
-          <li data-genre-id="10749">Romance</li>
-          <li data-genre-id="9648">Detective</li>
-          <li data-genre-id="53">Thriller</li>
-          <li data-genre-id="28">Action</li>
-          <li data-genre-id="99">Documentary</li>
-          <li data-genre-id="27">Horror</li>
-        </ul>
-      </div>
-    </div>
+        <div id="genreWrapper" class="genre-wrapper genre-hidden">
+          <div class="genre-select" hidden id="genreSelect">
+            <button class="genre-btn" id="genreBtn">
+              Genre
+              <svg class="icon icon-chevron-down" id="genreIcon">
+                <use
+                  href="./images/icon.svg/symbol-defs.svg#icon-chevron-down"
+                ></use>
+              </svg>
+            </button>
+
+            <ul class="genre-dropdown" id="genreDropdown">
+              <li data-genre-id="10749">Romance</li>
+              <li data-genre-id="9648">Detective</li>
+              <li data-genre-id="53">Thriller</li>
+              <li data-genre-id="28">Action</li>
+              <li data-genre-id="99">Documentary</li>
+              <li data-genre-id="27">Horror</li>
+            </ul>
+          </div>
+        </div>
         <section class="container hidden" id="emptySection">
           <p class="search-movie" id="emptyState">
-            OOPS... <br>
-            We are very sorry! <br>
-            You don't have any movies <br>
+            OOPS... <br />
+            We are very sorry! <br />
+            You don't have any movies <br />
             at your library.
           </p>
           <button class="search-button" type="submit">Search movie</button>
         </section>
-      
+
         <section class="movie-list" id="movieList"></section>
-      
-        <button class="load-more-btn hidden" id="loadMoreBtn">
-          Load more
-        </button>
+
+        <button class="load-more-btn hidden" id="loadMoreBtn">Load more</button>
       </section>
     </main>
-     <!-- Scroll Up Button -->
+    <footer class="footer">
+      <p class="footer-copy">© 2023 | All Rights Reserved |</p>
+      <div class="footer-mobile-text">
+        <p class="footer-part">Developed with</p>
+        <svg class="icon heart-icon">
+          <use xlink:href="/images/icons/symbol-defs.svg#icon-heart"></use>
+        </svg>
+        <span class="footer-span">by</span>
+        <button class="team-link" id="openTeamModal">GoIT Students</button>
+      </div>
+    </footer>
+    <!-- Scroll Up Button -->
     <button class="scroll-up" id="scrollUpBtn" aria-label="Sayfanın başına git">
       <svg width="20" height="20" viewBox="0 0 24 24">
         <path d="M12 4l-8 8h5v8h6v-8h5z" fill="currentColor" />
