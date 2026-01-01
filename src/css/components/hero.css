@@ -3,7 +3,7 @@
   /* Use CSS variable for hero image/overlay — overlay is a left->right dark fade */
   --hero-overlay: var(--hero-overlay-dark);
   --hero-image: var(--hero-image);
-  min-height: 56vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: flex-start; /* content aligned left */
@@ -11,8 +11,18 @@
   background-repeat: no-repeat;
   background-image: var(--hero-overlay), var(--hero-image);
   background-size: cover;
-  background-position: right center; /* show photo on the right, overlay on the left */
+  background-position: center right; /* show photo on the right, overlay on the left */
   color: #ffffff; /* keep hero text white so it's readable over the dark overlay */
+}
+
+.hero-section {
+  min-height: 400px;
+  width: 100%;
+  display: block;
+}
+
+.hero-default {
+  background-color: #111; /* Resim yüklenene kadar siyah görünsün */
 }
 
 .hero,
@@ -32,21 +42,37 @@
 }
 
 .hero-content {
-	padding: 48px 16px;
+  padding: 64px 16px 56px;
+    max-width: 600px;
 }
 
 .hero-title {
-	font-size: 28px;
-	line-height: 1.05;
-	margin: 0 0 12px 0;
+  font-size: 32px;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px 0;
     color: white;
 }
 
 .hero-description {
-	font-size: 14px;
-	color: white;
-	max-width: 48ch;
-	margin-bottom: 18px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 46ch;
+  margin-bottom: 24px;
+}
+
+.hero .movie-rating-stars,
+.hero-rating-stars {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  padding: 0;
+  display: flex;
+  gap: 6px;
+  margin: 0 0 16px 0;
+  line-height: 1;
+  justify-content: flex-start;
 }
 
 .btn-primary {
@@ -69,10 +95,10 @@
 
 .hero-btns {
     position: relative;
-    z-index: 99; /* Butonların her şeyin üstünde ve tıklanabilir olduğundan emin olalım */
+    z-index: 3;
     display: flex;
-    gap: 15px;
-    margin-top: 20px;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 /* Figma'daki Turuncu Gradient Buton (Watch Trailer) */
@@ -116,13 +142,8 @@
   }
 }
 
-
-
-
-
 /* --------------- Desktop ve Tablet -------------------------------------------- */
 /* --- Tablet ve Desktop (768px ve üzeri) --- */
-
 
 /* Tablet (768px ve üzeri) */
 @media (min-width: 768px) and (max-width: 1279px) {
@@ -141,15 +162,17 @@
 }
 
 @media (min-width: 768px) {
-	.hero {
-		min-height: 72vh;
-	}
-	.hero-title {
-		font-size: 48px;
-	}
-	.hero-description {
-		font-size: 16px;
-	}
+  .hero {
+    min-height: 72vh;
+  }
+  .hero-title {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+  .hero-description {
+    font-size: 16px;
+    line-height: 1.6;
+  }
 }
 
 @media (min-width: 768px) {
@@ -164,12 +187,12 @@
     }
 
   .hero-content {
-    padding: 60px 40px;
-    max-width: 800px; /* İçeriğin çok yayılmasını engelle */
+    padding: 72px 40px 72px;
+    max-width: 720px; /* İçeriğin çok yayılmasını engelle */
   }
 
   .hero-title {
-    font-size: 48px;
+    font-size: 52px;
     margin-bottom: 24px;
   }
 
@@ -205,5 +228,41 @@
   
   .hero-content {
     padding-left: 80px; /* Sol tarafta daha fazla boşluk */
+    max-width: 820px;
+  }
+}
+
+
+body[data-page="library"] .hero {
+  /* Mobile (default) 1x & 2x */
+  background-image: var(--hero-overlay-dark, linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)),
+    image-set(
+      url('../../images/background/mobile-2.jpg') 1x,
+      url('../../images/background/mobile-2-@2x.jpg') 2x
+    ) !important;
+  background-size: cover !important;
+  background-position: center right !important;
+  background-repeat: no-repeat !important;
+}
+
+@media (min-width: 768px) {
+  body[data-page="library"] .hero {
+    /* Tablet 1x & 2x */
+    background-image: var(--hero-overlay-dark, linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)),
+      image-set(
+        url('../../images/background/tablet-2.jpg') 1x,
+        url('../../images/background/tablet-2-@2x.jpg') 2x
+      ) !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  body[data-page="library"] .hero {
+    /* Desktop 1x & 2x */
+    background-image: var(--hero-overlay-dark, linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)),
+      image-set(
+        url('../../images/background/desktop-2.jpg') 1x,
+        url('../../images/background/desktop-2-@2x.jpg') 2x
+      ) !important;
   }
 }
