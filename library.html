@@ -15,15 +15,15 @@
       rel="stylesheet"
     />
     <script type="module" crossorigin src="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js"></script>
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-DoUapkU1.js"></script>
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-BgcZzMNI.css">
+    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-B8NsEZNg.js"></script>
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-64DM94aG.css">
   </head>
   <body data-page="library">
     <header class="header">
   <div class="container header-container">
     <a href="/" class="logo-link">
-      <svg class="icon icon-logo">
-        <use xlink:href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-logo"></use>
+      <svg class="logo-icon" width="32" height="32">
+        <use href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-logo"></use>
       </svg>
       <span class="logo-text desktop-only">Cinemania</span>
     </a>
@@ -45,19 +45,22 @@
         <span class="menu-text">MENU</span>
       </button>
 
-      <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox" />
-          <div class="slider round">
-            <svg class="icon icon-sun">
-              <use xlink:href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-sun"></use>
-            </svg>
-            <svg class="icon icon-moon">
-              <use xlink:href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-moon"></use>
-            </svg>
-          </div>
-        </label>
-      </div>
+        <button type="button" class="menu-open-btn mobile-only" id="menu-open-btn">
+            <span class="menu-text">MENU</span>
+        </button>
+
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round">
+          <svg class="icon-sun" width="14" height="14">
+            <use href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-sun"></use>
+          </svg>
+          <svg class="icon-moon" width="14" height="14">
+            <use href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-moon"></use>
+          </svg>
+        </div>
+      </label>
     </div>
 
     <nav class="mobile-menu">
@@ -70,18 +73,15 @@
   </div>
 </header>
 
+    <section class="hero" id="hero-section" data-page="library">
+      <div class="container hero-content">
+        <h1 class="hero-title">Create Your Dream Cinema</h1>
+        <p class="hero-description">Is a guide to designing a personalized movie theater experience with the right equipment, customized decor, and favorite films. This guide helps you bring the cinema experience into your own home with cozy seating, dim lighting, and movie theater snacks.</p>
+        <button type="button" class="btn-primary" id="hero-btn">Get Started</button>
+      </div>
+    </section>
 
     <main class="library-page">
-      <section class="container" id="hero-section" data-page="library">
-        <h1>My Library</h1>
-        <p class="muted">
-          Saved movies will appear here. If it's empty, add items from the movie
-          details or hero actions.
-        </p>
-        <div id="library-list" class="grid-list">
-          <!-- Saved movies will be inserted here by the app's scripts -->
-        </div>
-      </section>
 
       <section class="page-container">
         <div id="genreWrapper" class="genre-wrapper genre-hidden">
