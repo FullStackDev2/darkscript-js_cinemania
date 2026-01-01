@@ -15,15 +15,15 @@
       rel="stylesheet"
     />
     <script type="module" crossorigin src="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js"></script>
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-DT5-yG-C.js"></script>
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-Kh90Vags.css">
+    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-Cx0wfNRi.js"></script>
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-BkR6JJXc.css">
   </head>
   <body data-page="catalog">
     <header class="header">
   <div class="container header-container">
     <a href="/" class="logo-link">
-      <svg class="logo-icon" width="32" height="32">
-        <use href="/src/images/icon.svg/logo.svg"></use>
+      <svg class="icon icon-logo">
+        <use xlink:href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-logo"></use>
       </svg>
       <span class="logo-text desktop-only">Cinemania</span>
     </a>
@@ -37,28 +37,29 @@
     </nav>
 
     <div class="header-right">
+      <button
+        type="button"
+        class="menu-open-btn mobile-only"
+        id="menu-open-btn"
+      >
+        <span class="menu-text">MENU</span>
+      </button>
 
-        <button type="button" class="menu-open-btn mobile-only" id="menu-open-btn">
-            <span class="menu-text">MENU</span>
-        </button>
-
-    <div class="theme-switch-wrapper">
-      <label class="theme-switch" for="checkbox">
-        <input type="checkbox" id="checkbox" />
-        <div class="slider round">
-          <svg class="icon-sun" width="14" height="14">
-            <use href="/symbol-defs.svg#icon-sun"></use>
-          </svg>
-          <svg class="icon-moon" width="14" height="14">
-            <use href="/symbol-defs.svg#icon-moon"></use>
-          </svg>
-        </div>
-      </label>
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round">
+            <svg class="icon icon-sun">
+              <use xlink:href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-sun"></use>
+            </svg>
+            <svg class="icon icon-moon">
+              <use xlink:href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-moon"></use>
+            </svg>
+          </div>
+        </label>
+      </div>
     </div>
 
-      
-    </div>
-    
     <nav class="mobile-menu">
       <ul class="nav-list">
         <li><a href="./index.html" class="nav-link active">Home</a></li>
@@ -68,6 +69,7 @@
     </nav>
   </div>
 </header>
+
 
     <main class="catalog-page">
       <section class="container" id="hero-section" data-page="dynamic">
@@ -83,12 +85,9 @@
 
       <section class="catalog-page">
         <div class="search-row">
-      
-         <div class="film-input">
-          
-          <input type="text" class="search-input" placeholder="Film" />
-    
-        </div>
+          <div class="film-input">
+            <input type="text" class="search-input" placeholder="Film" />
+          </div>
           <!-- YEAR DROPDOWN -->
           <div class="year-select">
             <button class="year-btn" id="yearBtn" type="button">
@@ -108,26 +107,24 @@
               <li data-year="2015">2015</li>
             </ul>
           </div>
-      
-      <div class="cntry-select" id="countrySelect">
-        <button class="country-btn" type="button">
 
-        <span id="selectedCountry">Country</span>
-       
-      </button>
+          <div class="cntry-select" id="countrySelect">
+            <button class="country-btn" type="button">
+              <span id="selectedCountry">Country</span>
+            </button>
 
-         <ul class="country-list">
-          <li data-country>United States</li>
-          <li data-country>Germany</li>
-          <li data-country>France</li>
-          <li data-country>Italy</li>
-          <li data-country>Spain</li>
-          <li data-country>United Kingdom</li>
-          <li data-country>Japan</li>
-          <li data-country>Belgium</li>
-         </ul>
-      </div>
-      
+            <ul class="country-list">
+              <li data-country>United States</li>
+              <li data-country>Germany</li>
+              <li data-country>France</li>
+              <li data-country>Italy</li>
+              <li data-country>Spain</li>
+              <li data-country>United Kingdom</li>
+              <li data-country>Japan</li>
+              <li data-country>Belgium</li>
+            </ul>
+          </div>
+
           <button class="search-btn">
             <svg class="icon icon-search3" width="18px" height="18px">
               <use
@@ -149,16 +146,14 @@
       </section>
     </main>
     <footer class="footer">
-      <div class="container footer-container">
-        <div class="footer-text-wrapper">
-          <p class="footer-text">
-            © 2023 | All Rights Reserved | Developed with
-            <svg class="footer-heart-icon" width="14" height="13">
-              <use href="./images/icon.svg/symbol-defs.svg#icon-heart"></use>
-            </svg>
-            by <span class="footer-student-name">GoIT Students</span>
-          </p>
-        </div>
+      <p class="footer-copy">© 2023 | All Rights Reserved |</p>
+      <div class="footer-mobile-text">
+        <p class="footer-part">Developed with</p>
+        <svg class="icon heart-icon">
+          <use xlink:href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-heart"></use>
+        </svg>
+        <span class="footer-span">by</span>
+        <button class="team-link" id="openTeamModal">GoIT Students</button>
       </div>
     </footer>
     <!-- Scroll Up Button -->
