@@ -88,6 +88,21 @@ function renderHeroContent(container, film) {
     </div>
   `;
 
+  const trailerBtn = container.querySelector('#watch-trailer');
+  const detailsBtn = container.querySelector('#more-details');
+
+  if (trailerBtn) {
+    trailerBtn.onclick = () => {
+      window.dispatchEvent(new CustomEvent('openTrailerModal', { detail: { movieId: id } }));
+    };
+  }
+
+  if (detailsBtn) {
+    detailsBtn.onclick = () => {
+      window.dispatchEvent(new CustomEvent('openDetailsModal', { detail: { movie: film } }));
+    };
+  }
+
   // Event Listeners (Burayı koruyoruz)
   document.getElementById('watch-trailer').addEventListener('click', () => {
     window.dispatchEvent(new CustomEvent('openTrailerModal', { detail: { movieId: id } }));
