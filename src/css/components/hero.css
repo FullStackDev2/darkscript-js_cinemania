@@ -67,6 +67,14 @@
   background-position: center;
 }
 
+.hero-btns {
+    position: relative;
+    z-index: 99; /* Butonların her şeyin üstünde ve tıklanabilir olduğundan emin olalım */
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
 /* Figma'daki Turuncu Gradient Buton (Watch Trailer) */
 .btn-primary {
     background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);

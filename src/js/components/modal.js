@@ -1,4 +1,4 @@
-import { getMovieDetails } from '../api/api-service.js'; 
+import { getMovieDetails, getMovieVideos } from '../api/api-service.js';
 import { isInLibrary, addMovie, removeMovie } from '../utils/local-storage.js';
 
 // --- 1. MODAL İSKELETİNİ OLUŞTURMA (DOM Injection) ---
@@ -177,5 +177,58 @@ containerIds.forEach(id => {
     });
   }
 });
+
+// hero.js'den gelen "More Details" sinyalini yakala
+window.addEventListener('openDetailsModal', (event) => {
+  const movieData = event.detail.movie;
+  // Modal fonksiyonun movieId beklediği için id'yi gönderiyoruz
+  if (movieData && movieData.id) {
+    openDetailsModal(movieData.id);
+  }
+});
+
+// Hero'dan gelen "Watch Trailer" sinyali
+
+window.addEventListener('openTrailerModal', async (event) => {
+  const movieId = event.detail.movieId;
+  const overlay = document.querySelector('.backdrop');
+  const content = document.getElementById('modal-content');
+  
+  // 1. Modalı görünür yap ve yükleniyor mesajı ver
+  overlay.classList.remove('is-hidden');
+  document.body.classList.add('modal-open');
+  content.innerHTML = '<div style="color: #111; text-align:center; padding: 50px;">🎬 Loading Trailer...</div>';
+
+  try {
+    const videos = await getMovieVideos(movieId);
+    console.log("Fetched videos:", videos); // Hata ayıklama için
+    
+    // 2. Videoları kontrol et (Trailer ve YouTube olanı bul)
+    // api-service.js zaten filtreleme yapıyor ama biz yine de ilk videoyu alalım
+    if (videos && videos.length > 0) {
+      const trailerKey = videos[0].key;
+      
+      // 3. İçeriği temizle ve Iframe'i bas
+      // Önemli: padding-bottom: 56.25% (16:9 oranı) videonun görünmesini sağlar
+      content.innerHTML = `
+        <div class="trailer-container">
+          <iframe 
+            src="https://www.youtube.com/embed/${trailerKey}?autoplay=1" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      `;
+    } else { // Fragman yoksa hata mesajı ______________________________
+      content.innerHTML = `<div class="no-trailer-msg">Sorry, no trailer found for this movie.</div>`;
+    }
+  } catch (error) {
+    console.error("Trailer loading error:", error);
+    content.innerHTML = '<p style="text-align:center; padding:20px;">An error occurred while fetching the video.</p>';
+  }
+});
+
 
 export default { openDetailsModal };
