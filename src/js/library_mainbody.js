@@ -1,3 +1,10 @@
+import {
+  IMAGE_BASE,
+  renderStarsToRating,
+  getFavorites
+} from "./components/mainbody.js";
+
+
 export function initLibrary() {
 
   const movieList = document.getElementById("movieList");
@@ -9,6 +16,8 @@ export function initLibrary() {
   const genreIcon = document.getElementById("genreIcon");
   const searchMovieBtn = document.querySelector(".search-button");
 
+
+
   let selectedGenreId = null;
   // 🔒 DOM GUARD
   if (!movieList || !emptySection || !loadMoreBtn) {
@@ -17,118 +26,150 @@ export function initLibrary() {
   }
 
   // ⬇️ Dışarı tıklayınca dropdown kapansın
-  document.addEventListener("click", () => {
-    if (!genreDropdown?.classList.contains("active")) return;
-    genreDropdown.classList.remove("active");
-    genreIcon?.classList.remove("rotate");
-  });
-
-if (searchMovieBtn) {
-  searchMovieBtn.addEventListener("click", () => {
-    window.location.href = "/catalog.html";
-  });
-}
-
-genreDropdown?.addEventListener("click", (e) => {
-  const li = e.target.closest("li");
-  if (!li) return;
-
-  selectedGenreId = li.dataset.genreId
-    ? Number(li.dataset.genreId)
-    : null;
+  document.addEventListener("click", function () {
+  if (!genreDropdown) return;
+  if (!genreDropdown.classList.contains("active")) return;
 
   genreDropdown.classList.remove("active");
-  genreIcon?.classList.remove("rotate");
 
-  renderLibrary();
+  if (genreIcon) {
+    genreIcon.classList.remove("rotate");
+  }
 });
-  
-  if (searchMovieBtn) {
-  searchMovieBtn.addEventListener("click", () => {
-    // 🔥 Catalog’a scroll yapılacağını söyle
-    sessionStorage.setItem("scrollCatalog", "true");
 
-    window.location.href = "./catalog.html";
+  if (genreBtn && genreDropdown) {
+  genreBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+
+    genreDropdown.classList.toggle("active");
+
+    if (genreIcon) {
+      genreIcon.classList.toggle("rotate");
+    }
   });
 }
 
-  function getFavoriteMovies() {
-    return JSON.parse(localStorage.getItem("favorites")) || [];
+  if (searchMovieBtn) {
+    searchMovieBtn.addEventListener("click", () => {
+      window.location.href = "/catalog.html";
+    });
+  }
+
+  if (genreDropdown) {
+  genreDropdown.addEventListener("click", function (e) {
+    e.stopPropagation();
+
+    const li = e.target.closest("li");
+    if (!li) return;
+
+    selectedGenreId = li.dataset.genreId
+      ? Number(li.dataset.genreId)
+      : null;
+
+    genreDropdown.classList.remove("active");
+
+    if (genreIcon) {
+      genreIcon.classList.remove("rotate");
+    }
+
+    renderLibrary();
+  });
+}
+  
+  if (searchMovieBtn) {
+    searchMovieBtn.addEventListener("click", () => {
+      // 🔥 Catalog’a scroll yapılacağını söyle
+      sessionStorage.setItem("scrollCatalog", "true");
+
+      window.location.href = "./catalog.html";
+    });
   }
 
   
   renderLibrary();
 
   function renderLibrary() {
-    const favorites = getFavoriteMovies();
-    const filteredFavorites = selectedGenreId
-  ? favorites.filter(movie =>
-      movie.genre_ids?.includes(selectedGenreId)
-    )
-  : favorites;
-    movieList.innerHTML = "";
+  const favorites = getFavorites();
 
-    // ✅ SADECE WRAPPER KONTROL
+  let filteredFavorites = favorites;
+
+if (selectedGenreId !== null) {
+  const byGenre = favorites.filter(movie =>
+    Array.isArray(movie.genres) &&
+    movie.genres.some(g => g.id === selectedGenreId)
+  );
+
+  if (byGenre.length > 0) {
+    filteredFavorites = byGenre;
+  }
+}
+
+
+  movieList.innerHTML = "";
+
+  if (favorites.length === 0) {
+    emptySection.classList.remove("hidden");
+    loadMoreBtn.classList.add("hidden");
+
     if (genreWrapper) {
-      genreWrapper.classList.toggle(
-        "genre-hidden",
-        favorites.length === 0
-      );
+      genreWrapper.classList.add("genre-hidden");
     }
-
-    if (favorites.length === 0) {
-      emptySection.classList.remove("hidden");
-      loadMoreBtn.classList.add("hidden");
-      return;
-    }
-
-    emptySection.classList.add("hidden");
-
-    renderMovies(favorites.slice(0, 9));
-    loadMoreBtn.classList.toggle("hidden", favorites.length <= 9);
+    return;
   }
 
-  // ⬇️ Genre butonuna tıklayınca aç/kapa
-  genreBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    genreDropdown.classList.toggle("active");
-    genreIcon?.classList.toggle("rotate");
-  });
+  if (genreWrapper) {
+    genreWrapper.classList.remove("genre-hidden");
+  }
 
-  genreDropdown?.addEventListener("click", (e) => {
-  const li = e.target.closest("li");
-  if (!li) return;
+  emptySection.classList.add("hidden");
 
-  selectedGenreId = li.dataset.genreId
-    ? Number(li.dataset.genreId)
-    : null;
+  renderMovies(filteredFavorites.slice(0, 9));
 
-  // dropdown kapat
-  genreDropdown.classList.remove("active");
-  genreIcon?.classList.remove("rotate");
+  loadMoreBtn.classList.toggle(
+    "hidden",
+    filteredFavorites.length <= 9
+  );
+}
 
-  renderLibrary();
-});
+
+
 
 
   function renderMovies(movies) {
-    movies.forEach(movie => {
-      if (!movie.poster_path) return;
+  movieList.innerHTML = "";
 
-      const year = movie.release_date?.slice(0, 4) || "N/A";
+  movies.forEach(movie => {
+    if (!movie.poster_path) return;
 
-      const card = document.createElement("article");
-      card.className = "movie-card";
-      card.setAttribute("data-id", movie.id);
-      card.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-        <div class="movie-card-overlay">
+    const poster = `${IMAGE_BASE}${movie.poster_path}`;
+    const year = movie.release_date?.slice(0, 4) || "N/A";
+
+    const genres = Array.isArray(movie.genres)
+      ? movie.genres.map(g => g.name).slice(0, 2).join(", ")
+      : "Unknown";
+
+    const card = document.createElement("a");
+    card.className = "movie-card";
+    card.setAttribute("data-id", movie.id);
+    card.href = `catalog_mainbody.html?id=${movie.id}`;
+
+    card.innerHTML = `
+      <img src="${poster}" alt="${movie.title}">
+      <div class="movie-card-overlay">
+        <div class="movie-card-text">
           <h3>${movie.title}</h3>
-          <p>${year}</p>
+          <p>${genres} | ${year}</p>
         </div>
-      `;
+        <div class="movie-rating-stars"></div>
+      </div>
+    `;
 
-      movieList.appendChild(card);
-    });
-  }
+    movieList.appendChild(card);
+
+    renderStarsToRating(
+      card.querySelector(".movie-rating-stars"),
+      movie.vote_average || 0
+    );
+  });
+}
 }
