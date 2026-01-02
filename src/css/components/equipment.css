@@ -221,9 +221,9 @@ color: #F87719;
     list-style: none;
     margin: 0;
     padding: 0;
-    background: #fff;
+    background: var(--color-bg);
     border-radius: 8px;
-    border: 1px solid rgba(89, 89, 89, 1);
+    border: 1px solid var(--color-secondary);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -250,12 +250,13 @@ color: #F87719;
     line-height: 20px;
     cursor: pointer;
     font-weight: 500;
-    border-bottom: 0.8px solid rgba(89, 89, 89, 0.9);
+    border-bottom: 0.8px solid var(--color-secondary);
+    color: var(--color-text);
 }
 
 .genre-dropdown li:hover,
 .genre-dropdown li:active {
-    color: rgba(248, 119, 25, 1);
+    color: var(--color-primary);
 }
 
 .genre-dropdown li:last-child {
