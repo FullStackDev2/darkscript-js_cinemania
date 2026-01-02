@@ -6,7 +6,7 @@ import { initLibrary } from "./library_mainbody.js";
 import { initCatalog } from "./catalog_list.js";
 import { initCatalogHome } from "./catalog_mainbody.js";
 import { initScrollUp } from './components/scrollup.js';
-
+import { initFooter } from './components/footer.js';
 
 
 // 3. Diğer bileşenler
@@ -23,6 +23,7 @@ import './components/scrollup.js';
 
 // 2. Hemen çalıştır
 initTheme(); 
+initFooter();
 
 document.addEventListener("DOMContentLoaded", () => {
   initScrollUp();
