@@ -16,13 +16,19 @@ import './components/footer.js';
 import './components/modal.js';
 
 // 4. Sayfa özelindeki JS'ler
-import './catalog_list.js';
 import './components/pagination.js';
-import "./catalog_mainbody.js";
 import './components/scrollup.js';
 
 // 2. Hemen çalıştır
 initTheme(); 
+
+
+
+
+
+if (document.body.dataset.page === "catalog-main") {
+  initCatalogMainbody();
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   initScrollUp();

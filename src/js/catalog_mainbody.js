@@ -1,3 +1,12 @@
+import {
+  API_KEY,
+  BASE_URL,
+  IMAGE_BASE,
+  renderStarsToRating,
+  isFavorite,
+  toggleFavorite
+} from "./components/mainbody.js";
+
 export function initCatalogHome() {
   const GENRES = {
     28: "Action",
@@ -15,9 +24,6 @@ export function initCatalogHome() {
     10749: "Romance"
   };
 
-  const API_KEY = "98ff2d6267ceea8e039422b0f46fb813";
-  const BASE_URL = "https://api.themoviedb.org/3";
-  const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
   const IMAGE_HERO = "https://image.tmdb.org/t/p/original";
 
   // 🔒 DOM GUARD (bu sayfa değilse çalışmaz)
@@ -26,63 +32,6 @@ export function initCatalogHome() {
     console.warn("CatalogHome DOM yok, initCatalogHome çalışmadı");
     return;
   }
-
-  // ======================
-  // STAR RENDER
-  // ======================
-  function renderStarsToRating(el, rating) {
-  if (!el) return;
-
-  el.innerHTML = "";
-
-  const fullStars = Math.floor(rating / 2);
-  const hasHalfStar = rating % 2 >= 1;
-
-  for (let i = 0; i < 5; i++) {
-    let fillType = "empty";
-
-    if (i < fullStars) {
-      fillType = "full";
-    } else if (i === fullStars && hasHalfStar) {
-      fillType = "half";
-    }
-
-    const gradientId = `star-${Math.random().toString(36).slice(2)}`;
-
-    el.innerHTML += `
-      <svg viewBox="0 0 32 32" width="14" height="14">
-        <defs>
-
-          <!-- DOLU -->
-          <linearGradient id="${gradientId}-full" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#F84119"/>
-            <stop offset="100%" stop-color="#F89F19"/>
-          </linearGradient>
-
-          <!-- YARIM (ayni renk, ortadan bölünmüş) -->
-          <linearGradient id="${gradientId}-half" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#F84119"/>
-            <stop offset="50%" stop-color="#F89F19"/>
-            <stop offset="50%" stop-color="#bfbfbf"/>
-            <stop offset="100%" stop-color="#bfbfbf"/>
-          </linearGradient>
-
-        </defs>
-
-        <path
-          d="M24.622 30c-0.211 0.001-0.416-0.065-0.587-0.188l-8.038-5.827-8.038 5.827c-0.172 0.125-0.379 0.191-0.591 0.191s-0.419-0.069-0.589-0.195c-0.171-0.126-0.297-0.303-0.361-0.505s-0.061-0.42 0.007-0.621l3.135-9.286-8.125-5.572c-0.176-0.121-0.309-0.294-0.379-0.496s-0.074-0.42-0.011-0.624c0.063-0.204 0.189-0.382 0.361-0.509s0.379-0.196 0.592-0.196h10.024l3.025-9.309c0.065-0.201 0.192-0.376 0.363-0.5s0.377-0.191 0.588-0.191c0.211 0 0.417 0.067 0.588 0.191s0.298 0.299 0.363 0.5l3.025 9.313h10.024c0.214 0 0.422 0.068 0.594 0.195s0.299 0.305 0.362 0.509c0.063 0.204 0.060 0.423-0.011 0.625s-0.203 0.376-0.379 0.496l-8.128 5.569 3.133 9.283c0.051 0.15 0.065 0.31 0.042 0.467s-0.084 0.306-0.176 0.435c-0.092 0.129-0.214 0.234-0.355 0.307s-0.297 0.111-0.456 0.111z"
-          fill="${
-            fillType === "full"
-            ? `url(#${gradientId}-full)`
-            : fillType === "half"
-            ? `url(#${gradientId}-half)`
-            : "#bfbfbf"
-        }"
-        />
-      </svg>
-    `;
-  }
-}
 
   // ======================
   // WEEKLY TRENDS
@@ -141,101 +90,171 @@ export function initCatalogHome() {
   // MOVIE OF THE MONTH
   // ======================
   function fetchMovieOfTheMonth() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
 
-    fetch(
-      `${BASE_URL}/discover/movie?api_key=${API_KEY}` +
-      `&primary_release_date.gte=${year}-${month}-01` +
-      `&primary_release_date.lte=${year}-${month}-31` +
-      `&sort_by=popularity.desc`
-    )
-      .then(r => r.json())
-      .then(d => {
-        const movie = d.results?.find(m => m.backdrop_path);
-        if (movie) {
-          renderMovieDetails(movie);
-          initLibraryButton(movie);
-        }
-      });
+  const noMsg = document.getElementById("noUpcomingMsg");
+  const heroSection = document.querySelector(".hero1");
+  const detailsSection = document.querySelector(".movie-details");
+
+  fetch(
+    `${BASE_URL}/discover/movie?api_key=${API_KEY}` +
+    `&primary_release_date.gte=${year}-${month}-01` +
+    `&primary_release_date.lte=${year}-${month}-31` +
+    `&sort_by=popularity.desc`
+  )
+    .then(r => r.json())
+    .then(d => {
+      const movie = d.results?.find(m => m.backdrop_path);
+
+      if (!movie) {
+        // ❌ Film yok → HER ŞEY GİZLİ
+        if (noMsg) noMsg.style.display = "block";
+        if (heroSection) heroSection.style.display = "none";
+        if (detailsSection) detailsSection.style.display = "none";
+        return;
+      }
+
+      // ✅ Film var → HER ŞEY GÖRÜNÜR
+      if (noMsg) noMsg.style.display = "none";
+      if (heroSection) heroSection.style.display = "block";
+      if (detailsSection) detailsSection.style.display = "block";
+
+      renderMovieDetails(movie);
+    })
+    .catch(err => {
+      console.error(err);
+      if (noMsg) noMsg.style.display = "block";
+      if (heroSection) heroSection.style.display = "none";
+      if (detailsSection) detailsSection.style.display = "none";
+    });
+}
+  
+  // ======================
+// DATE FORMATTER
+// ======================
+function formatDate(dateStr) {
+  if (!dateStr) return "—";
+  const [year, month, day] = dateStr.split("-");
+  return `${day}.${month}.${year}`;
+  }
+  
+
+
+ function renderMovieDetails(movie) {
+  if (!movie) return;
+
+  // ❗ Bu fonksiyon SADECE detail sayfasında çalışsın
+  const voteAvgEl = document.getElementById("movieVoteAvg");
+  if (!voteAvgEl) {
+    console.warn("⏭️ renderMovieDetails skipped (not detail page)");
+    return;
   }
 
-  function renderMovieDetails(movie) {
   const backdrop = document.getElementById("heroBackdrop");
-  if (!backdrop) return;
+  if (backdrop && movie.backdrop_path) {
+    backdrop.src = IMAGE_HERO + movie.backdrop_path;
+  }
 
-  backdrop.src = IMAGE_HERO + movie.backdrop_path;
+  // 🔒 Güvenli text setter
+  const setText = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  };
 
-  // TITLE
-  document.getElementById("movieTitle").textContent = movie.title;
+  // ======================
+  // BASIC INFO
+  // ======================
+  setText("movieTitle", movie.title || "—");
+  setText("movieOverview", movie.overview || "No overview available.");
+   setText("movieDate", movie.release_date || "—");
+    setText("movieDate", formatDate(movie.release_date));
 
-  // ABOUT
-  document.getElementById("movieOverview").textContent =
-    movie.overview || "No overview available.";
+  setText(
+    "movieVoteAvg",
+    typeof movie.vote_average === "number"
+      ? movie.vote_average.toFixed(1)
+      : "—"
+  );
 
-  // RELEASE DATE
-  document.getElementById("movieDate").textContent =
-    movie.release_date || "N/A";
+  setText(
+    "movieVoteCount",
+    typeof movie.vote_count === "number"
+      ? movie.vote_count
+      : "—"
+  );
 
-  // VOTE
-  document.getElementById("movieVoteAvg").textContent =
-    movie.vote_average?.toFixed(1) || "0";
+  setText(
+    "moviePopularity",
+    typeof movie.popularity === "number"
+      ? movie.popularity.toFixed(0)
+      : "—"
+  );
 
-  document.getElementById("movieVoteCount").textContent =
-    movie.vote_count || "0";
+  // ======================
+  // GENRES (DETAIL + LIST UYUMLU)
+  // ======================
+  let genresText = "N/A";
 
-  // POPULARITY
-  document.getElementById("moviePopularity").textContent =
-    movie.popularity?.toFixed(0) || "0";
+  if (Array.isArray(movie.genres) && movie.genres.length > 0) {
+    // DETAIL PAGE DATA
+    genresText = movie.genres.map(g => g.name).join(", ");
+  } else if (Array.isArray(movie.genre_ids) && movie.genre_ids.length > 0) {
+    // TRENDING / DISCOVER DATA
+    genresText = movie.genre_ids
+      .map(id => GENRES[id])
+      .filter(Boolean)
+      .join(", ");
+  }
 
-  // GENRE
-  const genres = movie.genre_ids
-    ?.map(id => GENRES[id])
-    .filter(Boolean)
-    .join(", ");
-
-  document.getElementById("movieGenre").textContent =
-    genres || "N/A";
-}
+  setText("movieGenre", genresText);
 
   // ======================
   // LIBRARY BUTTON
   // ======================
-  function getFavorites() {
-    return JSON.parse(localStorage.getItem("favorites")) || [];
-  }
-
-  function isFavorite(id) {
-    return getFavorites().some(m => m.id === id);
-  }
-
-  function initLibraryButton(movie) {
-    const btn = document.getElementById("libraryToggleBtn");
-    if (!btn) return;
-
-    const update = () => {
-      btn.textContent = isFavorite(movie.id)
-        ? "Remove from my library"
+  const libraryBtn = document.getElementById("libraryToggleBtn");
+  if (libraryBtn) {
+    const updateBtn = () => {
+      const active = isFavorite(movie.id);
+      libraryBtn.textContent = active
+        ? "Remove from library"
         : "Add to my library";
-      btn.classList.toggle("active", isFavorite(movie.id));
+      libraryBtn.classList.toggle("active", active);
     };
 
-    update();
+    updateBtn();
 
-    btn.onclick = () => {
-      let favs = getFavorites();
-      if (isFavorite(movie.id)) {
-        favs = favs.filter(m => m.id !== movie.id);
-      } else {
-        favs.push(movie);
-      }
-      localStorage.setItem("favorites", JSON.stringify(favs));
-      update();
+    libraryBtn.onclick = e => {
+      e.stopPropagation();
+      toggleFavorite(movie);
+      updateBtn();
     };
   }
+}
 
+
+
+  
   // 🚀 START
   fetchWeeklyTrends();
   fetchMovieOfTheMonth();
+}
+
+export function initCatalogMainbody() {
+  const params = new URLSearchParams(window.location.search);
+  const movieId = params.get("id");
+
+  if (!movieId) {
+    console.warn("❌ movieId yok");
+    return;
+  }
+
+  fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`)
+    .then(r => r.json())
+    .then(movie => {
+      console.log("🎬 MOVIE LOADED:", movie);
+      renderMovieDetails(movie); // 🔥 movie SADECE BURADA VAR
+    })
+    .catch(err => console.error("API error:", err));
 }
