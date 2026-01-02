@@ -1,10 +1,12 @@
 /* Ana stil dosyası Tüm bileşenlerin ve düzenlerin ana stil dosyasıdır. */
+@import url('./base/variables.css');
+@import url('./components/reset.css');
 @import url('./components/hero.css');
 @import url('./components/header.css');
 @import url('./components/modal.css');
 @import url('./components/library.css');
-@import url('./components/reset.css');
-@import url('./base/variables.css');
+
+
 @import url('./components/equipment.css');
 @import url('./components/catalog.css');
 @import url('./components/footer.css');
