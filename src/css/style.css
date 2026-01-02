@@ -10,6 +10,7 @@
 @import url('./components/footer.css');
 @import url('./components/scrollup.css');
 @import url('./components/pagination.css');
+@import url('./components/trailer_popup.css');
 
 /* Sayfanın temel iskeleti */
 html, body {
