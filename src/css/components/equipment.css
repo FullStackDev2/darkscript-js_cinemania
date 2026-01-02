@@ -1,5 +1,5 @@
 .page-container{
-   font-family: 'Roboto', sans-serif;
+   font-family: var(--font-main);
    max-width: 320px;
    margin: 0 auto;
     display: flex;
@@ -13,6 +13,8 @@
    padding-top: 29px;
    text-align: center;
    padding-bottom: 20px;
+   color: var(--color-text);
+   background-color: transparent;
 }
 
 
@@ -215,8 +217,8 @@ color: #F87719;
     align-items: center;
     padding: 0 12px;
     cursor: pointer;
-    background: rgba(255, 255, 255, 1);
-    border: 1px solid rgba(89, 89, 89, 1);
+    background: var(--color-bg);
+    border: 1px solid var(--color-secondary);
     position: relative;
     z-index: 2;
 }
@@ -227,9 +229,9 @@ color: #F87719;
     list-style: none;
     margin: 0;
     padding: 0;
-    background: #fff;
+    background: var(--color-bg);
     border-radius: 8px;
-    border: 1px solid rgba(89, 89, 89, 1);
+    border: 1px solid var(--color-secondary);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -257,12 +259,13 @@ color: #F87719;
     line-height: 20px;
     cursor: pointer;
     font-weight: 500;
-    border-bottom: 0.8px solid rgba(89, 89, 89, 0.9);
+    border-bottom: 0.8px solid var(--color-secondary);
+    color: var(--color-text);
 }
 
 .genre-dropdown li:hover,
 .genre-dropdown li:active {
-    color: rgba(248, 119, 25, 1);
+    color: var(--color-primary);
 }
 
 .genre-dropdown li:last-child {
@@ -301,7 +304,7 @@ color: #F87719;
 }
 
 .load-more-btn:hover {
-    background: #fff;
+    background: var(--color-bg);
     border: 1px solid transparent;
     background-image:
                 linear-gradient(#fff, #fff),

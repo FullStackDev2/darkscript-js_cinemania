@@ -18,10 +18,7 @@ function createModalRoot() {
   // Modal içeriği: Kapatma butonu ve içerik kapsayıcısı
   modalElement.innerHTML = `
     <button type="button" class="modal-close-btn" data-modal-close>
-      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 8L22 22" stroke="black" stroke-width="2"/>
-        <path d="M8 22L22 8" stroke="black" stroke-width="2"/>
-      </svg>
+      <svg class="icon icon-Vectorx"><use xlink:href="/images/icons/symbol-defs.svg#icon-Vectorx">
     </button>
     <div class="modal-content" id="modal-content"></div>
   `;
@@ -63,7 +60,7 @@ export async function openDetailsModal(movieId) {
   const content = document.getElementById('modal-content');
   
   // Yükleniyor animasyonu veya yazısı
-  content.innerHTML = '<div style="display:flex; justify-content:center; align-items:center; height:200px;">Loading details...</div>';
+  content.innerHTML = '<div style="text-align:center; padding: 50px;">🎬 Loading Trailer...</div>';
   
   overlay.classList.remove('is-hidden');
   document.body.classList.add('modal-open');
@@ -197,7 +194,7 @@ window.addEventListener('openTrailerModal', async (event) => {
   // 1. Modalı görünür yap ve yükleniyor mesajı ver
   overlay.classList.remove('is-hidden');
   document.body.classList.add('modal-open');
-  content.innerHTML = '<div style="color: #111; text-align:center; padding: 50px;">🎬 Loading Trailer...</div>';
+  content.innerHTML = '<div style="text-align:center; padding: 50px;">🎬 Loading Trailer...</div>';
 
   try {
     const videos = await getMovieVideos(movieId);
