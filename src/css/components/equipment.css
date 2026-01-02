@@ -2,6 +2,9 @@
    font-family: 'Roboto', sans-serif;
    max-width: 320px;
    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .container .search-movie{
    font-weight: 400;
@@ -15,6 +18,8 @@
 
 .hidden {
     display: none;
+    pointer-events: none;
+    cursor: default;
 } 
 
 .search-button {
@@ -51,12 +56,15 @@ color: #F87719;
     max-width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
+    align-content: start;
     gap: 20px;
     padding:36px 16px;
     padding-bottom: 24px;
+    min-height: 70vh;
     margin: 0 auto;
     box-sizing: border-box; 
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
 }
 
 .movie-card {
@@ -95,6 +103,7 @@ color: #F87719;
     aspect-ratio: 2 / 3;
     object-fit: cover;
     display: block;
+    backface-visibility: hidden;
 }
 
 
@@ -172,11 +181,9 @@ color: #F87719;
 
 .genre-wrapper {
     display: inline-block;
-    /* veya flex */
-}
-
-.genre-select {
-    transition: opacity 0.25s ease;
+    width: 100%;
+    padding: 0 25px;
+    box-sizing: border-box;
 }
 
 .genre-hidden {
@@ -192,20 +199,21 @@ color: #F87719;
     width: 173px;
     max-width: 280px;
     display: inline-block;
-    padding-left: 16px;
     padding-top: 40px;
+    transition: opacity 0.25s ease;
+    margin: 0 auto;
 }
 
 .genre-btn {
-    width: 173px;
+    width: 100%;
     height: 40px;
     border-radius: 8px;
     background: transparent;
     display: flex;
+    overflow: visible;
     justify-content: space-between;
     align-items: center;
     padding: 0 12px;
-    left: 4px;
     cursor: pointer;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(89, 89, 89, 1);
@@ -213,11 +221,9 @@ color: #F87719;
     z-index: 2;
 }
 
-
-
 .genre-dropdown {
     position: absolute;
-    width: 172px;
+    width: 100%;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -231,6 +237,7 @@ color: #F87719;
     transform 0.3s ease,
     visibility 0.3s ease;
     z-index: 1000;
+    margin: 0 auto;
 }
 
 .genre-dropdown.active {
@@ -307,5 +314,33 @@ color: #F87719;
 
 .load-more-btn.hidden {
     opacity: 0;
-    pointer-events: none;
+}
+
+#loadMoreBtn {
+    margin-bottom: 36px;
+}
+
+.genre-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    height: 16px;
+    width: 16px;
+    visibility: visible;
+    display: block;
+    overflow: visible;
+}
+
+.chevron-path {
+    stroke: #595959;
+}
+
+.genre-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.genre-btn.open .genre-icon {
+    transform: rotate(180deg);
+    
 }

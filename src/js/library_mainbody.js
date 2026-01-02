@@ -17,7 +17,7 @@ export function initLibrary() {
   const searchMovieBtn = document.querySelector(".search-button");
 
 
-
+  let visibleCount = 5;
   let selectedGenreId = null;
   // 🔒 DOM GUARD
   if (!movieList || !emptySection || !loadMoreBtn) {
@@ -31,7 +31,8 @@ export function initLibrary() {
   if (!genreDropdown.classList.contains("active")) return;
 
   genreDropdown.classList.remove("active");
-
+  genreBtn.classList.remove("open");
+    
   if (genreIcon) {
     genreIcon.classList.remove("rotate");
   }
@@ -42,6 +43,7 @@ export function initLibrary() {
     e.stopPropagation();
 
     genreDropdown.classList.toggle("active");
+    genreBtn.classList.toggle("open");
 
     if (genreIcon) {
       genreIcon.classList.toggle("rotate");
@@ -67,11 +69,21 @@ export function initLibrary() {
       : null;
 
     genreDropdown.classList.remove("active");
-
+    genreBtn.classList.remove("open");
+    
     if (genreIcon) {
       genreIcon.classList.remove("rotate");
     }
+    window.addEventListener("resize", () => {
+  if (window.innerWidth <= 768) {
+    visibleCount = 6;
+  } else {
+    visibleCount = Infinity;
+  }
+  renderLibrary();
+  });
 
+    visibleCount = 5;
     renderLibrary();
   });
 }
@@ -105,7 +117,14 @@ if (selectedGenreId !== null) {
 }
 
 
-  movieList.innerHTML = "";
+    movieList.innerHTML = "";
+    
+  if (selectedGenreId !== null) {
+  filteredFavorites = favorites.filter(movie =>
+    Array.isArray(movie.genres) &&
+    movie.genres.some(g => g.id === selectedGenreId)
+  );
+}
 
   if (favorites.length === 0) {
     emptySection.classList.remove("hidden");
@@ -123,15 +142,18 @@ if (selectedGenreId !== null) {
 
   emptySection.classList.add("hidden");
 
-  renderMovies(filteredFavorites.slice(0, 9));
+  renderMovies(filteredFavorites.slice(0, visibleCount));
 
   loadMoreBtn.classList.toggle(
     "hidden",
-    filteredFavorites.length <= 9
+   visibleCount === Infinity || visibleCount >= filteredFavorites.length
   );
 }
 
-
+loadMoreBtn.addEventListener("click", () => {
+  visibleCount += 3;
+  renderLibrary();
+});
 
 
 
