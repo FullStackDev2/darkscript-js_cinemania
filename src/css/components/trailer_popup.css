@@ -1,0 +1,135 @@
+/* --- Trailer Error Popup Responsive Stilleri --- */
+
+/* 1. ZEMİN (Backdrop) */
+.popup-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Hafif karartma */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000 !important;
+  opacity: 1;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.popup-backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 2. KART YAPISI (Önce Mobil Ayarlar) */
+.popup-container {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 30px 20px;
+  width: 280px; /* Mobilde dar (Görseldeki gibi) */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1);
+  transition: transform 250ms, width 250ms;
+}
+
+/* İçerik Düzeni (Flexbox) */
+.popup-content {
+  display: flex;
+  flex-direction: column; /* Mobilde ALT ALTA */
+  align-items: center;    /* Ortala */
+  text-align: center;     /* Yazıları ortala */
+}
+
+/* Metin Alanı */
+.popup-text {
+  margin-bottom: 20px; /* Resimle araya boşluk */
+  width: 100%;
+}
+
+.popup-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #000;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.popup-message {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+  margin: 0;
+}
+
+/* Resim Alanı */
+.popup-image-wrapper img {
+  max-width: 100%;
+  height: auto;
+  max-height: 140px; /* Mobilde çok büyük olmasın */
+  object-fit: contain;
+}
+
+/* Kapatma Butonu (X) */
+.popup-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  transition: color 250ms;
+}
+
+.popup-close-btn:hover {
+  color: #F84119;
+}
+
+/* ----------------------------------------------------------- */
+/* TABLET VE DESKTOP GÖRÜNÜMÜ (768px ve üzeri ekranlar)        */
+/* ----------------------------------------------------------- */
+@media screen and (min-width: 768px) {
+  .popup-container {
+    width: 600px; /* Kart genişler */
+    padding: 40px;
+  }
+
+  .popup-content {
+    flex-direction: row;      /* YAN YANA diz (Yatay) */
+    align-items: center;      /* Dikeyde ortala */
+    justify-content: space-between; /* Aralarını aç */
+    text-align: left;         /* Yazıları sola yasla */
+  }
+
+  .popup-text {
+    flex: 1;             /* Sol taraf alanı doldursun */
+    margin-bottom: 0;    /* Alt boşluğu sıfırla */
+    padding-right: 30px; /* Resimle araya mesafe koy */
+  }
+
+  .popup-title {
+    font-size: 24px;     /* Başlık büyür */
+    margin-top: 0;
+  }
+
+  .popup-message {
+    font-size: 16px;     /* Yazı büyür */
+  }
+
+  .popup-image-wrapper {
+    flex: 1;             /* Sağ taraf alanı doldursun */
+    display: flex;
+    justify-content: flex-end; /* Resmi sağa yasla */
+  }
+
+  .popup-image-wrapper img {
+    max-height: 200px; /* Masaüstünde resim daha büyük */
+  }
+}

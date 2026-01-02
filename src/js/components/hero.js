@@ -1,5 +1,5 @@
-import { getTrending, getUpcoming, getGenres } from '../api/api-service.js';
-
+import { getTrending, getUpcoming, getGenres, getMovieVideos } from '../api/api-service.js';
+import { openTrailerErrorPopup } from './trailer_popup.js';
 function renderStarsToRating(el, rating) {
   if (!el) return;
 
@@ -125,9 +125,27 @@ function renderHeroContent(container, film) {
 
   renderStarsToRating(container.querySelector('.hero-rating-stars'), vote_average);
 
-  container.querySelector('#watch-trailer').onclick = () => {
-    window.dispatchEvent(new CustomEvent('openTrailerModal', { detail: { movieId: id } }));
+  // --- popup ---
+
+container.querySelector('#watch-trailer').onclick = async (e) => {
+    e.preventDefault();
+    
+    try {
+      
+      const videos = await getMovieVideos(id);
+     
+      if (videos && videos.length > 0) { 
+        window.dispatchEvent(new CustomEvent('openTrailerModal', { detail: { movieId: id } }));
+      } else {
+        openTrailerErrorPopup();
+      }
+
+    } catch (error) {
+      console.log('Hata:', error);
+      openTrailerErrorPopup();
+    }
   };
+  // --------------------------
 
   container.querySelector('#more-details').onclick = () => {
     window.dispatchEvent(new CustomEvent('openDetailsModal', { detail: { movie: film } }));

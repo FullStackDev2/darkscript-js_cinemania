@@ -7,7 +7,7 @@ import { initCatalog } from "./catalog_list.js";
 import { initCatalogHome } from "./catalog_mainbody.js";
 import { initScrollUp } from './components/scrollup.js';
 import { initFooter } from './components/footer.js';
-
+import { openTrailerErrorPopup } from './components/trailer_popup.js';
 
 // 3. Diğer bileşenler
 import './components/header.js';

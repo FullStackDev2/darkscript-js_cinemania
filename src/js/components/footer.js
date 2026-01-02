@@ -1,8 +1,6 @@
 // src/js/components/footer.js
 
 export function initFooter() {
-  console.log("Footer: Olay dinleyicisi başlatıldı (Event Delegation)");
-
   // Butona doğrudan değil, document body'ye dinleyici ekliyoruz
   document.body.addEventListener('click', (e) => {
     
