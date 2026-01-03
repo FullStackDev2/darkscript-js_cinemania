@@ -454,6 +454,29 @@ color: #F87719;
         margin-bottom: 40px;
     }
    
+    .search-button {
+        width: 133px;
+        font-size: 14px;
+        line-height: 1.4;
+        height: 40px;
+    }
+
+    .load-more-btn{
+        width: 115px;
+        font-size: 14px;
+        line-height: 1.4;
+        height: 40px;
+    }
+
+    .genre-btn{
+        width: 144px;
+        height: 44px;
+    }
+
+    #genreDropdown {
+        width: 144px;
+        height: 264px;
+    }
 
     #movieList {
         display: grid;

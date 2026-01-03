@@ -976,6 +976,43 @@ body.dark .search-input:focus::placeholder {
         line-height: 28px;
     }
 
+    .search-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .country-btn {
+        height: 44px;
+    }
+
+    .year-btn{
+        height: 44px;
+    }
+
+    .search-input{
+        height: 44px;
+    }
+
+    .movie-rating-stars{
+        transform: scale(1.2);
+        transform-origin: center;
+    }
+
+    #libraryToggleBtn{
+        width: 155px;
+        height: 40px;
+    }
+
+    .section-header a {
+        font-size: 24px;
+        line-height: 1.3;
+    }
+
+    .section-header h2 {
+        font-size: 24px;
+        line-height: 1.3;
+    }
+
     .meta-row {
         display: grid;
         grid-template-columns: 1fr auto;
