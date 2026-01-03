@@ -16,6 +16,23 @@
    color: var(--color-text);
    background-color: transparent;
 }
+.year-btn,
+.country-btn {
+  color: #8c8c8c !important; /* Hem siyah hem beyaz temada görünen orta gri */
+}
+
+/* İçindeki seçili metin (ID ile atanmışsa) de griyi miras alsın */
+#selectedYear,
+#selectedCountry {
+  color: inherit !important;
+}
+
+/* Hover durumunda (Mouse üzerine gelince) renk canlansın/turuncu olsun */
+.year-btn:hover,
+.country-btn:hover {
+  color: #F87719 !important;
+  border-color: #F87719;
+}
 
 
 .hidden {
@@ -41,13 +58,18 @@ cursor: pointer;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 text-rendering: optimizeLegibility;
+color: #fff;
+}
+
+body.dark-theme .search-button {
+  color: #111111;
 }
 
 .search-button:hover {
-background: #fff;
+background: var(--color-bg);
 border: 1px solid transparent;
 background-image:
-            linear-gradient(#fff, #fff),
+            linear-gradient(var(--color-bg), var(--color-bg)),
             linear-gradient(160deg, #FFC226, #F84119);
 background-origin: border-box;
 background-clip: padding-box, border-box;
@@ -78,6 +100,7 @@ color: #F87719;
     text-decoration: none;
     max-width: 280px;
     margin: 0 auto;
+    background-color: var(--color-secondary);
 }
 
 .movie-card-text {
@@ -219,6 +242,7 @@ color: #F87719;
     cursor: pointer;
     background: var(--color-bg);
     border: 1px solid var(--color-secondary);
+    color: #B7B7B7;
     position: relative;
     z-index: 2;
 }
@@ -307,7 +331,7 @@ color: #F87719;
     background: var(--color-bg);
     border: 1px solid transparent;
     background-image:
-                linear-gradient(#fff, #fff),
+                linear-gradient(var(--color-bg), var(--color-bg)),
                 linear-gradient(160deg, #FFC226, #F84119);
     background-origin: border-box;
     background-clip: padding-box, border-box;
@@ -334,7 +358,7 @@ color: #F87719;
 }
 
 .chevron-path {
-    stroke: #595959;
+    stroke: var(--color-text);
 }
 
 .genre-text {
