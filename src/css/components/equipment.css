@@ -177,7 +177,6 @@ color: #F87719;
     bottom: 17px;
     line-height: 1;
     padding-bottom: 3px;
-    flex-shrink: 0;
     transform: scale(1.1);
 }
 
@@ -347,3 +346,100 @@ color: #F87719;
     transform: rotate(180deg);
     
 }
+.library-page:empty{
+    min-height: 0;
+        padding: 0;
+        margin: 0;
+}
+
+#movieList:empty {
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+    .page-container {
+        max-width: 768px;
+        padding: 0 32px;
+    }
+
+    .movie-card img {
+        width: 224px;
+        height: 325px;
+    }
+
+    #emptyState {
+        font-size: 24px;
+        width: 438px;
+        padding-bottom: 24px;
+        padding-top: 0;
+    }
+
+    .search-movie {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 32px;
+        max-width: 438px;
+
+    }
+
+    .search-movie span:not(:last-child) {
+        margin-bottom: 3px;
+    }
+
+    .search-movie span {
+         display: block;
+         
+    }
+
+    .search-button {
+        margin-top: 0;
+        margin-bottom: 40px;
+    }
+   
+
+    #movieList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        padding: 36px 0;
+        margin: 0 auto;
+        width: 100%;
+        row-gap: 28px;
+    }
+
+   #movieList:empty {
+       min-height: 0;
+       padding: 0;
+       margin: 0;
+   }
+
+   .movie-card {
+       max-width: none;
+       margin: 0 auto;
+   }
+
+   .movie-card img {
+       width: 100%;
+       aspect-ratio: 2 / 3;
+       object-fit: cover;
+   }
+   
+   #emptySection {
+    padding-top: 60px;
+   }
+
+   .genre-wrapper {
+    padding-left: 0;
+   }
+              /*  ||      //////////////////// KATALOG BÖLÜMÜ //////////////////////////////////   ||       */
+              
+              
+   
+
+}
+
