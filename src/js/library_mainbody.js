@@ -68,6 +68,15 @@ export function initLibrary() {
       ? Number(li.dataset.genreId)
       : null;
 
+    const genreTextEl = genreBtn.querySelector(".genre-text");
+
+if (genreTextEl) {
+  if (li.dataset.genreId) {
+    genreTextEl.textContent = li.textContent;
+  } else {
+    genreTextEl.textContent = "Genre";
+  }
+}
     genreDropdown.classList.remove("active");
     genreBtn.classList.remove("open");
     
@@ -105,26 +114,37 @@ export function initLibrary() {
 
   let filteredFavorites = favorites;
 
-if (selectedGenreId !== null) {
-  const byGenre = favorites.filter(movie =>
-    Array.isArray(movie.genres) &&
-    movie.genres.some(g => g.id === selectedGenreId)
-  );
-
-  if (byGenre.length > 0) {
-    filteredFavorites = byGenre;
-  }
-}
-
-
-    movieList.innerHTML = "";
-    
   if (selectedGenreId !== null) {
-  filteredFavorites = favorites.filter(movie =>
-    Array.isArray(movie.genres) &&
-    movie.genres.some(g => g.id === selectedGenreId)
-  );
-}
+    const byGenre = favorites.filter(movie =>
+      Array.isArray(movie.genres) &&
+      movie.genres.some(g => g.id === selectedGenreId)
+    );
+
+    if (byGenre.length > 0) {
+      filteredFavorites = byGenre;
+    }
+  }
+
+  movieList.innerHTML = "";
+
+  if (selectedGenreId !== null) {
+    filteredFavorites = favorites.filter(movie =>
+      Array.isArray(movie.genres) &&
+      movie.genres.some(g => g.id === selectedGenreId)
+    );
+  }
+
+  /* 🔥 EK: Tür seçili ama film yoksa → OOPS + Search gelsin */
+  if (selectedGenreId !== null && filteredFavorites.length === 0) {
+    emptySection.classList.remove("hidden");
+    loadMoreBtn.classList.add("hidden");
+
+    if (genreWrapper) {
+      genreWrapper.classList.remove("genre-hidden");
+    }
+    return;
+  }
+  /* 🔥 EK BİTTİ */
 
   if (favorites.length === 0) {
     emptySection.classList.remove("hidden");
@@ -146,9 +166,10 @@ if (selectedGenreId !== null) {
 
   loadMoreBtn.classList.toggle(
     "hidden",
-   visibleCount === Infinity || visibleCount >= filteredFavorites.length
+    visibleCount === Infinity || visibleCount >= filteredFavorites.length
   );
 }
+
 
 loadMoreBtn.addEventListener("click", () => {
   visibleCount += 3;
