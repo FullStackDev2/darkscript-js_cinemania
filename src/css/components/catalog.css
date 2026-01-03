@@ -2,7 +2,7 @@
     max-width: 320px;
     margin: 0 auto;
     width: 100%;
-    font-family: 'Roboto',sans-serif;
+    font-family: var(--font-main);
 }
 
 .hero1 {
@@ -71,6 +71,7 @@
     width: 184px;
     white-space: nowrap;
     padding-left: 20px;
+    color: var(--color-text);
 }
 
 .section-header h2 {
@@ -81,6 +82,7 @@
     width: 123px;
     white-space: nowrap;
     padding-left: 19px;
+    color: var(--color-text);
 }
 
 .section-header a {
@@ -155,7 +157,7 @@
     font-size: 20px;
     font-weight: 400;
     padding-top: 48px;
-    color: rgba(17, 17, 17, 1);
+    color: var(--color-text);
     width: 100%;
 }
 
@@ -263,7 +265,7 @@
 
 .movie-head {
     text-transform: uppercase;
-    color: #111111;
+    color:var(--color-text);
     font-weight: 500;
     font-size: 20px;
     line-height: 1;
@@ -279,9 +281,8 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 1;
-    color: #282828;
-    font-family: 'Roboto', sans-serif;
-    justify-self: start;
+    color: var(--color-text);
+    font-family: var(--font-main);
 }
 
 
@@ -309,7 +310,7 @@
 
 #moviePopularity{
     padding-right: 20px;
-    color: #282828;
+    color: var(--color-text);
 }
 
 .movie-meta1 {
@@ -338,6 +339,7 @@
     padding: 0 8px;
     border-radius: 5px;
     background: rgba(255, 255, 255, 1);
+    color: #000000;
     font-size: 14px;
     font-weight: 500;
     line-height: 1;
@@ -352,6 +354,7 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 1;
+    color: #000000;
 }
 
 .stick {
@@ -364,8 +367,8 @@
    padding-bottom: 24px;
    font-size: 14px;
    font-weight: 400;
-   color: #282828;
-   line-height: 1.6;
+   color: var(--color-text);
+   line-height: 1.43;
 }
 
 .no-upcoming {
@@ -377,6 +380,7 @@
     font-weight: 500;
     letter-spacing: 0.3px;
     padding-bottom: 40px;
+    color: var(--color-text);
 }
 
 #movieOverview::after {
@@ -391,6 +395,7 @@
     white-space: normal;
     overflow-wrap: break-word;
     line-height: 1.4;
+    color: var(--color-text);
 }
 
 .genre {
@@ -405,7 +410,9 @@
     text-align: center;
     line-height: 1.4;
     white-space: normal;
-    transform: translateX(35px);
+    overflow-wrap: break-word;
+    word-break: normal;
+    color: var(--color-text);
 }
 
 .subButon {
@@ -430,10 +437,10 @@
 }
 
 .subButon:hover {
-    background: #fff;
+    background: var(--color-bg);
     border: 1px solid transparent;
     background-image:
-            linear-gradient(#fff, #fff),
+            linear-gradient(var(--color-bg), var(--color-bg)),
             linear-gradient(160deg, #FFC226, #F84119);
     background-origin: border-box;
     background-clip: padding-box, border-box;
@@ -450,10 +457,10 @@
     font-size: 12px;
     font-weight: 500;
     line-height: 1.6;
-    background: #fff;
+    background: var(--color-bg);
     border: 1px solid transparent;
     background-image:
-            linear-gradient(#fff, #fff),
+            linear-gradient(var(--color-bg), var(--color-bg)),
             linear-gradient(160deg, #FFC226, #F84119);
     background-origin: border-box;
     background-clip: padding-box, border-box;
@@ -473,9 +480,9 @@
     width: 100%;
     height: 40px;
     padding: 0 14px;
-    border: 1px solid #595959;
+    border: 1px solid var(--color-secondary);
     border-radius: 8px;
-    background: #fff;
+    background: var(--color-bg);
 
     display: flex;
     align-items: center;
@@ -483,7 +490,7 @@
 
     font-size: 14px;
     font-weight: 500;
-    color: #595959;
+    color: var(--color-text);
     cursor: pointer;
 }
 
@@ -493,10 +500,11 @@
     height: 44px;
     padding: 0 14px;
     border-radius: 12px;
-    border: 1px solid #e6e6e6;
     font-size: 14px;
     outline: none;
-    background-color: #fff;
+    border: 1px solid var(--color-secondary);
+    background-color: var(--color-bg);
+    color: var(--color-text);
 }
 
 
@@ -504,7 +512,6 @@
     flex: 2;
     max-width: 173px;
     height: 40px;
-    color: #595959;
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
@@ -520,14 +527,14 @@
 
 .search-input,
 .search-select {
-    border: 1px solid #595959;
+    border: 1px solid var(--color-secondary);
     border-radius: 8px;
 }
 
 
 .year-select {
     position: relative;
-    background: #fff;
+    background: var(--color-bg);
     width: 95px;
 }
 
@@ -542,8 +549,9 @@
     cursor: pointer;
     width: 95px;
     height: 40px;
-    background: #fff;
-    border: 1px solid #595959;
+    background: var(--color-bg);
+    border: 1px solid var(--color-secondary);
+    color: var(--color-text);
     border-radius: 8px;
     font-weight: 500;
     font-size: 14px;
@@ -555,8 +563,8 @@
     top: calc(100% + 6px);
     left: 0;
     width: 100%;
-    background: #fff;
-    border: 1px solid #595959;
+    background: var(--color-bg);
+    border: 1px solid var(--color-secondary);
     border-radius: 8px;
     list-style: none;
     padding: 4px 0;
@@ -574,7 +582,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
-    color: #595959;
+    color: var(--color-text);
 }
 .year-dropdown.open {
     opacity: 1;
@@ -584,6 +592,7 @@
 
 .icon-chevron {
     transition: transform 0.25s ease;
+    fill: var(--color-text);
 }
 
 .year-dropdown li {
@@ -597,6 +606,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
+    color: var(--color-text);
     
 }
 
@@ -615,13 +625,14 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: #fff;
 }
 
 .search-btn:hover {
-    background: #fff;
+    background: var(--color-bg);
     border: 1px solid transparent;
     background-image:
-        linear-gradient(#fff, #fff),
+        linear-gradient(var(--color-bg), var(--color-bg)),
         linear-gradient(160deg, #FFC226, #F84119);
     background-origin: border-box;
     background-clip: padding-box, border-box;
@@ -648,7 +659,7 @@
     transform: translateY(-50%);
     width: 18px;
     height: 18px;
-    color: #999;
+    color: var(--color-text);
     pointer-events: none;
 }
 
@@ -668,7 +679,7 @@
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    color: #282828;
+    color: var(--color-text);
     position: relative;
     left: 9px;
 }
@@ -682,7 +693,7 @@
     right: 18px;
     bottom: 0;
     height: 1px;
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--color-secondary);
     
 }
 
@@ -703,7 +714,7 @@
     transform: translateY(-50%);
     width: 16px;
     height: 16px;
-    color: #595959;
+    color: var(--color-text);
     pointer-events: none;
 }
 
@@ -713,7 +724,7 @@
     transform: translateY(-50%);
     left: 14px;
     pointer-events: none;
-    color: #595959;
+    color: var(--color-text);
     font-weight: 500;
     font-size: 14px;
     line-height: 1;
@@ -743,7 +754,7 @@
 
 .country-chevron {
     flex-shrink: 0;
-    color: #595959;
+    color: var(--color-text);
     position: absolute;
     right: 14px;
     top: 50%;
@@ -757,8 +768,8 @@
     top: 100%;
     left: 0;
     width: 100%;
-    background: #fff;
-    border: 1px solid #595959;
+    background: var(--color-bg);
+    border: 1px solid var(--color-secondary);
     border-radius: 6px;
     list-style: none;
     padding: 6px 0;
@@ -788,7 +799,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #595959;
+    color:var(--color-text);
 }
 
 .search-clear-btn:hover {
