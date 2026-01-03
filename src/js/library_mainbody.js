@@ -17,7 +17,15 @@ export function initLibrary() {
   const searchMovieBtn = document.querySelector(".search-button");
 
 
-  let visibleCount = 5;
+
+
+  function isTablet() {
+    return window.innerWidth >= 768 && window.innerWidth < 1024;
+    
+  }
+  
+
+  let visibleCount = 0;
   let selectedGenreId = null;
   // 🔒 DOM GUARD
   if (!movieList || !emptySection || !loadMoreBtn) {
@@ -83,19 +91,22 @@ if (genreTextEl) {
     if (genreIcon) {
       genreIcon.classList.remove("rotate");
     }
-    window.addEventListener("resize", () => {
-  if (window.innerWidth <= 768) {
     visibleCount = 6;
-  } else {
-    visibleCount = Infinity;
-  }
-  renderLibrary();
-  });
-
-    visibleCount = 5;
     renderLibrary();
   });
 }
+  
+  function getInitialVisibleCount() {
+  if (!isTablet()) {
+    return Infinity; // desktop / mobile (şimdilik sınırsız)
+  }
+
+  if (selectedGenreId !== null) {
+    return 6; // tablet + genre seçili
+  }
+
+  return 9; // tablet + genre yok
+  }
   
   if (searchMovieBtn) {
     searchMovieBtn.addEventListener("click", () => {
@@ -106,8 +117,16 @@ if (genreTextEl) {
     });
   }
 
-  
-  renderLibrary();
+  visibleCount = getInitialVisibleCount();
+renderLibrary();
+
+  window.addEventListener("resize", () => {
+  const newCount = getInitialVisibleCount();
+  if (newCount !== visibleCount) {
+    visibleCount = newCount;
+    renderLibrary();
+  }
+});
 
   function renderLibrary() {
   const favorites = getFavorites();
@@ -170,6 +189,14 @@ if (genreTextEl) {
   );
 }
 
+  window.addEventListener("resize", () => {
+  const newCount = getInitialVisibleCount();
+
+  if (newCount !== visibleCount) {
+    visibleCount = newCount;
+    renderLibrary();
+  }
+});
 
 loadMoreBtn.addEventListener("click", () => {
   visibleCount += 3;
@@ -201,7 +228,10 @@ loadMoreBtn.addEventListener("click", () => {
       <div class="movie-card-overlay">
         <div class="movie-card-text">
           <h3>${movie.title}</h3>
-          <p>${genres} | ${year}</p>
+          <p class="movie-meta">
+          <span class="movie-genres">${genres}</span>
+          <span class="movie-year">| ${year}</span>
+          </p>
         </div>
         <div class="movie-rating-stars"></div>
       </div>

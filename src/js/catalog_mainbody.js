@@ -48,7 +48,7 @@ export function initCatalogHome() {
 
     container.innerHTML = "";
 
-    movies.slice(0, 1).forEach(movie => {
+    movies.slice(0, 3).forEach(movie => {
       const genres = movie.genre_ids
         .map(id => GENRES[id])
         .filter(Boolean)
