@@ -91,15 +91,6 @@ if (genreTextEl) {
     if (genreIcon) {
       genreIcon.classList.remove("rotate");
     }
-    window.addEventListener("resize", () => {
-  if (window.innerWidth <= 768) {
-    visibleCount = 6;
-  } else {
-    visibleCount = Infinity;
-  }
-  renderLibrary();
-  });
-
     visibleCount = 6;
     renderLibrary();
   });
@@ -237,7 +228,10 @@ loadMoreBtn.addEventListener("click", () => {
       <div class="movie-card-overlay">
         <div class="movie-card-text">
           <h3>${movie.title}</h3>
-          <p>${genres} | ${year}</p>
+          <p class="movie-meta">
+          <span class="movie-genres">${genres}</span>
+          <span class="movie-year">| ${year}</span>
+          </p>
         </div>
         <div class="movie-rating-stars"></div>
       </div>

@@ -449,7 +449,7 @@ function searchMovies(page = 1) {
 
     emptyMessage.style.display = 'none';
 
-    movies.slice(0, 10).forEach(movie => {
+    movies.slice(0, 20).forEach(movie => {
       const card = document.createElement('a');
       card.className = 'movie-card';
       card.setAttribute('data-id', movie.id);
@@ -472,8 +472,11 @@ function searchMovies(page = 1) {
         <div class="movie-card-overlay">
           <div class="movie-card-text">
             <h3>${movie.title}</h3>
-            <p>${genres} | ${year}</p>
-          </div>
+            <div class="movie-meta">
+        <span class="movie-genre">${genres}</span>
+        <span class="movie-year">| ${year}</span>
+      </div>
+    </div>
           <div class="movie-rating-stars"></div>
         </div>
       `;
