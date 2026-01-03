@@ -103,18 +103,19 @@ body.modal-open {
 
 /* Vote Styling */
 .vote-average {
-  background-color: var(--color-primary); /* Turuncu arka plan */
-  color: #ffffff;
+  background-color: #f7f7f7;
+  color: #000000;
   padding: 1px 10px;
   border-radius: 5px;
   text-align: center;
 }
 
 .vote-count {
-  background-color: #f7f7f7;
   padding: 1px 10px;
   border-radius: 5px;
   margin-left: 4px;
+  background-color: #f7f7f7; /* Sabit açık arka plan */
+  color: #000000;
 }
 
 /* --- ABOUT SECTION --- */
@@ -155,18 +156,17 @@ body.modal-open {
 /* Add to Library Button Style */
 .btn-add-library {
   background-color: transparent;
-  border: 1px solid var(--color-text);
+  border: 1px solid #ff6b08;
   color: var(--color-text);
 }
 
 .btn-add-library:hover,
 .btn-add-library.active {
-  background-color: var(--color-primary);
   border-color: var(--color-primary);
+  background-color: #ff6b08;
   color: #ffffff;
-  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  box-shadow: 0px 0px 10px rgba(255, 107, 8, 0.5);
 }
-
 /* modal.css sonuna ekle */
 
 .trailer-container {
