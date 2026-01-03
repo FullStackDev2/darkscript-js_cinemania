@@ -59,18 +59,20 @@ export function initCatalog() {
   sessionStorage.removeItem("scrollCatalog");
 
   // DOM + filmler render olduktan sonra scroll
-  setTimeout(() => {
-    const posterImg = document.querySelector(".movie-card img");
+   setTimeout(() => {
+    const searchRow = document.querySelector(".search-row");
+    if (!searchRow) return;
 
-    if (!posterImg) return;
+    const y =
+      searchRow.getBoundingClientRect().top +
+      window.scrollY -
+      20; // küçük boşluk (istersen 0 yap)
 
-    const posterHeight = posterImg.getBoundingClientRect().height;
-
-    window.scrollBy({
-      top: posterHeight * 2.5, // 🎯 2.5 AFİŞ
-      behavior: "smooth"
+    window.scrollTo({
+      top: y,
+      behavior: "smooth",
     });
-  }, 600); // 🔥 filmler yüklensin diye bekliyoruz
+  }, 300);
 }
   const paginationContainer = document.getElementById('pagination');
   if (!moviesContainer || !emptyMessage) return;

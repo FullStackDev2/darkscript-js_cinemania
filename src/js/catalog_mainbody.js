@@ -90,47 +90,64 @@ export function initCatalogHome() {
   // MOVIE OF THE MONTH
   // ======================
   function fetchMovieOfTheMonth() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
+    const now = new Date();
+const year = now.getFullYear();
+const month = String(now.getMonth() + 1).padStart(2, "0");
 
-  const noMsg = document.getElementById("noUpcomingMsg");
-  const heroSection = document.querySelector(".hero1");
-  const detailsSection = document.querySelector(".movie-details");
+// ayın ilk günü
+const fromDate = `${year}-${month}-01`;
 
-  fetch(
-    `${BASE_URL}/discover/movie?api_key=${API_KEY}` +
-    `&primary_release_date.gte=${year}-${month}-01` +
-    `&primary_release_date.lte=${year}-${month}-31` +
-    `&sort_by=popularity.desc`
-  )
-    .then(r => r.json())
-    .then(d => {
-      const movie = d.results?.find(m => m.backdrop_path);
+// ayın son günü
+const lastDay = new Date(year, now.getMonth() + 1, 0).getDate();
+const toDate = `${year}-${month}-${String(lastDay).padStart(2, "0")}`;
 
-      if (!movie) {
-        // ❌ Film yok → HER ŞEY GİZLİ
-        if (noMsg) noMsg.style.display = "block";
-        if (heroSection) heroSection.style.display = "none";
-        if (detailsSection) detailsSection.style.display = "none";
-        return;
-      }
+    const noMsg = document.getElementById("noUpcomingMsg");
+    const heroSection = document.querySelector(".hero1");
+    const detailsSection = document.querySelector(".movie-details");
 
-      // ✅ Film var → HER ŞEY GÖRÜNÜR
-      if (noMsg) noMsg.style.display = "none";
-      if (heroSection) heroSection.style.display = "block";
-      if (detailsSection) detailsSection.style.display = "block";
+   fetch(
+  `${BASE_URL}/discover/movie?api_key=${API_KEY}` +
+  `&primary_release_date.gte=${fromDate}` +
+  `&primary_release_date.lte=${toDate}` +
+  `&sort_by=popularity.desc`
+)
+  .then(r => r.json())
+  .then(d => {
+  console.log("API RAW RESULTS:", d.results);
 
-      renderMovieDetails(movie);
-    })
-    .catch(err => {
-      console.error(err);
-      if (noMsg) noMsg.style.display = "block";
-      if (heroSection) heroSection.style.display = "none";
-      if (detailsSection) detailsSection.style.display = "none";
-    });
+  const movies = (d.results || []).filter(m =>
+    m.backdrop_path &&     // görsel şart
+    m.vote_count > 0       // 🔥 vote / votes 0 ise ELENİR
+  );
+
+  console.log("FILTERED MOVIES:", movies);
+
+  if (movies.length === 0) {
+    console.warn("NO UPCOMING MOVIE THIS MONTH");
+    if (noMsg) noMsg.style.display = "block";
+    if (heroSection) heroSection.style.display = "none";
+    if (detailsSection) detailsSection.style.display = "none";
+    return;
+  }
+
+  // 🎲 Rastgele film
+  const randomMovie =
+    movies[Math.floor(Math.random() * movies.length)];
+
+  console.log("RANDOM MOVIE:", {
+    title: randomMovie.title,
+    release_date: randomMovie.release_date,
+    vote_count: randomMovie.vote_count,
+    popularity: randomMovie.popularity
+  });
+
+  if (noMsg) noMsg.style.display = "none";
+  if (heroSection) heroSection.style.display = "block";
+  if (detailsSection) detailsSection.style.display = "block";
+
+  renderMovieDetails(randomMovie);
+});
 }
-  
   // ======================
 // DATE FORMATTER
 // ======================
