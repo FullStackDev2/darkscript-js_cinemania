@@ -375,13 +375,46 @@ color: #F87719;
     margin: 0;
 }
 
+#emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* yatay ortalama */
+    text-align: center;
+}
 
+#emptySection {
+    max-width: 280px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#emptyState p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+#emptyState p:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+
+#emptyState span {
+    display: block;
+}
 
 /* Tablet */
 @media screen and (min-width: 768px) {
+
+    .library-page #movieList:empty {
+            min-height: 0;
+        }
+
     .page-container {
         max-width: 768px;
         padding: 0 32px;
+        margin: 0 auto;
     }
 
     .movie-card img {
@@ -396,6 +429,10 @@ color: #F87719;
         padding-top: 0;
     }
 
+    #emptyMessage{
+        line-height: 1.5;
+    }
+
     .search-movie {
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
@@ -403,15 +440,13 @@ color: #F87719;
         line-height: 32px;
         max-width: 438px;
         margin: 0 auto;
+        text-align: center;
     }
+
+    
 
     .search-movie span:not(:last-child) {
         margin-bottom: 3px;
-    }
-
-    .search-movie span {
-         display: block;
-         
     }
 
     .search-button {
@@ -427,7 +462,8 @@ color: #F87719;
         margin: 0 auto;
         width: 100%;
         row-gap: 28px;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        justify-content: center;
+        grid-template-columns: repeat(3, 224px);
     }
 
    #movieList:empty {
@@ -436,9 +472,10 @@ color: #F87719;
        margin: 0;
    }
 
+
    .movie-card {
        max-width: none;
-       margin: 0 auto;
+       margin: 0;
    }
 
    .movie-card img {
@@ -449,6 +486,12 @@ color: #F87719;
    
    #emptySection {
     padding-top: 60px;
+    max-width: 438px;
+   }
+
+   #emptyState {
+       font-size: 24px;
+       line-height: 1.33;
    }
 
    .genre-wrapper {

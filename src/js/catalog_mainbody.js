@@ -28,27 +28,55 @@ export function initCatalogHome() {
 
   // 🔒 DOM GUARD (bu sayfa değilse çalışmaz)
   if (!document.getElementById("weeklyTrends") &&
-      !document.getElementById("heroBackdrop")) {
+    !document.getElementById("heroBackdrop")) {
     console.warn("CatalogHome DOM yok, initCatalogHome çalışmadı");
     return;
   }
 
+ 
+
   // ======================
   // WEEKLY TRENDS
   // ======================
-  function fetchWeeklyTrends() {
-    fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
-      .then(r => r.json())
-      .then(d => renderWeeklyTrends(d.results || []));
+  let weeklyCache = [];
+
+function fetchWeeklyTrends() {
+  fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
+    .then(r => r.json())
+    .then(d => {
+      weeklyCache = d.results || [];
+      renderWeeklyTrends(weeklyCache);
+    });
+}
+  let lastWeeklyLimit = getWeeklyLimit();
+
+window.addEventListener("resize", () => {
+  const currentLimit = getWeeklyLimit();
+
+  // 🔥 limit değiştiyse yeniden render et
+  if (currentLimit !== lastWeeklyLimit) {
+    lastWeeklyLimit = currentLimit;
+    renderWeeklyTrends(weeklyCache);
   }
-
+});
+  
+  function getWeeklyLimit() {
+  return window.matchMedia("(min-width: 768px)").matches ? 3 : 1;
+}
+  
   function renderWeeklyTrends(movies) {
-    const container = document.getElementById("weeklyTrends");
-    if (!container) return;
+  const container = document.getElementById("weeklyTrends");
+  if (!container) return;
 
-    container.innerHTML = "";
+  container.innerHTML = "";
 
-    movies.slice(0, 3).forEach(movie => {
+
+  const shuffled = [...movies].sort(() => Math.random() - 0.5);
+
+  shuffled
+    .slice(0, getWeeklyLimit())
+    .forEach(movie => {
+
       const genres = movie.genre_ids
         .map(id => GENRES[id])
         .filter(Boolean)
@@ -71,7 +99,8 @@ export function initCatalogHome() {
         <div class="movie-card-overlay">
           <div class="movie-card-text">
             <h3>${movie.title}</h3>
-            <p>${genres} | ${year}</p>
+            <p class="movie-genres">${genres}</p>
+            <p class="movie-year">| ${year}</p>
           </div>
           <div class="movie-rating-stars"></div>
         </div>
@@ -84,7 +113,8 @@ export function initCatalogHome() {
 
       container.appendChild(card);
     });
-  }
+}
+
 
   // ======================
   // MOVIE OF THE MONTH
@@ -113,14 +143,11 @@ const toDate = `${year}-${month}-${String(lastDay).padStart(2, "0")}`;
 )
   .then(r => r.json())
   .then(d => {
-  console.log("API RAW RESULTS:", d.results);
 
   const movies = (d.results || []).filter(m =>
     m.backdrop_path &&     // görsel şart
     m.vote_count > 0       // 🔥 vote / votes 0 ise ELENİR
   );
-
-  console.log("FILTERED MOVIES:", movies);
 
   if (movies.length === 0) {
     console.warn("NO UPCOMING MOVIE THIS MONTH");
@@ -133,13 +160,6 @@ const toDate = `${year}-${month}-${String(lastDay).padStart(2, "0")}`;
   // 🎲 Rastgele film
   const randomMovie =
     movies[Math.floor(Math.random() * movies.length)];
-
-  console.log("RANDOM MOVIE:", {
-    title: randomMovie.title,
-    release_date: randomMovie.release_date,
-    vote_count: randomMovie.vote_count,
-    popularity: randomMovie.popularity
-  });
 
   if (noMsg) noMsg.style.display = "none";
   if (heroSection) heroSection.style.display = "block";
@@ -161,6 +181,7 @@ function formatDate(dateStr) {
 
  function renderMovieDetails(movie) {
   if (!movie) return;
+
 
   // ❗ Bu fonksiyon SADECE detail sayfasında çalışsın
   const voteAvgEl = document.getElementById("movieVoteAvg");
