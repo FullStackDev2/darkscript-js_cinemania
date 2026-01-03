@@ -1,6 +1,6 @@
 /* FOOTER */
 .footer {
-  color: var(--color-text);
+  color: #b7b7b7;
   font-family: var(--font-main);
   text-align: center;
   display: flex;
@@ -9,6 +9,7 @@
   gap: 8px;
   font-size: 14px;
   background-color: var(--color-bg);
+  padding-bottom: 28px;
 }
 
 .footer p {
@@ -27,7 +28,7 @@
 .team-link {
   background: none;
   border: none;
-  color: var(--color-text);
+  color: #b7b7b7;
   text-decoration: underline;
   cursor: pointer;
   font-size: inherit;
