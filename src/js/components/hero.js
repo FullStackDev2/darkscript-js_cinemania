@@ -1,5 +1,6 @@
 import { getTrending, getUpcoming, getGenres, getMovieVideos } from '../api/api-service.js';
 import { openTrailerErrorPopup } from './trailer_popup.js';
+import { showLoader, hideLoader } from '../utils/loader.js';
 function renderStarsToRating(el, rating) {
   if (!el) return;
 
@@ -59,6 +60,7 @@ export async function initHero() {
 
   if (pageType === 'dynamic') {
     try {
+        showLoader();
         const movies = await getTrending('day');
 
         if (movies && movies.length > 0) {
@@ -72,6 +74,8 @@ export async function initHero() {
     } catch (err) {
         console.error('Hero yüklenirken hata:', err);
         renderDefaultHero(heroSection);
+  } finally {
+    hideLoader();
     }
   }
 }
@@ -129,6 +133,7 @@ function renderHeroContent(container, film) {
 
 container.querySelector('#watch-trailer').onclick = async (e) => {
     e.preventDefault();
+    showLoader();
     
     try {
       
@@ -143,6 +148,8 @@ container.querySelector('#watch-trailer').onclick = async (e) => {
     } catch (error) {
       console.log('Hata:', error);
       openTrailerErrorPopup();
+    } finally {
+      hideLoader();
     }
   };
   // --------------------------

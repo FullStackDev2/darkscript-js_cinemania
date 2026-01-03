@@ -8,6 +8,7 @@ import { initCatalogHome } from "./catalog_mainbody.js";
 import { initScrollUp } from './components/scrollup.js';
 import { initFooter } from './components/footer.js';
 import { openTrailerErrorPopup } from './components/trailer_popup.js';
+import { hideLoader, resetLoader } from './utils/loader.js';
 
 // 3. Diğer bileşenler
 import './components/header.js';
@@ -32,6 +33,10 @@ if (document.body.dataset.page === "catalog-main") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Ensure loader is hidden on initial paint (defensive against stale state)
+  resetLoader();
+  hideLoader();
+
   initScrollUp();
 
   // Home / Catalog ana sayfa
@@ -47,5 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Library sayfası
   if (document.getElementById("movieList")) {
     initLibrary();
+  }
+
+  const libraryHeroCta = document.getElementById('hero-btn');
+  if (libraryHeroCta) {
+    libraryHeroCta.addEventListener('click', () => {
+      window.location.href = './catalog.html';
+    });
   }
 });
