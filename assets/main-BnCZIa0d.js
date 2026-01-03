@@ -193,4 +193,4 @@ import{a as he}from"./vendor-BWC8OeqA.js";(function(){const t=document.createEle
           </iframe>
         </div>
       `}else n.innerHTML='<div class="no-trailer-msg">Sorry, no trailer found for this movie.</div>'}catch(s){console.error("Trailer loading error:",s),n.innerHTML='<p style="text-align:center; padding:20px;">An error occurred while fetching the video.</p>'}});se();Me();document.body.dataset.page==="catalog-main"&&initCatalogMainbody();document.addEventListener("DOMContentLoaded",()=>{U(),j(),ke(),document.getElementById("weeklyTrends")&&Ee(),document.getElementById("moviesContainer")&&we(),document.getElementById("movieList")&&be();const e=document.getElementById("hero-btn");e&&e.addEventListener("click",()=>{window.location.href="./catalog.html"})});
-//# sourceMappingURL=main-BSae0IlB.js.map
+//# sourceMappingURL=main-BnCZIa0d.js.map
