@@ -1,6 +1,6 @@
 /* FOOTER */
 .footer {
-  color: var(--color-text);
+  color: #b7b7b7;
   font-family: var(--font-main);
   text-align: center;
   display: flex;
@@ -27,7 +27,7 @@
 .team-link {
   background: none;
   border: none;
-  color: var(--color-text);
+  color: #b7b7b7;
   text-decoration: underline;
   cursor: pointer;
   font-size: inherit;
