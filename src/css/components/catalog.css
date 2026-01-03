@@ -413,6 +413,7 @@
     overflow-wrap: break-word;
     word-break: normal;
     color: var(--color-text);
+    transform: translateX(35px);
 }
 
 .subButon {
@@ -517,7 +518,9 @@
     line-height: 1;
     padding-right: 36px;
 }
-
+body.dark .search-input:focus::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
 
 .search-select {
     flex: 1;
