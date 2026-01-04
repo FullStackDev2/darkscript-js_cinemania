@@ -2,6 +2,7 @@
    font-family: var(--font-main);
    align-items: stretch;
 }
+
 .container .search-movie{
    font-weight: 400;
    font-size: 20px;
@@ -200,6 +201,8 @@ color: #F87719;
     padding-left: 4px;
     box-sizing: border-box;
 }
+
+
 
 .genre-hidden {
     opacity: 0;

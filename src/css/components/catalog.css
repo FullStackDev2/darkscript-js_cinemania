@@ -120,6 +120,7 @@
     display: block;
 }
 
+
 .monthly h1 {
     font-size: 18px;
     color: #fff;
@@ -404,6 +405,37 @@
 
 #movieOverview::after {
     color: #F8F8F8;
+}
+
+.meta-row .meta-label {
+    text-align: left;
+    flex-shrink: 0;
+    /* Sıkışmasını engelle */
+    width: auto;
+}
+
+/* 3. Sağ Taraf (Korku, Gerilim vb.) */
+.meta-row .genre {
+    /* Kutu ve sınırlama özelliklerini sıfırla */
+    display: block;
+    line-clamp: unset;
+    -webkit-box-orient: unset;
+
+    /* Hizalama ve Genişlik */
+    text-align: right;
+    /* Metni SAĞA yasla */
+    max-width: none;
+    /* 160px sınırını kaldır */
+    margin: 0;
+    width: auto;
+
+    /* Metin akışı */
+    white-space: normal;
+    /* Alt satıra düzgün geçsin */
+    overflow: visible;
+
+    /* Flex içinde sağa it */
+    flex: 1 !important;
 }
 
 .meta-value {
@@ -837,7 +869,7 @@ body.dark .search-input:focus::placeholder {
         margin: 0 auto;
         max-width: calc(3 * 224px + 2 * 16px);
     }
-
+    
     #moviesContainer {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1041,6 +1073,7 @@ body.dark .search-input:focus::placeholder {
     .catalog-page {
         max-width: 1280px;
         margin: 0 auto;
+        
     }
 
     #moviesContainer {
@@ -1068,35 +1101,55 @@ body.dark .search-input:focus::placeholder {
         width: 805px;
         height: 458px;
         max-width: none;
-        padding-left: 32px;
+        flex-shrink: 0;
+
     }
     
     .hero-backdrop {
         position: absolute;
-        inset: 0;
         top: 0;
         left: 0;
         margin: 0;
-        padding-left: 32px;
+        padding-bottom: 0;
+        width: 810px;
+    }
+
+    #heroBackdrop {
+        width: 810px;
+    }
+
+    .hero-backdrop img {
+        width: 100%;
+    }
+
+    #movieVoteAvg,
+    #movieVoteCount {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .catalog-page>.hero1 {
+        justify-self: end;
     }
 
     .section-header1 h2 {
         padding-left: 0;
         font-size: 28px;
         line-height: 1;
-        padding-left: 32px;
+        margin-left: 32px;
     }
 
     .section-header h2 {
         font-size: 28px;
         line-height: 1;
-        padding-left: 32px;
+        margin-left: 32px;
     }
 
     .section-header a {
         font-size: 28px;
         line-height: 1;
-        padding-right: 32px;
+        margin-right: 32px;
     }
 
     .weekly-trends {
@@ -1142,5 +1195,56 @@ body.dark .search-input:focus::placeholder {
         transform: scale(1.8);
         font-size: 24px;
         transform-origin: bottom right;
+    }
+    
+
+    .catalog-page:has(.hero1 + .movie-details) {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 411px;
+        column-gap: 16px;                                 
+    }
+                
+    .catalog-page>.section,
+    .catalog-page>.section2 {
+        grid-column: 1 / -1;
+    }
+                
+    .catalog-page>.hero1 {
+        grid-column: 1;
+    }
+                
+    .catalog-page>.movie-details {
+        grid-column: 2;
+    }
+
+    #movieOverview {
+        width: 100%;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        padding-top: 8px;
+        padding-bottom: 12px;
+    }
+    .movie-meta{
+        gap: 20;
+    }
+
+    #libraryToggleBtn{
+        margin: 0;
+    }
+
+    .movie-details {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    #libraryToggleBtn {
+        margin-top: auto;
+    }
+    
+    #movieVoteAvg{
+        text-align: center;
+        justify-content: center;
     }
 }
