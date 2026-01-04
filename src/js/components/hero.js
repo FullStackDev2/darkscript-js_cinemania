@@ -99,10 +99,9 @@ function renderHeroContent(container, film) {
         else if (window.innerWidth >= 768) quality = isRetina ? 'w1280' : 'w780';
         imageUrl = `https://image.tmdb.org/t/p/${quality}${backdrop_path}`;
     } else {
-      // API'den görsel gelmezse public/background klasöründeki görseli kullan
-      const suffix = isRetina ? '-@2x' : '';
-      // Public klasörü kök dizin kabul edilir, o yüzden direkt /background ile başlanır
-      imageUrl = `./background/desktop-1${suffix}.jpg`;
+  // API'den görsel gelmezse src/images/background klasöründeki görseli kullan
+  const suffix = isRetina ? '-@2x' : '';
+  imageUrl = `/src/images/background/desktop-1${suffix}.jpg`;
     }
 
     container.style.backgroundImage = `${overlay}, url('${imageUrl}')`;
@@ -146,7 +145,6 @@ container.querySelector('#watch-trailer').onclick = async (e) => {
       }
 
     } catch (error) {
-      console.log('Hata:', error);
       openTrailerErrorPopup();
     } finally {
       hideLoader();
@@ -172,9 +170,7 @@ function renderDefaultHero(container) {
     
     // Public içindeki dosya yolu
     const base = import.meta.env.BASE_URL || '/';
-    const imageUrl = `./background/${fileName}.jpg`.replace(/\/+/g, '/');
-    
-    console.log("Resim URL Deneniyor:", imageUrl);
+  const imageUrl = `/src/images/background/${fileName}.jpg`.replace(/\/+/g, '/');
 
     container.style.backgroundImage = `${overlay}, url('${imageUrl}')`;
     container.style.backgroundSize = 'cover';

@@ -176,7 +176,6 @@ selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
       currentPage: page,
 
       onPageChange: newPage => {
-        console.log('Sayfa Değişiyor -> Yeni Sayfa:', newPage);
         currentPage = newPage; // Global state'i güncelle
 
         // currentMode değişkenine göre ilgili fonksiyonu çağır

@@ -291,7 +291,6 @@ export function initCatalogMainbody() {
   fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`)
     .then(r => r.json())
     .then(movie => {
-      console.log("🎬 MOVIE LOADED:", movie);
       renderMovieDetails(movie); // 🔥 movie SADECE BURADA VAR
     })
     .catch(err => console.error("API error:", err));

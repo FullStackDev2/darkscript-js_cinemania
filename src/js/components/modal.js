@@ -197,8 +197,7 @@ window.addEventListener('openTrailerModal', async (event) => {
   content.innerHTML = '<div style="text-align:center; padding: 50px;">🎬 Loading Trailer...</div>';
 
   try {
-    const videos = await getMovieVideos(movieId);
-    console.log("Fetched videos:", videos); // Hata ayıklama için
+  const videos = await getMovieVideos(movieId);
     
     // 2. Videoları kontrol et (Trailer ve YouTube olanı bul)
     // api-service.js zaten filtreleme yapıyor ama biz yine de ilk videoyu alalım

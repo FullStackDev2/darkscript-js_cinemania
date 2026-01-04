@@ -1,6 +1,3 @@
-// [header] header.js loaded
-console.log('[header] header.js checking in');
-
 document.addEventListener('DOMContentLoaded', () => {
   let overlayEl = null;
 
@@ -35,19 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Tek bir delegasyon üzerinden tüm tıklamaları yönetelim
   document.addEventListener('click', (e) => {
-
-    console.log('[header] Global click on:', e.target);
-
     // 1. Menü Butonu Kontrolü
     const btn = e.target.closest('.menu-open-btn');
     if (btn) {
-
-      console.log('[header] Menu btn detected!');
-
       const mobileMenu = document.querySelector('.mobile-menu');
       if (!mobileMenu) return;
       
-      console.log('[header] Menu toggle clicked');
       if (mobileMenu.classList.contains('open')) {
         closeMenu(btn, mobileMenu);
       } else {
