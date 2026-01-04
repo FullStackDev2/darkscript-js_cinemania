@@ -1039,11 +1039,11 @@ body.dark .search-input:focus::placeholder {
 
 @media (min-width: 1280px) {
     .catalog-page {
-            max-width: 1214px;
-            margin: 0 auto;
-        }
+        max-width: 1280px;
+        margin: 0 auto;
+    }
 
-     #moviesContainer {
+    #moviesContainer {
     grid-template-columns: repeat(3, 394px);
     gap: 16px;
     justify-content: center;
@@ -1053,10 +1053,94 @@ body.dark .search-input:focus::placeholder {
       max-width: none;
   }
 
-        .movie-card img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 394 / 574;
-            object-fit: cover;
-        }
+  .movie-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 394 / 574;
+        object-fit: cover;
+    }
+
+    .hero1 {
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+        padding: 0;
+        width: 805px;
+        height: 458px;
+        max-width: none;
+        padding-left: 32px;
+    }
+    
+    .hero-backdrop {
+        position: absolute;
+        inset: 0;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding-left: 32px;
+    }
+
+    .section-header1 h2 {
+        padding-left: 0;
+        font-size: 28px;
+        line-height: 1;
+        padding-left: 32px;
+    }
+
+    .section-header h2 {
+        font-size: 28px;
+        line-height: 1;
+        padding-left: 32px;
+    }
+
+    .section-header a {
+        font-size: 28px;
+        line-height: 1;
+        padding-right: 32px;
+    }
+
+    .weekly-trends {
+        display: grid;
+        grid-template-columns: repeat(3, 395px);
+        gap: 16px;
+        width: 1280px;
+        margin: 0 auto;
+        max-width: none;
+    }
+
+    .weekly-trends .movie-card {
+        width: 395px;
+         height: 574px;
+        margin: 0;
+        max-width: none;
+    }
+
+    .movie-card-text .movie-genres {
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 500;
+        margin-bottom: 2px;
+    }
+    
+    .movie-genre {
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 500;
+    }
+    .movie-card-text .movie-year {
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 500;
+    }
+    .movie-card-text h3 {
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+    .movie-rating-stars {
+        transform: scale(1.8);
+        font-size: 24px;
+        transform-origin: bottom right;
+    }
 }

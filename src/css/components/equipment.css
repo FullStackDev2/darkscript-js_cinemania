@@ -544,7 +544,7 @@ color: #F87719;
 
 @media (min-width: 1280px) {
     .page-container {
-        max-width: 1214px;
+        max-width: 1280px;
         margin: 0 auto;
     }
 
@@ -563,9 +563,9 @@ color: #F87719;
     }
 
     .movie-card img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 394 / 574;
-        object-fit: cover;
+        width: 394px;
+        height: 574px;
+        aspect-ratio: unset;
     }
+ 
 }
