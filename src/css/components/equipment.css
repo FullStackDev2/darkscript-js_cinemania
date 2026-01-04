@@ -1,8 +1,6 @@
 .page-container{
    font-family: var(--font-main);
    align-items: stretch;
-   max-width: clamp(320px, 90vw, 768px);
-   padding-inline: clamp(16px, 4vw, 32px);
 }
 .container .search-movie{
    font-weight: 400;
@@ -544,3 +542,30 @@ color: #F87719;
 
 }
 
+@media (min-width: 1280px) {
+    .page-container {
+        max-width: 1214px;
+        margin: 0 auto;
+    }
+
+         #movieList {
+             display: grid;
+             grid-template-columns: repeat(3, 394px);
+             gap: 16px;
+             justify-content: center;
+             width: 1214px;
+             margin: 0 auto;
+         }
+
+    .movie-card {
+        max-width: none;
+
+    }
+
+    .movie-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 394 / 574;
+        object-fit: cover;
+    }
+}

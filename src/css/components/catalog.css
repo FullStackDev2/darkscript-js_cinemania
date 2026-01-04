@@ -146,8 +146,8 @@
     border-radius: 5px;
     overflow: hidden;
     text-decoration: none;
-    max-width: 280px;
     margin: 0 auto;
+    max-width: 280px;
 }
 
 #moviesContainer{
@@ -877,11 +877,6 @@ body.dark .search-input:focus::placeholder {
         flex-shrink: 0;
     }
 
-    .movie-card img {
-        width: 224px;
-        height: 325px;
-    }
-
     .movie-meta,
     .movie-meta1 {
         display: flex;
@@ -940,10 +935,6 @@ body.dark .search-input:focus::placeholder {
         display: block;
     }
     
-    .weekly-trends .movie-card img {
-        width: 224px;
-        height: 325px;
-    }
     .emptyHidden {
         width: 513px;
         margin: 0 auto;
@@ -1044,4 +1035,28 @@ body.dark .search-input:focus::placeholder {
         row-gap: 16px;
     }
    
+}
+
+@media (min-width: 1280px) {
+    .catalog-page {
+            max-width: 1214px;
+            margin: 0 auto;
+        }
+
+     #moviesContainer {
+    grid-template-columns: repeat(3, 394px);
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .movie-card {
+      max-width: none;
+  }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 394 / 574;
+            object-fit: cover;
+        }
 }
