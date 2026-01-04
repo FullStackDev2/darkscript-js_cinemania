@@ -278,12 +278,9 @@
 
 
 body[data-page="library"] .hero {
-  /* Mobile (default) 1x & 2x */
+  /* Mobile (default) */
   background-image: var(--hero-overlay-dark, linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)),
-    image-set(
-      url('../../images/background/mobile-2.jpg') 1x,
-      url('../../images/background/mobile-2-@2x.jpg') 2x
-    ) !important;
+    url('../../images/background/mobile-2.jpg') !important;
   background-size: cover !important;
   background-position: center right !important;
   background-repeat: no-repeat !important;
@@ -291,22 +288,16 @@ body[data-page="library"] .hero {
 
 @media (min-width: 768px) {
   body[data-page="library"] .hero {
-    /* Tablet 1x & 2x */
+    /* Tablet */
     background-image: var(--hero-overlay-dark, linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)),
-      image-set(
-        url('../../images/background/tablet-2.jpg') 1x,
-        url('../../images/background/tablet-2-@2x.jpg') 2x
-      ) !important;
+      url('../../images/background/tablet-2.jpg') !important;
   }
 }
 
 @media (min-width: 1280px) {
   body[data-page="library"] .hero {
-    /* Desktop 1x & 2x */
+    /* Desktop */
     background-image: var(--hero-overlay-dark, linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)),
-      image-set(
-        url('../../images/background/desktop-2.jpg') 1x,
-        url('../../images/background/desktop-2-@2x.jpg') 2x
-      ) !important;
+      url('../../images/background/desktop-2.jpg') !important;
   }
 }
