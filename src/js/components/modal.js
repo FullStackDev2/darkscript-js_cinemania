@@ -15,10 +15,12 @@ function createModalRoot() {
   const modalElement = document.createElement('div');
   modalElement.className = 'modal'; // CSS: .modal
   
+  const spriteHref = `${import.meta.env.BASE_URL}images/icons/symbol-defs.svg#icon-Vectorx`;
+
   // Modal içeriği: Kapatma butonu ve içerik kapsayıcısı
   modalElement.innerHTML = `
     <button type="button" class="modal-close-btn" data-modal-close>
-      <svg class="icon icon-Vectorx"><use xlink:href="./images/icons/symbol-defs.svg#icon-Vectorx"></use></svg>
+      <svg class="icon icon-Vectorx"><use xlink:href="${spriteHref}"></use></svg>
     </button>
     <div class="modal-content" id="modal-content"></div>
   `;
