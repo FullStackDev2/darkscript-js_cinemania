@@ -18,7 +18,7 @@ function createModalRoot() {
   // Modal içeriği: Kapatma butonu ve içerik kapsayıcısı
   modalElement.innerHTML = `
     <button type="button" class="modal-close-btn" data-modal-close>
-      <svg class="icon icon-Vectorx"><use xlink:href="/images/icons/symbol-defs.svg#icon-Vectorx">
+      <svg class="icon icon-Vectorx"><use xlink:href="./images/icons/symbol-defs.svg#icon-Vectorx">
     </button>
     <div class="modal-content" id="modal-content"></div>
   `;

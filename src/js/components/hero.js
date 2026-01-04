@@ -101,7 +101,7 @@ function renderHeroContent(container, film) {
     } else {
   // API'den görsel gelmezse src/images/background klasöründeki görseli kullan
   const suffix = isRetina ? '-@2x' : '';
-  imageUrl = `/src/images/background/desktop-1${suffix}.jpg`;
+  imageUrl = `./images/background/desktop-1${suffix}.jpg`;
     }
 
     container.style.backgroundImage = `${overlay}, url('${imageUrl}')`;
@@ -170,7 +170,7 @@ function renderDefaultHero(container) {
     
     // Public içindeki dosya yolu
     const base = import.meta.env.BASE_URL || '/';
-  const imageUrl = `/src/images/background/${fileName}.jpg`.replace(/\/+/g, '/');
+  const imageUrl = `./images/background/${fileName}.jpg`.replace(/\/+/g, '/');
 
     container.style.backgroundImage = `${overlay}, url('${imageUrl}')`;
     container.style.backgroundSize = 'cover';
