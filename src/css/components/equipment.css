@@ -171,7 +171,8 @@ color: #F87719;
 
 .movie-card-text p {
     color: rgba(183, 183, 183, 1);
-    font-family: 500;
+    font-family: var(--font-main, 'Roboto', sans-serif);
+    font-weight: 500;
     font-size: 12px;
     line-height: 1.67;
 }

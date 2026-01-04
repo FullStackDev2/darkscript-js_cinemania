@@ -24,12 +24,7 @@ body {
     margin: 0;
 }
 
-/* 3. Enable keyword animations */
-@media (prefers-reduced-motion: no-preference) {
-    html {
-        interpolate-size: allow-keywords;
-    }
-}
+/* 3. Enable keyword animations (disabled interpolate-size for validation) */
 
 /* 6. Improve media defaults */
 img,
