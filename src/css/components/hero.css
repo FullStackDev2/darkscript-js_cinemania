@@ -73,11 +73,26 @@
   padding: 0;
   display: flex;
   gap: 6px;
-  margin: 0 0 16px 0;
+  margin: 0 0 16px 8px; /* Hero yıldızlarını metinden biraz içeri al */
   line-height: 1;
   justify-content: flex-start;
   margin-left: 0;
   width: auto;
+  padding-left: 6px; /* Yıldızların sol kenardan taşmaması için küçük boşluk */
+}
+
+@media (min-width: 1280px) {
+  .hero .movie-rating-stars,
+  .hero-rating-stars {
+    margin-left: 12px; /* Desktop'ta biraz daha içeri al */
+  }
+}
+
+/* Hero yıldızları (sadece hero alanı) */
+.hero .star,
+.hero-rating-stars .star {
+  width: 24px;
+  height: 24px;
 }
 
 .btn-primary {
@@ -192,7 +207,7 @@
     }
 
   .hero-content {
-    padding: 72px 40px 72px;
+    padding: 72px 40px 72px 64px; /* Desktop/tablet'te sola mesafeyi artır */
     max-width: 720px; /* İçeriğin çok yayılmasını engelle */
   }
 
@@ -233,11 +248,32 @@
   }
   
   .hero-content {
-    padding-left: 48px; /* Daha az padding, sola yaslı kalsın */
+    padding-left: 120px; /* Desktop'ta soldan daha fazla boşluk */
     margin: 0;
     max-width: 780px;
     align-items: flex-start;
   }
+}
+
+/* Hero yıldızları için kesin hizalama (katalog stilini ezmek için daha spesifik) */
+.hero .movie-rating-stars,
+.hero .hero-rating-stars {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  margin: 0 0 16px 0 !important; /* Başlıkla aynı hizada olsun */
+  padding: 0 !important;
+  gap: 6px;
+  width: auto;
+  align-self: flex-start;
+}
+
+.hero .movie-rating-stars .star,
+.hero .hero-rating-stars .star {
+  width: 24px;
+  height: 24px;
 }
 
 
