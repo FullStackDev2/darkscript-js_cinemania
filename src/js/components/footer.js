@@ -19,7 +19,6 @@ export function initFooter() {
     // --- AÇMA İŞLEMİ ---
     if (openBtn) {
       e.preventDefault(); // Link ise gitmesini engelle
-      console.log("Footer: Modal açılıyor...");
       modal.classList.add('is-open');
       document.body.style.overflow = 'hidden'; // Kaydırmayı kilitle
       return; // İşlem bitti
@@ -27,7 +26,6 @@ export function initFooter() {
 
     // --- KAPATMA İŞLEMİ (X butonu) ---
     if (closeBtn) {
-      console.log("Footer: Modal kapanıyor (Buton ile)...");
       modal.classList.remove('is-open');
       document.body.style.overflow = '';
       return;
@@ -36,7 +34,6 @@ export function initFooter() {
     // --- KAPATMA İŞLEMİ (Siyah Boşluk / Backdrop) ---
     // closest kullanmıyoruz, çünkü direkt siyah alana tıklanmalı
     if (e.target === modal) {
-      console.log("Footer: Modal kapanıyor (Backdrop ile)...");
       modal.classList.remove('is-open');
       document.body.style.overflow = '';
     }
@@ -46,7 +43,6 @@ export function initFooter() {
   window.addEventListener('keydown', (e) => {
     const modal = document.getElementById('teamModal');
     if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
-      console.log("Footer: Modal kapanıyor (ESC ile)...");
       modal.classList.remove('is-open');
       document.body.style.overflow = '';
     }
