@@ -46,22 +46,19 @@
         <span class="menu-text">MENU</span>
       </button>
 
-        <button type="button" class="menu-open-btn mobile-only" id="menu-open-btn">
-            <span class="menu-text">MENU</span>
-        </button>
-
     <div class="theme-switch-wrapper">
       <label class="theme-switch" for="checkbox">
         <input type="checkbox" id="checkbox" />
-        <div class="slider round">
+        <span class="slider round">
           <svg class="icon-sun" width="14" height="14">
             <use href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-sun"></use>
           </svg>
           <svg class="icon-moon" width="14" height="14">
             <use href="/darkscript-js_cinemania/assets/symbol-defs-DWV3xnex.svg#icon-moon"></use>
           </svg>
-        </div>
+        </span>
       </label>
+    </div>
     </div>
 
     <nav class="mobile-menu">
@@ -105,12 +102,12 @@
         </p>
     </section>
 
-    <section class="hero1">
-        <img id="heroBackdrop" class="hero-backdrop" alt="Backdrop">
+    <div class="hero1">
+        <img id="heroBackdrop" class="hero-backdrop" alt="Backdrop" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
 
-    </section>
+    </div>
 
-    <section class="movie-details">
+    <div class="movie-details">
         <div class="movie-head" id="movieTitle"></div>
 
 
@@ -149,18 +146,11 @@
         </div>
 
         <button class="subButon" type="submit" id="libraryToggleBtn">Add to my library</button>
-    </section>
+    </div>
 </section>
-<!-- Scroll Up Button -->
-<button class="scroll-up" id="scrollUpBtn" aria-label="Sayfanın başına git">
-    <svg width="20" height="20" viewBox="0 0 24 24">
-        <path d="M12 4l-8 8h5v8h6v-8h5z" fill="currentColor" />
-    </svg>
-</button>
     </main>
 
-    <footer id="site-footer">
-        <!-- FOOTER -->
+  <!-- FOOTER -->
 <footer class="footer">
   <p class="footer-copy">© 2026 | All Rights Reserved |</p>
   <div class="footer-mobile-text">
@@ -281,7 +271,6 @@
   </div>
 </div>
 
-    </footer>
     <div id="trailer-error-popup" class="popup-backdrop is-hidden">
   <div class="popup-container">
     <button type="button" class="popup-close-btn" data-popup-close>
