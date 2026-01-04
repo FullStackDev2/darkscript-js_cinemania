@@ -28,7 +28,7 @@
 
     <main class="library-page">
 
-      <section class="page-container">
+      <div class="page-container">
         <div id="genreWrapper" class="genre-wrapper genre-hidden">
           <div class="genre-select" hidden id="genreSelect">
             <button class="genre-btn" id="genreBtn">
@@ -50,19 +50,19 @@
             </ul>
           </div>
         </div>
-        <section class="container hidden" id="emptySection">
+        <div class="container hidden" id="emptySection">
           <div class="search-movie" id="emptyState">
             <p>OOPS... </p>
           <p> We are very sorry! </p>
           <p>You don’t have any movies at your library.</p>
           </div>
           <button class="search-button" type="submit">Search movie</button>
-        </section>
+        </div>
 
-        <section class="movie-list" id="movieList"></section>
+        <div class="movie-list" id="movieList"></div>
 
         <button class="load-more-btn hidden" id="loadMoreBtn">Load more</button>
-      </section>
+      </div>
     </main>
     <load src="./partials/footer.html" />
     <load src="./trailer_popup.html" />
