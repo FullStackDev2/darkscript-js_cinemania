@@ -17,7 +17,9 @@ export function initLibrary() {
   const searchMovieBtn = document.querySelector(".search-button");
 
 
-
+  function isDesktop() {
+  return window.innerWidth >= 1280;
+}
 
   function isTablet() {
     return window.innerWidth >= 768 && window.innerWidth < 1024;
@@ -96,17 +98,25 @@ if (genreTextEl) {
   });
 }
   
-  function getInitialVisibleCount() {
-  if (!isTablet()) {
-    return Infinity; // desktop / mobile (şimdilik sınırsız)
+  function isDesktop() {
+  return window.innerWidth >= 1280;
+}
+
+function isDesktop() {
+  return window.innerWidth >= 1280;
+}
+
+function getInitialVisibleCount() {
+  if (isDesktop()) {
+    return 9;
   }
 
-  if (selectedGenreId !== null) {
-    return 6; // tablet + genre seçili
+  if (isTablet()) {
+    return selectedGenreId !== null ? 6 : 9;
   }
 
-  return 9; // tablet + genre yok
-  }
+  return 9; // mobile
+}
   
   if (searchMovieBtn) {
     searchMovieBtn.addEventListener("click", () => {
