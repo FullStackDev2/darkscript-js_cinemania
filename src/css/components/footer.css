@@ -10,6 +10,7 @@
   font-size: 14px;
   background-color: var(--color-bg);
   padding-bottom: 28px;
+  
 }
 
 .footer p {
@@ -204,6 +205,7 @@
 @media (min-width: 1200px) {
   .footer {
     font-size: 16px;
+    padding-top: 28px;
   }
 
   .modal {
