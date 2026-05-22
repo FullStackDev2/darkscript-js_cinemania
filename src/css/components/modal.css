@@ -283,7 +283,7 @@ body.dark-theme .modal-close-btn {
     overflow: hidden !important;
     border-radius: 5px;
     margin-bottom: 0 !important;
-    background-color: #000;
+    background-color: transparent;
   }
 
   .modal-img {
