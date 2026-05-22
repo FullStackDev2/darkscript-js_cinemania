@@ -1,10 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Library - Cinemania</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.classList.add(savedTheme + '-theme');
+      document.body?.classList.add(savedTheme + '-theme');
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,8 +21,8 @@
       rel="stylesheet"
     />
     <script type="module" crossorigin src="/darkscript-js_cinemania/assets/vendor-BWC8OeqA.js"></script>
-    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-4l4MHHnc.js"></script>
-    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-CDXVc-x1.css">
+    <script type="module" crossorigin src="/darkscript-js_cinemania/assets/main-ByXdP16m.js"></script>
+    <link rel="stylesheet" crossorigin href="/darkscript-js_cinemania/assets/main-DsdYmFjC.css">
   </head>
   <body data-page="library">
     <header class="header">
@@ -74,21 +79,39 @@
     <section class="hero" id="hero-section" data-page="library">
       <div class="container hero-content">
         <h1 class="hero-title">Create Your Dream Cinema</h1>
-        <p class="hero-description">Is a guide to designing a personalized movie theater experience with the right equipment, customized decor, and favorite films. This guide helps you bring the cinema experience into your own home with cozy seating, dim lighting, and movie theater snacks.</p>
-        <button type="button" class="btn-primary" id="hero-btn">Get Started</button>
+        <p class="hero-description">
+          Is a guide to designing a personalized movie theater experience with
+          the right equipment, customized decor, and favorite films. This guide
+          helps you bring the cinema experience into your own home with cozy
+          seating, dim lighting, and movie theater snacks.
+        </p>
+        <button type="button" class="btn-primary" id="hero-btn">
+          Get Started
+        </button>
       </div>
     </section>
 
     <main class="library-page">
-
       <div class="page-container">
         <div id="genreWrapper" class="genre-wrapper genre-hidden">
           <div class="genre-select" hidden id="genreSelect">
             <button class="genre-btn" id="genreBtn">
               Genre
-              <svg class="genre-icon" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true">
-                <path class="chevron-path" d="M7 20.5l9-9 9 9" fill="none" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" />
+              <svg
+                class="genre-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 32 32"
+                aria-hidden="true"
+              >
+                <path
+                  class="chevron-path"
+                  d="M7 20.5l9-9 9 9"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
             </button>
 
@@ -105,9 +128,9 @@
         </div>
         <div class="container hidden" id="emptySection">
           <div class="search-movie" id="emptyState">
-            <p>OOPS... </p>
-          <p> We are very sorry! </p>
-          <p>You don’t have any movies at your library.</p>
+            <p>OOPS...</p>
+            <p>We are very sorry!</p>
+            <p>You don’t have any movies at your library.</p>
           </div>
           <button class="search-button" type="submit">Search movie</button>
         </div>
@@ -141,6 +164,7 @@
         <img
           src="https://avatars.githubusercontent.com/u/219632368?v=4"
           alt="Nurettin Dinçer"
+          loading="lazy"
         />
         <h3>Nurettin DİNÇER</h3>
         <p>Team Lead</p>
@@ -172,8 +196,11 @@
       </li>
       <li>
         <img
-          src="https://avatars.githubusercontent.com/u/100768214?v=4"
+          src="https://avatars.githubusercontent.com/u/100768214?v=4&s=200"
           alt="Egemen Yılmaz"
+          width="100"
+          height="100"
+          loading="lazy"
         />
         <h3>Egemen YILMAZ</h3>
         <p>Scrum Master</p>
@@ -206,6 +233,7 @@
         <img
           src="https://avatars.githubusercontent.com/u/218478839?v=4"
           alt="Gülnihan Yazıcı"
+          loading="lazy"
         />
         <h3>Gülnihan YAZICI</h3>
         <p>Developer</p>
