@@ -221,4 +221,4 @@ import{a as ye}from"./vendor-BWC8OeqA.js";(function(){const t=document.createEle
       </div>
     </main>
   `,new Error("404 - Invalid route");le();Me();document.body.dataset.page==="catalog-main"&&de();document.addEventListener("DOMContentLoaded",()=>{V(),Y(),Se(),document.getElementById("weeklyTrends")&&de(),document.getElementById("moviesContainer")&&Ee(),document.getElementById("movieList")&&we();const e=document.getElementById("hero-btn");e&&e.addEventListener("click",()=>{window.location.href="./catalog.html"})});
-//# sourceMappingURL=main-ByXdP16m.js.map
+//# sourceMappingURL=main-hMyMr9v5.js.map
