@@ -33,7 +33,7 @@ export function initCatalogHome() {
     return;
   }
 
- 
+
 
   // ======================
   // WEEKLY TRENDS
@@ -59,11 +59,11 @@ window.addEventListener("resize", () => {
     renderWeeklyTrends(weeklyCache);
   }
 });
-  
+
   function getWeeklyLimit() {
   return window.matchMedia("(min-width: 768px)").matches ? 3 : 1;
 }
-  
+
   function renderWeeklyTrends(movies) {
   const container = document.getElementById("weeklyTrends");
   if (!container) return;
@@ -95,7 +95,7 @@ window.addEventListener("resize", () => {
       card.href = `catalog_mainbody.html?id=${movie.id}`;
 
       card.innerHTML = `
-        <img src="${poster}">
+        <img src="${poster}" loading="lazy">
         <div class="movie-card-overlay">
           <div class="movie-card-text">
             <h3>${movie.title}</h3>
@@ -176,7 +176,7 @@ function formatDate(dateStr) {
   const [year, month, day] = dateStr.split("-");
   return `${day}.${month}.${year}`;
   }
-  
+
 
 
  function renderMovieDetails(movie) {
@@ -273,7 +273,7 @@ function formatDate(dateStr) {
 
 
 
-  
+
   // 🚀 START
   fetchWeeklyTrends();
   fetchMovieOfTheMonth();

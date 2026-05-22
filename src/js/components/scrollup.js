@@ -1,25 +1,37 @@
 export function initScrollUp() {
-  const scrollUpBtn = document.getElementById("scrollUpBtn");
+  const scrollUpBtn = document.getElementById('scrollUpBtn');
 
-  // DOM Guard: Buton yoksa dur
+  // DOM Guard
   if (!scrollUpBtn) {
-    console.warn("Scroll button bulunamadı!"); // Konsolda bunu görürsen HTML'de buton yok demektir.
+    console.warn('Scroll button bulunamadı!');
     return;
   }
 
-  window.addEventListener("scroll", () => {
-    // 300px aşağı inildi mi?
+  let ticking = false;
+
+  function handleScroll() {
     if (window.scrollY > 300) {
-      scrollUpBtn.classList.add("show"); // CSS'teki .show class'ını ekler
+      scrollUpBtn.classList.add('show');
     } else {
-      scrollUpBtn.classList.remove("show");
+      scrollUpBtn.classList.remove('show');
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        handleScroll();
+        ticking = false;
+      });
+
+      ticking = true;
     }
   });
 
-  scrollUpBtn.addEventListener("click", () => {
+  scrollUpBtn.addEventListener('click', () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   });
 }

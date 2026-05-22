@@ -1,10 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>darkscript-js_cinemania</title>
+    <script>
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.classList.add(savedTheme + '-theme');
+      document.body?.classList.add(savedTheme + '-theme');
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -25,11 +30,11 @@
       <load src="./catalog_mainbody.html" />
     </main>
 
-  <load src="./partials/footer.html" />
+    <load src="./partials/footer.html" />
     <load src="./trailer_popup.html" />
 
     <script type="module" src="./js/main.js"></script>
-   
+
     <!-- Scroll Up Button -->
     <button class="scroll-up" id="scrollUpBtn" aria-label="Sayfanın başına git">
       <svg width="20" height="20" viewBox="0 0 24 24">

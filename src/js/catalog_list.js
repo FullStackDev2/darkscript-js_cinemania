@@ -97,10 +97,10 @@ parent.insertAdjacentHTML(
   </button>
   `
   );
-  
+
   const clearInputBtn = parent.querySelector(".search-clear-btn");
   clearInputBtn.style.display = "none";
-  
+
   const chevronSVG = `
   <svg class="icon-chevron" width="14" height="14" viewBox="0 0 32 32" aria-hidden="true">
   <path
@@ -150,17 +150,17 @@ yearBtn.insertAdjacentHTML("beforeend", chevronSVG);
 const selectedCountry = document.getElementById("selectedCountry");
 selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
 
-  
+
     // ======================
   // 3. PAGINATION KURULUMU
   // ======================
   function setupPagination(totalResults, page) {
-   
-    const MAX_PAGES = 24; 
-    const itemsPerPage = 20;
-    const maxItems = MAX_PAGES * itemsPerPage; 
 
-    
+    const MAX_PAGES = 24;
+    const itemsPerPage = 20;
+    const maxItems = MAX_PAGES * itemsPerPage;
+
+
     const safeTotal = totalResults > maxItems ? maxItems : totalResults;
 
     // Eğer sonuç yoksa pagination kutusunu temizle
@@ -207,7 +207,7 @@ selectedCountry.insertAdjacentHTML("afterend", countryChevronSVG);
   // STAR RENDER (TEK DOSYA)
   // ======================
 
-  
+
   parent.addEventListener("click", (e) => {
   const btn = e.target.closest(".search-clear-btn");
   if (!btn) return;
@@ -255,14 +255,14 @@ document.addEventListener("click", (e) => {
   countryList.prepend(li);
   countryList.dataset.init = "true";
 }
-  
+
   clearInputBtn.addEventListener("click", () => {
   filmInput.value = "";
   filmInput.focus();
   clearInputBtn.style.display = "none"; // 🔥 SADECE BURADA
 });
 
- 
+
 countrySelect.querySelectorAll(".country-list li").forEach(item => {
   item.addEventListener("click", () => {
     selectedCountry.textContent = item.textContent;
@@ -281,7 +281,7 @@ countrySelect.querySelectorAll(".country-list li").forEach(item => {
 
   });
 });
-  
+
   document.addEventListener("click", (e) => {
   const countrySelect = document.getElementById("countrySelect");
 
@@ -291,8 +291,8 @@ countrySelect.querySelectorAll(".country-list li").forEach(item => {
   }
   });
 
-  
-  
+
+
   // ======================
   // COUNTRY DROPDOWN
   // ======================
@@ -318,7 +318,7 @@ countrySelect.querySelectorAll(".country-list li").forEach(item => {
   // YEAR DROPDOWN
   // ======================
 
-  
+
   if (yearBtn && yearDropdown) {
   yearBtn.addEventListener("click", e => {
     e.stopPropagation();
@@ -338,8 +338,8 @@ countrySelect.querySelectorAll(".country-list li").forEach(item => {
     }
   });
 }
-  
-  
+
+
 
 // dış tıklama
 document.addEventListener("click", e => {
@@ -467,7 +467,7 @@ function searchMovies(page = 1) {
           .join(', ') || 'Unknown';
 
       card.innerHTML = `
-        <img src="${poster}">
+        <img src="${poster}" loading="lazy">
         <div class="movie-card-overlay">
           <div class="movie-card-text">
             <h3>${movie.title}</h3>

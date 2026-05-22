@@ -40,3 +40,17 @@
   opacity: 0;
   pointer-events: none; /* Gizliyken tıklanmasın */
 }
+
+@media screen and (max-width: 480px) {
+  .scroll-up-btn,
+  .scrollup-btn,
+  #scrollUpBtn {
+    right: 16px;
+    bottom: 73px;
+    z-index: 50;
+  }
+
+  .pagination {
+    margin-bottom: 80px;
+  }
+}
