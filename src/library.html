@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Library - Cinemania</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body data-page="library">
+    <load src="./partials/header.html" />
+    <section class="hero" id="hero-section" data-page="library">
+      <div class="container hero-content">
+        <h1 class="hero-title">Create Your Dream Cinema</h1>
+        <p class="hero-description">Is a guide to designing a personalized movie theater experience with the right equipment, customized decor, and favorite films. This guide helps you bring the cinema experience into your own home with cozy seating, dim lighting, and movie theater snacks.</p>
+        <button type="button" class="btn-primary" id="hero-btn">Get Started</button>
+      </div>
+    </section>
+
+    <main class="library-page">
+
+      <div class="page-container">
+        <div id="genreWrapper" class="genre-wrapper genre-hidden">
+          <div class="genre-select" hidden id="genreSelect">
+            <button class="genre-btn" id="genreBtn">
+              Genre
+              <svg class="genre-icon" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true">
+                <path class="chevron-path" d="M7 20.5l9-9 9 9" fill="none" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+
+            <ul class="genre-dropdown" id="genreDropdown">
+              <li>Genre</li>
+              <li data-genre-id="10749">Romance</li>
+              <li data-genre-id="9648">Detective</li>
+              <li data-genre-id="53">Thriller</li>
+              <li data-genre-id="28">Action</li>
+              <li data-genre-id="99">Documentary</li>
+              <li data-genre-id="27">Horror</li>
+            </ul>
+          </div>
+        </div>
+        <div class="container hidden" id="emptySection">
+          <div class="search-movie" id="emptyState">
+            <p>OOPS... </p>
+          <p> We are very sorry! </p>
+          <p>You don’t have any movies at your library.</p>
+          </div>
+          <button class="search-button" type="submit">Search movie</button>
+        </div>
+
+        <div class="movie-list" id="movieList"></div>
+
+        <button class="load-more-btn hidden" id="loadMoreBtn">Load more</button>
+      </div>
+    </main>
+    <load src="./partials/footer.html" />
+    <load src="./trailer_popup.html" />
+    <!-- Scroll Up Button -->
+    <button class="scroll-up" id="scrollUpBtn" aria-label="Sayfanın başına git">
+      <svg width="20" height="20" viewBox="0 0 24 24">
+        <path d="M12 4l-8 8h5v8h6v-8h5z" fill="currentColor" />
+      </svg>
+    </button>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

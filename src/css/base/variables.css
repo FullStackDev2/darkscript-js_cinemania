@@ -1,0 +1,25 @@
+/* variables.css */
+:root {
+  /* Varsayılan (Dark) */
+  --color-bg: #111111;
+  --color-text: #ffffff;
+  --color-secondary: #595959;
+  --color-primary: #f87115;
+  --font-main: 'Roboto', sans-serif;
+  --transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* JS'deki isimle aynı olmalı: light-theme */
+body.light-theme {
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-secondary: #282828;
+}
+
+/* Bu kural tüm sayfaya renkleri yayar */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  transition: var(--transition);
+}

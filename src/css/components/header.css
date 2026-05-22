@@ -1,0 +1,288 @@
+.header {
+  padding: 16px 0;
+  background-color: var(--color-bg);
+  transition: var(--transition);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header-container {
+    display: flex;
+  justify-content: space-between; /* Elemanları sola, ortaya ve sağa dağıtır */
+  align-items: center;           /* Dikeyde hepsini hizalar */
+  padding: 0 20px;
+  background-color: var(--color-bg);
+  position: relative; /* İçerideki elemanların hizalanması için */
+  min-height: 44px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.icon-logo {
+  width: 32px;  
+  height: 32px; 
+  fill: var(--color-text); 
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.logo-text {
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+
+/* Logo en solda kalsın (Zaten öyle) */
+.logo-link {
+    display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  flex: 1; /* Kalan boşluğu kapla */
+  justify-content: space-between; /* İçindekileri (Buton ve Toggle) iki uca iter */
+  margin-left: 20px; /* Logo ile arasındaki boşluk */
+}
+
+.menu-open-btn {
+    background: none;
+  border: none;
+  cursor: pointer;
+  
+  /* Butonu görsel olarak merkeze çeker */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-text);
+}
+
+/* Tema Switch Tasarımı */
+.theme-switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 48px;
+}
+
+/* Toggle'ı en sağda tutmak için */
+.theme-switch-wrapper {
+  margin-left: auto; /* Kendisini sağa iter */
+}
+
+/* İkonların görünmeme ihtimaline karşı */
+.logo-icon, .icon-sun, .icon-moon {
+  display: block;
+}
+
+/* ... Slider stilleri buraya gelecek ... */
+
+/* Slider styles */
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-secondary);
+  transition: 0.3s;
+  border-radius: 34px;
+}
+
+.theme-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.theme-switch input:checked + .slider {
+  background-color: var(--color-primary);
+}
+
+.theme-switch input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* Mobile menu styles (mobile-first) */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 280px;
+  max-width: 80vw;
+  background-color: var(--color-bg);
+  transform: translateX(-100%);
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 60;
+  padding-top: 72px;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.4);
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-menu .nav-list {
+  list-style: none;
+  padding: 0 20px;
+}
+
+.mobile-menu .nav-link {
+  display: block;
+  padding: 14px 0;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 55;
+}
+
+/* Slider içindeki ikonları hizala */
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 5px;
+  position: relative;
+}
+
+.icon-sun, .icon-moon {
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+  transition: opacity 0.3s ease;
+}
+
+/* Checkbox durumuna göre ikonların görünürlüğünü veya rengini değiştirme */
+/* Karanlık mod (işaretli değilken) */
+#checkbox:not(:checked) + .slider .icon-sun {
+  opacity: 0.2; /* Güneş soluk */
+}
+
+/* Aydınlık mod (işaretliyken) */
+#checkbox:checked + .slider .icon-moon {
+  opacity: 0.2; /* Ay soluk */
+}
+
+/* Slider yuvarlağının (ball) ikonların üstünde kalması için */
+.slider:before {
+  z-index: 2; /* Yuvarlak her zaman üstte */
+}
+
+/* --- Mobil Ayarlar (Zaten sende var ama ekleme yapıyoruz) --- */
+.logo-text.desktop-only {
+  display: none; /* Mobilde gizli */
+}
+
+.desktop-nav {
+  display: none; /* Mobilde gizli */
+}
+
+
+
+/* Desktop: Menü Saklanır */
+@media (min-width: 768px) {
+  .menu-open-btn { display: none; }
+  .mobile-menu { display: none; }
+}
+
+
+
+
+
+
+/* --------------- Desktop ve Tablet -------------------------------------------- */
+
+
+/* --- Tablet ve Desktop (768px ve üzeri) --- */
+@media (min-width: 768px) {
+  /* Logo yanına yazı gelsin */
+  .logo-text.desktop-only {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-left: 8px;
+  }
+
+  /* MENU yazısını kaldır */
+  .menu-open-btn.mobile-only {
+    display: none;
+  }
+
+  /* Ortadaki Navigasyonu göster */
+  .desktop-nav {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .desktop-nav .nav-list {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .desktop-nav .nav-link {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 6px;
+    transition: color 0.3s;
+  }
+
+  .desktop-nav .nav-link.active {
+    color: var(--color-primary);
+  }
+
+  .desktop-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s ease;
+  }
+
+  .desktop-nav .nav-link.active::after,
+  .desktop-nav .nav-link:hover::after {
+    background: var(--color-primary);
+  }
+}

@@ -1,0 +1,303 @@
+/* Hero styles (mobile-first) */
+.hero {
+  /* Use CSS variable for hero image/overlay — overlay is a left->right dark fade */
+  --hero-overlay: var(--hero-overlay-dark);
+  --hero-image: var(--hero-image);
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* content aligned left */
+  background-color: #0b0b0b; /* fallback */
+  background-repeat: no-repeat;
+  background-image: var(--hero-overlay), var(--hero-image);
+  background-size: cover;
+  background-position: center right; /* show photo on the right, overlay on the left */
+  color: #ffffff; /* keep hero text white so it's readable over the dark overlay */
+}
+
+.hero-section {
+  min-height: 400px;
+  width: 100%;
+  display: block;
+}
+
+.hero-default {
+  background-color: #111; /* Resim yüklenene kadar siyah görünsün */
+}
+
+.hero,
+.catalog-page #hero-section,
+.library-page #hero-section {
+    min-height: 56vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero, 
+.catalog-page #hero-section {
+    margin-bottom: 40px; /* Kendisinden sonra gelen her şeyi 40px aşağı iter */
+}
+
+.hero-content {
+  padding: 64px 16px 56px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-title {
+  font-size: 32px;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px 0;
+    color: white;
+}
+
+.hero-description {
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 46ch;
+  margin-bottom: 24px;
+}
+
+.hero .movie-rating-stars,
+.hero-rating-stars {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  padding: 0;
+  display: flex;
+  gap: 6px;
+  margin: 0 0 16px 8px; /* Hero yıldızlarını metinden biraz içeri al */
+  line-height: 1;
+  justify-content: flex-start;
+  margin-left: 0;
+  width: auto;
+  padding-left: 6px; /* Yıldızların sol kenardan taşmaması için küçük boşluk */
+}
+
+@media (min-width: 1280px) {
+  .hero .movie-rating-stars,
+  .hero-rating-stars {
+    margin-left: 12px; /* Desktop'ta biraz daha içeri al */
+  }
+}
+
+/* Hero yıldızları (sadece hero alanı) */
+.hero .star,
+.hero-rating-stars .star {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-primary {
+	display: inline-block;
+	background: var(--color-primary);
+	color: #fff;
+	padding: 10px 18px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+/* Default Hero Stilleri */
+.hero-default {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-btns {
+    position: relative;
+    z-index: 3;
+    display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* Figma'daki Turuncu Gradient Buton (Watch Trailer) */
+.btn-primary {
+    background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
+    border-radius: 74px; /* Figma'daki tam yuvarlak hat */
+    padding: 12px 28px;
+    font-weight: 500;
+    color: #ffffff;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(248, 65, 25, 0.4);
+}
+
+/* Figma'daki Şeffaf Buton (More Details) */
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 74px;
+    padding: 12px 28px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-left: 12px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #ffffff;
+    color: #111111;
+}
+
+/* Mobile (Varsayılan) */
+@media (max-width: 767px) {
+  .hero-default {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      -webkit-image-set(url('../../images/background/mobile-1.jpg') 1x, url('../../images/background/mobil-1-@2x.jpg') 2x);
+  }
+}
+
+/* --------------- Desktop ve Tablet -------------------------------------------- */
+/* --- Tablet ve Desktop (768px ve üzeri) --- */
+
+/* Tablet (768px ve üzeri) */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .hero-default {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      -webkit-image-set(url('../../images/background/tablet-1.jpg') 1x, url('../../images/background/tablet-1-@2x.jpg') 2x);
+  }
+}
+
+/* Desktop (1280px ve üzeri) */
+@media (min-width: 1280px) {
+  .hero-default {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      -webkit-image-set(url('../../images/background/desktop-1.jpg') 1x, url('../../images/background/desktop-1-@2x.jpg') 2x);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    min-height: 72vh;
+  }
+  .hero-title {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+  .hero-description {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    min-height: 80vh; /* Daha sinematik yükseklik */
+    background-position: center right;
+  }
+
+    .hero, 
+    .catalog-page #hero-section {
+        margin-bottom: 80px; /* Kendisinden sonra gelen her şeyi 40px aşağı iter */
+    }
+
+  .hero-content {
+    padding: 72px 40px 72px 64px; /* Desktop/tablet'te sola mesafeyi artır */
+    max-width: 720px; /* İçeriğin çok yayılmasını engelle */
+  }
+
+  .hero-title {
+    font-size: 52px;
+    margin-bottom: 24px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 450px; /* Okunabilirlik için metni daralt */
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+  }
+
+    .hero,
+    .catalog-page #hero-section,
+    .library-page #hero-section {
+        min-height: 80vh; /* Tablet ve Desktop yüksekliği sabitlendi */
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0; /* GH Pages'ta ortalamayı kaldır, sola yasla */
+        padding: 0 32px;
+        align-items: flex-start;
+    }
+}
+
+@media (min-width: 1280px) {
+  .hero-title {
+    font-size: 64px;
+  }
+  
+  .hero-content {
+    padding-left: 120px; /* Desktop'ta soldan daha fazla boşluk */
+    margin: 0;
+    max-width: 780px;
+    align-items: flex-start;
+  }
+}
+
+/* Hero yıldızları için kesin hizalama (katalog stilini ezmek için daha spesifik) */
+.hero .movie-rating-stars,
+.hero .hero-rating-stars {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  margin: 0 0 16px 0 !important; /* Başlıkla aynı hizada olsun */
+  padding: 0 !important;
+  gap: 6px;
+  width: auto;
+  align-self: flex-start;
+}
+
+.hero .movie-rating-stars .star,
+.hero .hero-rating-stars .star {
+  width: 24px;
+  height: 24px;
+}
+
+
+body[data-page="library"] .hero {
+  /* Mobile (default) */
+  background-image: var(--hero-overlay-dark, linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)),
+    url('../../images/background/mobile-2.jpg') !important;
+  background-size: cover !important;
+  background-position: center right !important;
+  background-repeat: no-repeat !important;
+}
+
+@media (min-width: 768px) {
+  body[data-page="library"] .hero {
+    /* Tablet */
+    background-image: var(--hero-overlay-dark, linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)),
+      url('../../images/background/tablet-2.jpg') !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  body[data-page="library"] .hero {
+    /* Desktop */
+    background-image: var(--hero-overlay-dark, linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)),
+      url('../../images/background/desktop-2.jpg') !important;
+  }
+}

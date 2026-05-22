@@ -1,0 +1,44 @@
+/* Ana stil dosyası Tüm bileşenlerin ve düzenlerin ana stil dosyasıdır. */
+@import url('./base/variables.css');
+@import url('./components/reset.css');
+@import url('./components/hero.css');
+@import url('./components/header.css');
+@import url('./components/modal.css');
+@import url('./components/library.css');
+@import url('./components/loader.css');
+
+
+@import url('./components/equipment.css');
+@import url('./components/catalog.css');
+@import url('./components/footer.css');
+@import url('./components/scrollup.css');
+@import url('./components/pagination.css');
+@import url('./components/trailer_popup.css');
+
+/* Sayfanın temel iskeleti */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main alanı tüm boşluğu doldursun */
+main {
+  flex: 1 0 auto;
+}
+
+/* Footer her zaman en altta kalsın */
+footer, 
+.footer, 
+#site-footer {
+  flex-shrink: 0 !important;
+  width: 100%;
+  position: relative !important; /* Asla fixed olmamalı */
+  z-index: 10;
+  margin-top: auto !important; /* Ekstra güvenlik: en alta it */
+}

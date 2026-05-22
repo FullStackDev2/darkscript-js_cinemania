@@ -1,0 +1,84 @@
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 50px 0;
+}
+
+/* Genel Buton Yapısı */
+.pagination-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+/* Sayı Butonları (01, 02...) */
+.pagination-number {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-secondary); /* Gri Çerçeve */
+  border-radius: 50%;
+  color: var(--color-text);
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Sayı Butonları Hover */
+.pagination-number:hover:not(.active) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Aktif Sayfa (Turuncu Gradient) */
+.pagination-number.active {
+  border: none;
+  background: linear-gradient(141.22deg, #ffc226 9.4%, #f84119 91.91%);
+
+  color: #fff; 
+  
+  box-shadow: 0px 0px 10px rgba(255, 107, 8, 0.4);
+}
+
+/* Ok İşaretleri */
+.pagination-arrow {
+  /* 👇 Okların rengini de koyu yaptık */
+  color: var(--color-text);
+  
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-arrow:hover:not(:disabled) {
+  color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+.pagination-arrow:disabled {
+  color: var(--color-secondary);
+  cursor: default;
+}
+
+/* SVG İkon Boyutları */
+.pagination-arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* "..." Noktaları */
+.pagination-dots {
+  color: var(--color-text);
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin: 0 5px;
+  padding-bottom: 5px;
+}
