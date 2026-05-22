@@ -10,10 +10,17 @@
 }
 
 /* JS'deki isimle aynı olmalı: light-theme */
+html.light-theme,
 body.light-theme {
   --color-bg: #ffffff;
   --color-text: #111111;
   --color-secondary: #282828;
+}
+html.dark-theme,
+body.dark-theme {
+  --color-bg: #111111;
+  --color-text: #ffffff;
+  --color-secondary: #b3b3b3;
 }
 
 /* Bu kural tüm sayfaya renkleri yayar */

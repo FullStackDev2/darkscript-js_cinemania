@@ -1,10 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catalog - Cinemania</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.classList.add(savedTheme + '-theme');
+      document.body?.classList.add(savedTheme + '-theme');
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,15 +27,17 @@
     <load src="./partials/hero.html" />
 
     <main class="catalog-page">
-
       <div class="catalog-page">
         <div class="search-row">
-      
-         <div class="film-input">
-          
-          <input type="text" class="search-input" placeholder="Film" />
-    
-        </div>
+          <div class="film-input">
+            <input
+              type="text"
+              class="search-input"
+              id="movie-search"
+              name="movie"
+              placeholder="Film"
+            />
+          </div>
           <!-- YEAR DROPDOWN -->
           <div class="year-select">
             <button class="year-btn" id="yearBtn" type="button">
@@ -50,36 +57,35 @@
               <li data-year="2015">2015</li>
             </ul>
           </div>
-      
-      <div class="cntry-select" id="countrySelect">
-        <button class="country-btn" type="button">
 
-        <span id="selectedCountry">Country</span>
-       
-      </button>
+          <div class="cntry-select" id="countrySelect">
+            <button class="country-btn" type="button">
+              <span id="selectedCountry">Country</span>
+            </button>
 
-         <ul class="country-list">
-          <li data-country>United States</li>
-          <li data-country>Germany</li>
-          <li data-country>France</li>
-          <li data-country>Italy</li>
-          <li data-country>Spain</li>
-          <li data-country>United Kingdom</li>
-          <li data-country>Japan</li>
-          <li data-country>Belgium</li>
-         </ul>
-      </div>
-      
-          <button class="search-btn">
-          </button>
+            <ul class="country-list">
+              <li data-country>United States</li>
+              <li data-country>Germany</li>
+              <li data-country>France</li>
+              <li data-country>Italy</li>
+              <li data-country>Spain</li>
+              <li data-country>United Kingdom</li>
+              <li data-country>Japan</li>
+              <li data-country>Belgium</li>
+            </ul>
+          </div>
+
+          <button class="search-btn"></button>
         </div>
       </div>
       <div class="movie-list">
         <div id="moviesContainer"></div>
-       <div id="emptyMessage" hidden>
-        <p class="emptyHidden">OOPS...</p>
-       <p class="emptyHidden">We are very sorry!</p>
-        <p class="emptyHidden">You don't have any results matching your search.</p>
+        <div id="emptyMessage" hidden>
+          <p class="emptyHidden">OOPS...</p>
+          <p class="emptyHidden">We are very sorry!</p>
+          <p class="emptyHidden">
+            You don't have any results matching your search.
+          </p>
         </div>
         <div id="pagination" class="pagination-container"></div>
       </div>

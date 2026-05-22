@@ -1,4 +1,9 @@
-import { getTrending, getUpcoming, getGenres, getMovieVideos } from '../api/api-service.js';
+import {
+  getTrending,
+  getUpcoming,
+  getGenres,
+  getMovieVideos,
+} from '../api/api-service.js';
 import { openTrailerErrorPopup } from './trailer_popup.js';
 import { showLoader, hideLoader } from '../utils/loader.js';
 function renderStarsToRating(el, rating) {
@@ -60,22 +65,22 @@ export async function initHero() {
 
   if (pageType === 'dynamic') {
     try {
-        showLoader();
-        const movies = await getTrending('day');
+      showLoader();
+      const movies = await getTrending('day');
 
-        if (movies && movies.length > 0) {
-          const film = pickRandom(movies);
-          // API'den gelen filmle hero içeriğini oluştur
-          renderHeroContent(heroSection, film);
-        } else {
-          // Api'den veri gelmezse varsayılan hero içeriğini oluştur
-          renderDefaultHero(heroSection);
-        }
-    } catch (err) {
-        console.error('Hero yüklenirken hata:', err);
+      if (movies && movies.length > 0) {
+        const film = pickRandom(movies);
+        // API'den gelen filmle hero içeriğini oluştur
+        renderHeroContent(heroSection, film);
+      } else {
+        // Api'den veri gelmezse varsayılan hero içeriğini oluştur
         renderDefaultHero(heroSection);
-  } finally {
-    hideLoader();
+      }
+    } catch (err) {
+      console.error('Hero yüklenirken hata:', err);
+      renderDefaultHero(heroSection);
+    } finally {
+      hideLoader();
     }
   }
 }
@@ -89,19 +94,20 @@ function renderHeroContent(container, film) {
   const { title, overview, backdrop_path, vote_average, id } = film;
 
   const updateBg = () => {
-    const overlay = 'linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)';
+    const overlay =
+      'linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)';
     const isRetina = window.devicePixelRatio > 1.1;
-    
+
     let imageUrl = '';
     if (backdrop_path) {
-        let quality = 'w780'; 
-        if (window.innerWidth >= 1280) quality = isRetina ? 'original' : 'w1280'; 
-        else if (window.innerWidth >= 768) quality = isRetina ? 'w1280' : 'w780';
-        imageUrl = `https://image.tmdb.org/t/p/${quality}${backdrop_path}`;
+      let quality = 'w780';
+      if (window.innerWidth >= 1280) quality = isRetina ? 'original' : 'w1280';
+      else if (window.innerWidth >= 768) quality = isRetina ? 'w1280' : 'w780';
+      imageUrl = `https://image.tmdb.org/t/p/${quality}${backdrop_path}`;
     } else {
-  // API'den görsel gelmezse src/images/background klasöründeki görseli kullan
-  const suffix = isRetina ? '-@2x' : '';
-  imageUrl = `./images/background/desktop-1${suffix}.jpg`;
+      // API'den görsel gelmezse src/images/background klasöründeki görseli kullan
+      const suffix = isRetina ? '-@2x' : '';
+      imageUrl = `./images/background/desktop-1${suffix}.jpg`;
     }
 
     container.style.backgroundImage = `${overlay}, url('${imageUrl}')`;
@@ -111,14 +117,17 @@ function renderHeroContent(container, film) {
 
   updateBg();
   const observer = new MutationObserver(updateBg);
-  observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
   window.addEventListener('resize', updateBg);
 
   container.innerHTML = `
     <div class="container hero-content">
       <h1 class="hero-title">${title}</h1>
       <div class="movie-rating-stars hero-rating-stars"></div>
-      <p class="hero-description">${overview.slice(0, 220)}...</p> 
+      <p class="hero-description">${overview.slice(0, 220)}...</p>
       <div class="hero-btns">
         <button type="button" class="btn-primary" id="watch-trailer">Watch trailer</button>
         <button type="button" class="btn-secondary" id="more-details">More details</button>
@@ -126,24 +135,27 @@ function renderHeroContent(container, film) {
     </div>
   `;
 
-  renderStarsToRating(container.querySelector('.hero-rating-stars'), vote_average);
+  renderStarsToRating(
+    container.querySelector('.hero-rating-stars'),
+    vote_average
+  );
 
   // --- popup ---
 
-container.querySelector('#watch-trailer').onclick = async (e) => {
+  container.querySelector('#watch-trailer').onclick = async e => {
     e.preventDefault();
     showLoader();
-    
+
     try {
-      
       const videos = await getMovieVideos(id);
-     
-      if (videos && videos.length > 0) { 
-        window.dispatchEvent(new CustomEvent('openTrailerModal', { detail: { movieId: id } }));
+
+      if (videos && videos.length > 0) {
+        window.dispatchEvent(
+          new CustomEvent('openTrailerModal', { detail: { movieId: id } })
+        );
       } else {
         openTrailerErrorPopup();
       }
-
     } catch (error) {
       openTrailerErrorPopup();
     } finally {
@@ -153,7 +165,9 @@ container.querySelector('#watch-trailer').onclick = async (e) => {
   // --------------------------
 
   container.querySelector('#more-details').onclick = () => {
-    window.dispatchEvent(new CustomEvent('openDetailsModal', { detail: { movie: film } }));
+    window.dispatchEvent(
+      new CustomEvent('openDetailsModal', { detail: { movie: film } })
+    );
   };
 }
 
@@ -162,15 +176,16 @@ function renderDefaultHero(container) {
 
   const updateDefaultBg = () => {
     const isRetina = window.devicePixelRatio > 1.1;
-    const overlay = 'linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)';
-    
+    const overlay =
+      'linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.0) 60%)';
+
     // Görselindeki isimlendirmeye göre: mobil-1 (i ile)
     let fileName = window.innerWidth < 768 ? 'mobil-1' : 'desktop-1';
     if (isRetina) fileName += '-@2x';
-    
+
     // Public içindeki dosya yolu
     const base = import.meta.env.BASE_URL || '/';
-  const imageUrl = `./images/background/${fileName}.jpg`.replace(/\/+/g, '/');
+    const imageUrl = `./images/background/${fileName}.jpg`.replace(/\/+/g, '/');
 
     container.style.backgroundImage = `${overlay}, url('${imageUrl}')`;
     container.style.backgroundSize = 'cover';
